@@ -45,40 +45,57 @@ $menuItems = [
         .yanis-header {
             width: 100%;
             background: #fff;
-            border-bottom: 2px solid #dce6f5;
+            border-bottom: 1px solid #dce6f5;
+            box-shadow: 0 3px 12px rgba(10, 47, 103, .06);
         }
 
         .yanis-navbar {
-            height: 94px;
+            min-height: 94px;
             max-width: 1720px;
             margin: 0 auto;
-            padding: 0 55px;
+            padding: 10px 55px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 22px;
+        }
+
+        .yanis-logo {
+            flex-shrink: 0;
         }
 
         .yanis-logo img {
-            height: 72px;
+            height: 62px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
             display: block;
         }
 
         .yanis-menu {
             display: flex;
             align-items: center;
-            gap: 38px;
-            height: 100%;
+            justify-content: center;
+            gap: clamp(18px, 2vw, 8px);
+            flex: 1;
+            min-height: 74px;
         }
 
         .yanis-menu a {
-            height: 100%;
+            min-height: 46px;
             display: flex;
             align-items: center;
             position: relative;
             text-decoration: none;
             color: #1d2430;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
+            letter-spacing: .1px;
+            transition: color .2s ease;
+        }
+
+        .yanis-menu a:hover {
+            color: #153a75;
         }
 
         .yanis-menu a.active {
@@ -91,7 +108,7 @@ $menuItems = [
             left: 0;
             right: 0;
             bottom: 0;
-            height: 4px;
+            height: 2px;
             background: #153a75;
             border-radius: 4px 4px 0 0;
         }
@@ -99,28 +116,32 @@ $menuItems = [
         .yanis-actions {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: clamp(10px, 1.7vw, 24px);
+            flex-shrink: 0;
         }
 
         .yanis-phone {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 5px;
             color: #153a75;
         }
 
         .phone-circle {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             border: 2px solid #d5deee;
             border-radius: 50%;
+            background: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .phone-circle i {
-            font-size: 19px;
+            font-size: 22px;
+            color: #7d8ea8;
+            transform: translate(15px, 14px) rotate(8deg);
         }
 
         .yanis-phone span {
@@ -132,15 +153,15 @@ $menuItems = [
 
         .yanis-phone strong {
             display: block;
-            font-size: 22px;
+            font-size: 19px;
             line-height: 1;
             color: #153a75;
             font-weight: 900;
         }
 
         .urgent-btn {
-            height: 48px;
-            padding: 0 34px;
+            min-height: 44px;
+            padding: 0 15px;
             border-radius: 9px;
             background: #e91f3f;
             color: #fff;
@@ -148,9 +169,15 @@ $menuItems = [
             align-items: center;
             gap: 11px;
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 800;
-            box-shadow: 0 6px 15px rgba(233, 31, 63, .25);
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 8px 16px rgba(233, 31, 63, .24);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .urgent-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 11px 22px rgba(233, 31, 63, .3);
         }
 
         .urgent-btn i {
@@ -637,7 +664,7 @@ $menuItems = [
                 </div>
 
                 <a href="#" class="urgent-btn">
-                    <i class="fa-solid fa-siren-on"></i>
+                    <i class="fa-regular fa-bell"></i>
                     Assistance Urgente
                 </a>
 
