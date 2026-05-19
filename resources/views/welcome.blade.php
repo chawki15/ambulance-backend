@@ -8,6 +8,79 @@ $menuItems = [
 ['label' => 'Actualités', 'url' => '#'],
 ['label' => 'Contact', 'url' => '#'],
 ];
+
+$services = [
+[
+'icon' => 'fa-truck-medical',
+'title' => 'TRANSPORT SANITAIRE',
+'desc' => 'Au Maroc et à l’international',
+'color' => '#edf3ff',
+'iconColor' => '#0f4aa3',
+],
+[
+'icon' => 'fa-house-medical',
+'title' => 'VISITE À DOMICILE',
+'desc' => 'Maintien à domicile et aide à la personne',
+'color' => '#fff1f3',
+'iconColor' => '#eb2d4b',
+],
+[
+'icon' => 'fa-graduation-cap',
+'title' => 'ASSISTANCE MÉDICALE SCOLAIRE',
+'desc' => 'Intervention rapide pour élèves et étudiants',
+'color' => '#edf4ff',
+'iconColor' => '#0c53c7',
+],
+[
+'icon' => 'fa-briefcase-medical',
+'title' => 'MÉDECINE DU TRAVAIL',
+'desc' => 'Santé au travail et gestion des accidents',
+'color' => '#f4efff',
+'iconColor' => '#6942c8',
+],
+[
+'icon' => 'fa-user-doctor',
+'title' => 'MÉDICALISATION DES ÉVÉNEMENTS',
+'desc' => 'Équipes médicales pour vos événements',
+'color' => '#eefbf7',
+'iconColor' => '#17896d',
+],
+[
+'icon' => 'fa-laptop-medical',
+'title' => 'TÉLÉCONSULTATION',
+'desc' => 'Consultation en ligne avec ou sans RDV',
+'color' => '#fff3eb',
+'iconColor' => '#ff7300',
+],
+];
+
+$heroSlides = [
+[
+'title' => 'L’ASSISTANCE MÉDICALE',
+'lead' => 'HUMAINE, RAPIDE ET FIABLE',
+'desc' => 'Yanis Assistance accompagne vos assurés et vos collaborateurs à chaque moment délicat grâce à une expertise médicale complète et une intervention immédiate.',
+'image' => 'https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=1900&q=80',
+'position' => 'center center',
+'align' => 'left',
+],
+[
+'title' => 'TRANSPORT SANITAIRE',
+'lead' => 'PARTOUT AU MAROC',
+'desc' => 'Une flotte médicale opérationnelle 24/7 pour assurer des transferts rapides, sûrs et encadrés par des professionnels.',
+'image' => 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&w=1900&q=80',
+'position' => 'center 32%',
+'align' => 'left',
+],
+[
+'title' => 'SOINS À DOMICILE',
+'lead' => 'PROXIMITÉ ET SÉRÉNITÉ',
+'desc' => 'Nos équipes interviennent à domicile pour vos patients avec un suivi médical de qualité et une prise en charge personnalisée.',
+'image' => 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1900&q=80',
+'position' => 'center 40%',
+'align' => 'left',
+],
+];
+
 @endphp
 <!DOCTYPE html>
 <html lang="fr">
@@ -53,7 +126,7 @@ $menuItems = [
             min-height: 94px;
             max-width: 1720px;
             margin: 0 auto;
-            padding: 10px 55px;
+            padding: 10px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -128,8 +201,8 @@ $menuItems = [
         }
 
         .phone-circle {
-            width: 52px;
-            height: 52px;
+            width: 40px;
+            height: 40px;
             border: 2px solid #d5deee;
             border-radius: 50%;
             background: #fff;
@@ -139,9 +212,9 @@ $menuItems = [
         }
 
         .phone-circle i {
-            font-size: 22px;
+            font-size: 18px;
             color: #7d8ea8;
-            transform: translate(15px, 14px) rotate(8deg);
+            transform: translate(10px, 8px) rotate(8deg);
         }
 
         .yanis-phone span {
@@ -153,16 +226,16 @@ $menuItems = [
 
         .yanis-phone strong {
             display: block;
-            font-size: 19px;
+            font-size: 18px;
             line-height: 1;
             color: #153a75;
-            font-weight: 900;
+            font-weight: 800;
         }
 
         .urgent-btn {
-            min-height: 44px;
-            padding: 0 15px;
-            border-radius: 9px;
+            min-height: 41px;
+            padding: 0 9px;
+            border-radius: 7px;
             background: #e91f3f;
             color: #fff;
             display: flex;
@@ -331,28 +404,88 @@ $menuItems = [
         }
 
         .hero {
-            background: url('https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=1900&q=80') center/cover no-repeat;
-            min-height: 520px;
-            position: relative
+            min-height: 420px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity .7s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
         }
 
         .hero:before {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(244, 248, 255, .93) 0%, rgba(244, 248, 255, .80) 44%, rgba(244, 248, 255, .18) 100%)
+            background: linear-gradient(90deg, rgba(244, 248, 255, .95) 0%, rgba(244, 248, 255, .86) 42%, rgba(244, 248, 255, .50) 68%, rgba(244, 248, 255, .30) 100%)
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            padding: 66px 0;
-            max-width: 660px
+            min-height: 420px;
+            padding: 32px 55px;
+            width: 100%;
+            max-width: 1720px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-content.align-left {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .hero-content.align-right {
+            text-align: right;
+            align-items: flex-end;
+        }
+
+        .hero-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 50px;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            gap: 10px;
+        }
+
+        .hero-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            background: rgba(255, 255, 255, .55);
+            box-shadow: 0 0 0 2px rgba(10, 47, 103, .18);
+            transition: transform .2s ease, background-color .2s ease;
+        }
+
+        .hero-dot:hover {
+            transform: scale(1.08);
+        }
+
+        .hero-dot.active {
+            background: #fff;
+            box-shadow: 0 0 0 2px #153a75;
         }
 
         h1 {
-            font-size: 62px;
-            line-height: 1.04;
+            font-size: 40px;
+            line-height: 1.02;
             margin: 0;
             color: var(--blue);
             font-weight: 900;
@@ -360,16 +493,39 @@ $menuItems = [
         }
 
         .lead {
-            font-size: 34px;
+            font-size: 30px;
             color: #223a62;
             font-weight: 700;
-            margin: 8px 0 14px
+            margin: 6px 0 12px
         }
 
         .desc {
-            font-size: 30px;
+            font-size: 18px;
             line-height: 1.35;
-            max-width: 640px
+            max-width: 640px;
+            min-height: 96px;
+        }
+
+        .hero-content h1,
+        .hero-content .lead,
+        .hero-content .desc {
+            text-shadow: 0 2px 10px rgba(255, 255, 255, .45), 0 1px 2px rgba(10, 47, 103, .18);
+        }
+
+        .hero-content .desc {
+            background: rgba(255, 255, 255, .28);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        .hero-content.align-right .desc {
+            text-align: right;
+        }
+
+        .hero-copy {
+            max-width: 560px;
         }
 
         .cta-row {
@@ -532,6 +688,136 @@ $menuItems = [
             padding: 30px 0 16px
         }
 
+        .yanis-footer {
+            background: #062b5f;
+            color: #fff;
+            padding: 22px 0 14px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .footer-inner {
+            max-width: 1320px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 260px 140px 170px 150px 240px 150px;
+            gap: 28px;
+            align-items: flex-start;
+        }
+
+        .footer-logo img {
+            width: 220px;
+            height: auto;
+        }
+
+        .footer-col,
+        .footer-social {
+            border-left: 1px solid rgba(255, 255, 255, .18);
+            padding-left: 24px;
+            min-height: 78px;
+        }
+
+        .footer-col h4,
+        .footer-social h4 {
+            margin: 0 0 8px;
+            font-size: 15px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .footer-col a,
+        .footer-col p {
+            display: block;
+            margin: 4px 0;
+            color: #dbe8ff;
+            font-size: 13px;
+            line-height: 1.25;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+        }
+
+        .contact p {
+            font-size: 12.5px;
+        }
+
+        .contact i {
+            width: 16px;
+            margin-right: 6px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 6px;
+            margin-top: 14px;
+        }
+
+        .social-icons a {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .social-icons a:nth-child(1) {
+            background: #2d6cdf;
+        }
+
+        .social-icons a:nth-child(2) {
+            background: #1e9bd7;
+        }
+
+        .social-icons a:nth-child(3) {
+            background: #e8407a;
+        }
+
+        .social-icons a:nth-child(4) {
+            background: #ff0000;
+        }
+
+        .footer-bottom {
+            max-width: 1320px;
+            margin: 16px auto 0;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, .18);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #dbe8ff;
+            font-size: 12.5px;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+
+        .footer-bottom a {
+            color: #dbe8ff;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 1100px) {
+            .footer-inner {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 20px;
+            }
+
+            .footer-bottom {
+                padding: 12px 20px 0;
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
         .fgrid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
@@ -632,6 +918,121 @@ $menuItems = [
                 font-size: 20px
             }
         }
+
+        .services-section {
+            padding: 45px 0 30px;
+            background: #f7f8fb;
+        }
+
+        .services-title {
+            text-align: center;
+            font-size: 40px;
+            font-weight: 900;
+            color: #113d7a;
+            margin-bottom: 45px;
+            position: relative;
+        }
+
+        .services-title::after {
+            content: "";
+            width: 55px;
+            height: 4px;
+            background: #ea2c48;
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 18px;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 22px 20px 18px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .05);
+            transition: .25s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 185px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+        }
+
+        .service-top {
+            display: flex;
+            gap: 16px;
+        }
+
+        .service-icon {
+            width: 68px;
+            min-width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-icon i {
+            font-size: 31px;
+        }
+
+        .service-content h3 {
+            margin: 0 0 10px;
+            font-size: 15px;
+            line-height: 1.2;
+            color: #153a75;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .service-content p {
+            margin: 0;
+            color: #5d6472;
+            font-size: 14px;
+            line-height: 1.45;
+            font-weight: 500;
+        }
+
+        .service-arrow {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 18px;
+        }
+
+        .service-arrow i {
+            font-size: 18px;
+            color: #153a75;
+        }
+
+        @media (max-width: 1400px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(1, 1fr);
+                padding: 0 20px;
+            }
+
+            .services-title {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 
@@ -678,15 +1079,26 @@ $menuItems = [
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container hero-content">
-            <h1>L’ASSISTANCE MÉDICALE</h1>
-            <p class="lead">HUMAINE, RAPIDE ET FIABLE</p>
-            <p class="desc">Yanis Assistance accompagne vos assurés et vos collaborateurs à chaque moment délicat grâce à une expertise médicale complète et une intervention immédiate.</p>
+    <section class="hero" id="heroSlider">
+        @foreach ($heroSlides as $index => $slide)
+        <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ $slide['image'] }}'); --hero-pos: {{ $slide['position'] }};"></div>
+        @endforeach
+
+        <div class="container hero-content align-{{ $heroSlides[0]['align'] }}" id="heroContent">
+            <div class="hero-copy">
+                <h1 id="heroTitle">{{ $heroSlides[0]['title'] }}</h1>
+                <p class="lead" id="heroLead">{{ $heroSlides[0]['lead'] }}</p>
+                <p class="desc" id="heroDesc">{{ $heroSlides[0]['desc'] }}</p>
+            </div>
             <div class="cta-row">
                 <a class="btn btn-red" href="#">DEMANDER UNE ASSISTANCE</a>
                 <a class="btn btn-white" href="#">NOUS CONTACTER</a>
             </div>
+        </div>
+        <div class="hero-dots" aria-label="Navigation du slider hero">
+            @foreach ($heroSlides as $index => $slide)
+            <button type="button" class="hero-dot {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}" aria-label="Aller au slide {{ $index + 1 }}"></button>
+            @endforeach
         </div>
     </section>
 
@@ -723,40 +1135,44 @@ $menuItems = [
         </section>
 
         <section class="services-section">
-            <h2 class="section-title">NOS SERVICES</h2>
-            <div class="services">
-                <article class="service">
-                    <div class="icon">🚐</div>
-                    <h3>Transport Sanitaire</h3>
-                    <p>Au Maroc et à l’international</p>
+
+            <h2 class="services-title">
+                NOS SERVICES
+            </h2>
+
+            <div class="services-grid">
+
+                @foreach($services as $service)
+
+                <article class="service-card">
+
+                    <div class="service-top">
+
+                        <div class="service-icon"
+                            style="background: {{ $service['color'] }}; color: {{ $service['iconColor'] }}">
+                            <i class="fa-solid {{ $service['icon'] }}"></i>
+                        </div>
+
+                        <div class="service-content">
+                            <h3>{{ $service['title'] }}</h3>
+                            <p>{{ $service['desc'] }}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="service-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+
                 </article>
-                <article class="service">
-                    <div class="icon">🏠</div>
-                    <h3>Visite à Domicile</h3>
-                    <p>Maintien à domicile et aide à la personne</p>
-                </article>
-                <article class="service">
-                    <div class="icon">🎓</div>
-                    <h3>Assistance Médicale Scolaire</h3>
-                    <p>Intervention rapide pour élèves et étudiants</p>
-                </article>
-                <article class="service">
-                    <div class="icon">💼</div>
-                    <h3>Médecine du Travail</h3>
-                    <p>Santé au travail & gestion des accidents</p>
-                </article>
-                <article class="service">
-                    <div class="icon">👨‍⚕️</div>
-                    <h3>Médicalisation des Événements</h3>
-                    <p>Équipes médicales pour vos événements</p>
-                </article>
-                <article class="service">
-                    <div class="icon">💻</div>
-                    <h3>Téléconsultation</h3>
-                    <p>Consultation en ligne avec ou sans RDV</p>
-                </article>
+
+                @endforeach
+
             </div>
+
         </section>
+
+
         <section class="band">
             <div>
                 <h4>Zones d’intervention</h4>
@@ -781,26 +1197,60 @@ $menuItems = [
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="fgrid">
-                <div class="fbrand">YANIS ASSISTANCE</div>
-                <div class="fcol">
-                    <h5>Liens rapides</h5><a href="#">Accueil</a><a href="#">À propos</a><a href="#">Nos Services</a>
-                </div>
-                <div class="fcol">
-                    <h5>Nos Services</h5><a href="#">Transport Sanitaire</a><a href="#">Assistance Domicile</a><a href="#">Médecine du Travail</a>
-                </div>
-                <div class="fcol">
-                    <h5>Informations</h5><a href="#">Partenaires</a><a href="#">Actualités</a><a href="#">Recrutement</a>
-                </div>
-                <div class="fcol">
-                    <h5>Contact</h5>
-                    <p>0522 123 456</p>
-                    <p>contact@yanis-assistance.ma</p>
+    <footer class="yanis-footer">
+        <div class="footer-inner">
+
+            <div class="footer-logo">
+                <img src="{{ asset('images/logo-yanis.png') }}" alt="Yanis Assistance">
+            </div>
+
+            <div class="footer-col">
+                <h4>Liens rapides</h4>
+                <a href="#">Accueil</a>
+                <a href="#">À propos</a>
+                <a href="#">Nos Services</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Nos Services</h4>
+                <a href="#">Transport Sanitaire</a>
+                <a href="#">Assistance Domicile</a>
+                <a href="#">Médecine du Travail</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Informations</h4>
+                <a href="#">Partenaires</a>
+                <a href="#">Actualités</a>
+                <a href="#">Recrutement</a>
+            </div>
+
+            <div class="footer-col contact">
+                <h4>Contact</h4>
+                <p>Lotissement Addoha 2 Imm B 5 N° 3<br>Sidi Moumen Aljadid / Casablanca</p>
+                <p><i class="fa-solid fa-phone"></i> 0522 123 456</p>
+                <p><i class="fa-regular fa-envelope"></i> contact@yanis-assistance.ma</p>
+            </div>
+
+            <div class="footer-social">
+                <h4>Suivez-nous</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="copyright"><span>© 2026 Yanis Assistance. Tous droits réservés.</span><span>Mentions légales | Politique de confidentialité</span></div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Yanis Assistance. Tous droits réservés.</p>
+            <div>
+                <a href="#">Mentions légales</a>
+                <span>|</span>
+                <a href="#">Politique de confidentialité</a>
+            </div>
         </div>
     </footer>
     <script>
@@ -809,6 +1259,45 @@ $menuItems = [
         if (mobileToggle && mobileMenu) {
             mobileToggle.addEventListener("click", () => mobileMenu.classList.toggle("show"));
         }
+    </script>
+    <script>
+        const heroSlides = @json($heroSlides);
+        const heroSection = document.getElementById('heroSlider');
+        const slideEls = heroSection.querySelectorAll('.hero-slide');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroLead = document.getElementById('heroLead');
+        const heroDesc = document.getElementById('heroDesc');
+        const heroContent = document.getElementById('heroContent');
+        const heroDots = heroSection.querySelectorAll('.hero-dot');
+        let currentSlide = 0;
+        let slideTimer;
+
+        function setSlide(index) {
+            slideEls.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            heroTitle.textContent = heroSlides[index].title;
+            heroLead.textContent = heroSlides[index].lead;
+            heroDesc.textContent = heroSlides[index].desc;
+            heroContent.className = `container hero-content align-${heroSlides[index].align || 'left'}`;
+            heroDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        }
+
+        function startSlider() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => {
+                currentSlide = (currentSlide + 1) % heroSlides.length;
+                setSlide(currentSlide);
+            }, 5000);
+        }
+
+        heroDots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                currentSlide = Number(dot.dataset.slide);
+                setSlide(currentSlide);
+                startSlider();
+            });
+        });
+
+        startSlider();
     </script>
 </body>
 
