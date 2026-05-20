@@ -1,0 +1,20 @@
+{
+  "menu.home": "Accueil",
+  "menu.about": "À propos",
+  "menu.services": "Nos Services",
+  "menu.fleet": "Flotte & Moyens",
+  "menu.partners": "Partenaires",
+  "menu.news": "Actualités",
+  "menu.contact": "Contact",
+  "assist_24_7": "Assistance 24/7",
+  "urgent_assistance": "Assistance Urgente",
+  "hero.slide1.title": "L’ASSISTANCE MÉDICALE",
+  "hero.slide1.lead": "HUMAINE, RAPIDE ET FIABLE",
+  "hero.slide1.desc": "Yanis Assistance accompagne vos assurés et vos collaborateurs à chaque moment délicat grâce à une expertise médicale complète et une intervention immédiate.",
+  "hero.slide2.title": "TRANSPORT SANITAIRE",
+  "hero.slide2.lead": "PARTOUT AU MAROC",
+  "hero.slide2.desc": "Une flotte médicale opérationnelle 24/7 pour assurer des transferts rapides, sûrs et encadrés par des professionnels.",
+  "hero.slide3.title": "SOINS À DOMICILE",
+  "hero.slide3.lead": "PROXIMITÉ ET SÉRÉNITÉ",
+  "hero.slide3.desc": "Nos équipes interviennent à domicile pour vos patients avec un suivi médical de qualité et une prise en charge personnalisée."
+}
