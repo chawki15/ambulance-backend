@@ -1,13 +1,4 @@
 @php
-$menuItems = [
-['label' => __('menu.home'), 'url' => '#'],
-['label' => __('menu.about'), 'url' => '#'],
-['label' => __('menu.services'), 'url' => '#'],
-['label' => __('menu.fleet'), 'url' => '#'],
-['label' => __('menu.partners'), 'url' => '#'],
-['label' => __('menu.news'), 'url' => '#'],
-['label' => __('menu.contact'), 'url' => '#'],
-];
 $heroSlides = [
 ['title'=>__('hero.slide1.title'),'lead'=>__('hero.slide1.lead'),'desc'=>__('hero.slide1.desc'),'image'=>'https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=1900&q=80','position'=>'center center','align'=>'left'],
 ['title'=>__('hero.slide2.title'),'lead'=>__('hero.slide2.lead'),'desc'=>__('hero.slide2.desc'),'image'=>'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&w=1900&q=80','position'=>'center 32%','align'=>'right'],

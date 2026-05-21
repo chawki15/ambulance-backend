@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
     <title>Yanis Assistance</title>
     <style>
         :root {
@@ -197,63 +198,6 @@
 
             .yanis-phone {
                 display: none;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .yanis-navbar {
-                padding: 0 20px;
-            }
-
-            .yanis-menu {
-                display: none;
-            }
-
-            .yanis-phone,
-            .yanis-actions .urgent-btn,
-            .yanis-actions .lang-switch {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: inline-flex;
-            }
-
-            .yanis-navbar {
-                display: grid;
-                grid-template-columns: 42px 1fr 42px;
-                align-items: center;
-                padding: 10px 14px;
-                direction: ltr;
-                gap: 8px;
-            }
-
-            [dir="rtl"] .yanis-navbar {
-                direction: ltr;
-            }
-
-            .yanis-logo {
-                justify-self: center;
-            }
-
-            .yanis-logo img {
-                height: 50px;
-                max-width: 170px;
-            }
-
-            .mobile-spacer {
-                display: block;
-                width: 42px;
-                height: 42px;
-            }
-
-            .yanis-actions {
-                display: none;
-            }
-
-            .mobile-menu-card {
-                min-height: auto;
-                max-width: 390px;
             }
         }
 
@@ -812,32 +756,6 @@
                 display: none
             }
 
-            .mobile-toggle {
-                display: inline-block
-            }
-
-            .mobile-menu {
-                display: none;
-                flex-direction: column;
-                gap: 10px;
-                background: #fff;
-                padding: 14px 0 16px;
-                border-top: 1px solid #e9eef6
-            }
-
-            .mobile-menu a {
-                text-decoration: none;
-                color: #111;
-                font-size: 17px;
-                font-weight: 600;
-                padding: 0 18px;
-                font-family: 'Segoe UI', Tahoma, Arial, sans-serif
-            }
-
-            .mobile-menu.show {
-                display: flex
-            }
-
             .services {
                 grid-template-columns: repeat(3, 1fr)
             }
@@ -1009,114 +927,6 @@
 
         [dir="rtl"] .lang-switch {
             direction: ltr;
-        }
-
-
-
-        .mobile-toggle {
-            display: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            border: 1px solid #dbe4f3;
-            background: #fff;
-            color: #153a75;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .mobile-menu {
-            position: fixed;
-            inset: 0;
-            background: rgba(9, 23, 52, .25);
-            z-index: 200;
-            display: none;
-            padding: 14px;
-        }
-
-        .mobile-menu.show {
-            display: block;
-        }
-
-        .mobile-menu-card {
-            background: #fff;
-            border-radius: 16px;
-            max-width: 360px;
-            width: 100%;
-            min-height: calc(100vh - 28px);
-            padding: 16px;
-            box-shadow: 0 10px 24px rgba(10, 47, 103, .14);
-        }
-
-        .mobile-close {
-            background: transparent;
-            border: 0;
-            font-size: 22px;
-            color: #22355a;
-        }
-
-        .mobile-brand img {
-            height: 52px;
-            margin: 6px 0 12px;
-        }
-
-        .mobile-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 8px 0 20px;
-        }
-
-        .mobile-links a {
-            text-decoration: none;
-            color: #1d2f55;
-            font-weight: 700;
-            padding: 8px 6px;
-            border-radius: 8px;
-        }
-
-        .mobile-links a.active {
-            color: #e91f3f;
-            background: #fff4f6;
-        }
-
-        .mobile-urgent-btn {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            background: #e91f3f;
-            color: #fff;
-            font-weight: 700;
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        .mobile-lang-switch {
-            margin-top: 16px;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        .mobile-lang-switch a {
-            text-decoration: none;
-            color: #1d2f55;
-        }
-
-        .mobile-lang-switch a.active {
-            color: #153a75;
-        }
-
-        [dir="rtl"] .mobile-menu-card {
-            margin-left: auto;
-            text-align: right;
-        }
-
-        [dir="rtl"] .mobile-close {
-            display: block;
-            margin-right: 0;
-            margin-left: auto;
         }
     </style>
 </head>

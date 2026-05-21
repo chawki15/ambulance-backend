@@ -1,0 +1,36 @@
+/* Header/mobile menu styles */
+@media (max-width:1100px) {
+  .mobile-toggle { display: inline-block; }
+  .mobile-menu { display:none; flex-direction:column; gap:10px; background:#fff; padding:14px 0 16px; border-top:1px solid #e9eef6; }
+  .mobile-menu a { text-decoration:none; color:#111; font-size:17px; font-weight:600; padding:0 18px; font-family:'Segoe UI', Tahoma, Arial, sans-serif; }
+  .mobile-menu.show { display:flex; }
+}
+.mobile-toggle { display:none; width:42px; height:42px; border-radius:10px; border:1px solid #dbe4f3; background:#fff; color:#153a75; align-items:center; justify-content:center; font-size:20px; }
+.mobile-menu { position:fixed; inset:0; background:rgba(9,23,52,.25); z-index:200; display:none; padding:0; }
+.mobile-menu.show { display:block; }
+.mobile-menu-card { background:#fff; border-radius:0; max-width:100%; width:100%; min-height:100vh; padding:18px 16px 20px; box-shadow:none; }
+.mobile-topbar { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.mobile-topbar { position: relative; min-height: 56px; }
+.mobile-brand { position: absolute; left: 50%; transform: translateX(-50%); }
+.mobile-close { width:40px; height:40px; border-radius:10px; background:transparent; border:1px solid #d7e1f0; font-size:26px; color:#22355a; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.mobile-brand img { height:56px; margin:0; }
+.mobile-links { display:flex; flex-direction:column; gap:10px; margin:8px 0 20px; }
+.mobile-links a { text-decoration:none; color:#1d2f55; font-weight:700; padding:8px 6px; border-radius:8px; }
+.mobile-links a.active { color:#e91f3f; background:#fff4f6; }
+.mobile-urgent-btn { display:flex; justify-content:center; gap:8px; text-decoration:none; background:#e91f3f; color:#fff; font-weight:700; padding:12px; border-radius:10px; }
+.mobile-lang-switch { margin-top:16px; text-align:center; font-weight:800; }
+.mobile-lang-switch a { text-decoration:none; color:#1d2f55; }
+.mobile-lang-switch a.active { color:#153a75; }
+[dir="rtl"] .mobile-menu-card { text-align:right; }
+[dir="rtl"] .mobile-topbar { flex-direction: row-reverse; }
+[dir="rtl"] .mobile-brand { left: 50%; transform: translateX(-50%); }
+
+@media (max-width: 992px) {
+  .yanis-navbar { display:grid; grid-template-columns:42px 1fr 42px; align-items:center; gap:8px; padding:10px 14px; direction:ltr; }
+  [dir="rtl"] .yanis-navbar { direction:ltr; }
+  .yanis-logo { justify-self:center; }
+  .yanis-logo img { height:50px; max-width:170px; }
+  .yanis-menu, .yanis-phone, .yanis-actions .urgent-btn, .yanis-actions .lang-switch { display:none !important; }
+  .mobile-toggle { display:inline-flex; }
+  .mobile-spacer { display:block !important; width:42px; height:42px; }
+}

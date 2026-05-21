@@ -16,6 +16,37 @@ use App\Http\Controllers\LocaleController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+Route::get('/about', function () {
+    $isArabic = app()->getLocale() === 'ar';
+    return view('about', compact('isArabic'));
+})->name('about');
+
+Route::get('/services', function () {
+    $isArabic = app()->getLocale() === 'ar';
+    return view('services', compact('isArabic'));
+})->name('services');
+
+Route::get('/fleet', function () {
+    $isArabic = app()->getLocale() === 'ar';
+    return view('fleet', compact('isArabic'));
+})->name('fleet');
+
+Route::get('/partners', function () {
+    $isArabic = app()->getLocale() === 'ar';
+    return view('partners', compact('isArabic'));
+})->name('partners');
+
+Route::get('/news', function () {
+    $isArabic = app()->getLocale() === 'ar';
+    return view('news', compact('isArabic'));
+})->name('news');
+
+Route::get('/contact', function () {
+    $isArabic = app()->getLocale() === 'ar';
+    return view('contact', compact('isArabic'));
+})->name('contact');
 
 Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');

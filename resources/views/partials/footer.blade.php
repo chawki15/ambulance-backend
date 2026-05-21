@@ -75,42 +75,45 @@
         });
     }
 </script>
+@if (isset($heroSlides))
 <script>
     const heroSlides = @json($heroSlides);
     const heroSection = document.getElementById('heroSlider');
-    const slideEls = heroSection.querySelectorAll('.hero-slide');
-    const heroTitle = document.getElementById('heroTitle');
-    const heroLead = document.getElementById('heroLead');
-    const heroDesc = document.getElementById('heroDesc');
-    const heroContent = document.getElementById('heroContent');
-    const heroDots = heroSection.querySelectorAll('.hero-dot');
-    let currentSlide = 0;
-    let slideTimer;
+    if (heroSection && Array.isArray(heroSlides) && heroSlides.length) {
+        const slideEls = heroSection.querySelectorAll('.hero-slide');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroLead = document.getElementById('heroLead');
+        const heroDesc = document.getElementById('heroDesc');
+        const heroContent = document.getElementById('heroContent');
+        const heroDots = heroSection.querySelectorAll('.hero-dot');
+        let currentSlide = 0;
+        let slideTimer;
 
-    function setSlide(index) {
-        slideEls.forEach((slide, i) => slide.classList.toggle('active', i === index));
-        heroTitle.textContent = heroSlides[index].title;
-        heroLead.textContent = heroSlides[index].lead;
-        heroDesc.textContent = heroSlides[index].desc;
-        heroContent.className = `container hero-content align-${heroSlides[index].align || 'left'}`;
-        heroDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-    }
+        function setSlide(index) {
+            slideEls.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            heroTitle.textContent = heroSlides[index].title;
+            heroLead.textContent = heroSlides[index].lead;
+            heroDesc.textContent = heroSlides[index].desc;
+            heroContent.className = `container hero-content align-${heroSlides[index].align || 'left'}`;
+            heroDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        }
 
-    function startSlider() {
-        clearInterval(slideTimer);
-        slideTimer = setInterval(() => {
-            currentSlide = (currentSlide + 1) % heroSlides.length;
-            setSlide(currentSlide);
-        }, 5000);
-    }
-
-    heroDots.forEach((dot) => {
-        dot.addEventListener('click', () => {
-            currentSlide = Number(dot.dataset.slide);
-            setSlide(currentSlide);
-            startSlider();
+        function startSlider() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => {
+                currentSlide = (currentSlide + 1) % heroSlides.length;
+                setSlide(currentSlide);
+            }, 5000);
+        }
+        heroDots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                currentSlide = Number(dot.dataset.slide);
+                setSlide(currentSlide);
+                startSlider();
+            });
         });
-    });
 
-    startSlider();
+        startSlider();
+    }
 </script>
+@endif
