@@ -1,59 +1,59 @@
 @php
 $menuItems = [
-['label' => 'Accueil', 'url' => '#'],
-['label' => 'À propos', 'url' => '#'],
-['label' => 'Nos Services', 'url' => '#'],
-['label' => 'Flotte & Moyens', 'url' => '#'],
-['label' => 'Partenaires', 'url' => '#'],
-['label' => 'Actualités', 'url' => '#'],
-['label' => 'Contact', 'url' => '#'],
+['label' => __('menu.home'), 'url' => '#'],
+['label' => __('menu.about'), 'url' => '#'],
+['label' => __('menu.services'), 'url' => '#'],
+['label' => __('menu.fleet'), 'url' => '#'],
+['label' => __('menu.partners'), 'url' => '#'],
+['label' => __('menu.news'), 'url' => '#'],
+['label' => __('menu.contact'), 'url' => '#'],
 ];
 $heroSlides = [
-['title'=>'L’ASSISTANCE MÉDICALE','lead'=>'HUMAINE, RAPIDE ET FIABLE','desc'=>'Yanis Assistance accompagne vos assurés et vos collaborateurs à chaque moment délicat grâce à une expertise médicale complète et une intervention immédiate.','image'=>'https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=1900&q=80','position'=>'center center','align'=>'left'],
-['title'=>'TRANSPORT SANITAIRE','lead'=>'PARTOUT AU MAROC','desc'=>'Une flotte médicale opérationnelle 24/7 pour assurer des transferts rapides, sûrs et encadrés par des professionnels.','image'=>'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&w=1900&q=80','position'=>'center 32%','align'=>'right'],
-['title'=>'SOINS À DOMICILE','lead'=>'PROXIMITÉ ET SÉRÉNITÉ','desc'=>'Nos équipes interviennent à domicile pour vos patients avec un suivi médical de qualité et une prise en charge personnalisée.','image'=>'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1900&q=80','position'=>'center 40%','align'=>'left'],
+['title'=>__('hero.slide1.title'),'lead'=>__('hero.slide1.lead'),'desc'=>__('hero.slide1.desc'),'image'=>'https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=1900&q=80','position'=>'center center','align'=>'left'],
+['title'=>__('hero.slide2.title'),'lead'=>__('hero.slide2.lead'),'desc'=>__('hero.slide2.desc'),'image'=>'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&w=1900&q=80','position'=>'center 32%','align'=>'right'],
+['title'=>__('hero.slide3.title'),'lead'=>__('hero.slide3.lead'),'desc'=>__('hero.slide3.desc'),'image'=>'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1900&q=80','position'=>'center 40%','align'=>'left'],
 ];
 
 $services = [
 [
 'icon' => 'fa-truck-medical',
-'title' => 'TRANSPORT SANITAIRE',
-'desc' => 'Au Maroc et à l’international',
+'title' => __('services.transport.title'),
+'desc' => __('services.transport.desc'),
 'color' => '#edf3ff',
 'iconColor' => '#0f4aa3',
 ],
 [
 'icon' => 'fa-house-medical',
-'title' => 'VISITE À DOMICILE',
-'desc' => 'Maintien à domicile et aide à la personne',
+'title' => __('services.home_visit.title'),
+'desc' => __('services.home_visit.desc'),
 'color' => '#fff1f3',
 'iconColor' => '#eb2d4b',
 ],
 [
 'icon' => 'fa-graduation-cap',
-'title' => 'ASSISTANCE MÉDICALE SCOLAIRE',
-'desc' => 'Intervention rapide pour élèves et étudiants',
+'title' => __('services.school_medical.title'),
+'desc' => __('services.school_medical.desc'),
 'color' => '#edf4ff',
 'iconColor' => '#0c53c7',
 ],
 [
 'icon' => 'fa-briefcase-medical',
-'title' => 'MÉDECINE DU TRAVAIL',
-'desc' => 'Santé au travail et gestion des accidents',
+'title' => __('services.work_medicine.title'),
+'desc' => __('services.work_medicine.desc'),
 'color' => '#f4efff',
 'iconColor' => '#6942c8',
 ],
 [
 'icon' => 'fa-user-doctor',
-'title' => 'MÉDICALISATION DES ÉVÉNEMENTS',
-'desc' => 'Équipes médicales pour vos événements',
+'title' => __('services.events_medical.title'),
+'desc' => __('services.events_medical.desc'),
 'color' => '#eefbf7',
 'iconColor' => '#17896d',
 ],
 [
 'icon' => 'fa-laptop-medical',
-'title' => 'TÉLÉCONSULTATION',
-'desc' => 'Consultation en ligne avec ou sans RDV',
+'title' => __('services.teleconsultation.title'),
+'desc' => __('services.teleconsultation.desc'),
 'color' => '#fff3eb',
 'iconColor' => '#ff7300',
 ],
@@ -123,7 +123,7 @@ $services = [
     <section class="services-section">
 
         <h2 class="services-title">
-            NOS SERVICES
+            {{ __('home.services_title') }}
         </h2>
 
         <div class="services-grid">
@@ -159,24 +159,24 @@ $services = [
     </section>
     <section class="band">
         <div>
-            <h4>Zones d’intervention</h4>
-            <p>Grand Casablanca, Mohammedia, Bouskoura, Berrechid, Benslimane, Khouribga et régions.</p>
-            <a class="assist-btn" href="#">VOIR TOUTES LES ZONES</a>
+            <h4>{{ __('home.zones.title') }}</h4>
+            <p>{{ __('home.zones.desc') }}</p>
+            <a class="assist-btn" href="#">{{ __('home.zones.cta') }}</a>
         </div>
         <div>
-            <h4>Pourquoi nous choisir ?</h4>
+            <h4>{{ __('home.why_choose_us.title') }}</h4>
             <ul>
-                <li>Intervention rapide 24/7</li>
-                <li>Équipes médicales qualifiées</li>
-                <li>Matériel médical de pointe</li>
-                <li>Service humain et personnalisé</li>
+                <li>{{ __('home.why_choose_us.item1') }}</li>
+                <li>{{ __('home.why_choose_us.item2') }}</li>
+                <li>{{ __('home.why_choose_us.item3') }}</li>
+                <li>{{ __('home.why_choose_us.item4') }}</li>
             </ul>
         </div>
         <div>
-            <h4>Besoin d’aide immédiate ?</h4>
-            <p>Notre équipe est disponible 24h/24 et 7j/7</p>
+            <h4>{{ __('home.immediate_help.title') }}</h4>
+            <p>{{ __('home.immediate_help.desc') }}</p>
             <div class="phone-big">06 60 23 10 10</div>
-            <br><a class="assist-btn" href="#">DEMANDER UNE ASSISTANCE EN LIGNE</a>
+            <br><a class="assist-btn" href="#">{{ __('home.immediate_help.cta') }}</a>
         </div>
     </section>
 </main>
