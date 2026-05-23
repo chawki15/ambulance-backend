@@ -50,3 +50,10 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
+
+Route::prefix('admin')->group(function () {
+    Route::view('/login', 'admin.login')->name('admin.login');
+    Route::view('/home', 'admin.home')->name('admin.dashboard');
+    Route::view('/users/create', 'admin.users-create')->name('admin.users.create');
+    Route::redirect('/', '/admin/login')->name('admin.home');
+});

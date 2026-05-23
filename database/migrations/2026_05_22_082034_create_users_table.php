@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
+            $table->string('profile_photo')->nullable();
             $table->string('password');
 
             $table->enum('role', [
@@ -26,13 +27,13 @@ return new class extends Migration
                 'emergency_doctor'
             ])->default('driver');
 
-            $table->string('specialty')->nullable();
-
             $table->enum('status', [
                 'available',
                 'busy',
                 'offline'
             ])->default('available');
+
+            $table->boolean('is_active')->default(true);
 
             $table->rememberToken();
             $table->timestamps();

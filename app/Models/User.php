@@ -10,20 +10,33 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    public const ROLE_ADMIN = 'admin';
+
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
         'email',
         'phone',
+        'profile_photo',
         'password',
         'role',
-        'specialty',
         'status',
+        'is_active',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(self::ROLE_ADMIN);
+    }
 }

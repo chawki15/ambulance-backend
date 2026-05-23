@@ -16,9 +16,10 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'phone' => 'nullable|string',
+            'profile_photo' => 'nullable|image|max:2048',
             'password' => 'required|min:6',
-            'role' => 'required|in:admin,driver,nurse,general_doctor,emergency_doctor',
-            'specialty' => 'nullable|string',
+            'role' => 'required|in:driver,nurse,general_doctor,emergency_doctor',
+            'is_active' => 'sometimes|boolean',
         ]);
 
         $data['password'] = Hash::make($data['password']);
@@ -43,6 +44,12 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['Email or password incorrect'],
+            ]);
+        }
+
+        if (!$user->is_active) {
+            throw ValidationException::withMessages([
+                'email' => ['Your account is inactive'],
             ]);
         }
 
