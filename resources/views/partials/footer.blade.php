@@ -2,7 +2,7 @@
     <div class="footer-inner">
 
         <div class="footer-logo">
-            <img src="{{ asset('images/logo-yanis.png') }}" alt="Yanis Assistance">
+            <img src="{{ asset('images/logo-footer.png') }}" alt="Yanis Assistance">
         </div>
 
         <div class="footer-col">

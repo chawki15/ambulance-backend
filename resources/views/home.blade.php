@@ -7,46 +7,40 @@ $heroSlides = [
 
 $services = [
 [
-'icon' => 'fa-truck-medical',
+'icon' => 'medical-transport.png',
 'title' => __('services.transport.title'),
 'desc' => __('services.transport.desc'),
-'color' => '#edf3ff',
-'iconColor' => '#0f4aa3',
+'color' => '#edf5f8',
 ],
 [
-'icon' => 'fa-house-medical',
+'icon' => 'visite-a-domicile.png',
 'title' => __('services.home_visit.title'),
 'desc' => __('services.home_visit.desc'),
 'color' => '#fff1f3',
-'iconColor' => '#eb2d4b',
 ],
 [
-'icon' => 'fa-graduation-cap',
+'icon' => 'assistance-medicale-scolaire.png',
 'title' => __('services.school_medical.title'),
 'desc' => __('services.school_medical.desc'),
 'color' => '#edf4ff',
-'iconColor' => '#0c53c7',
 ],
 [
-'icon' => 'fa-briefcase-medical',
+'icon' => 'medecine-du-travail.png',
 'title' => __('services.work_medicine.title'),
 'desc' => __('services.work_medicine.desc'),
 'color' => '#f4efff',
-'iconColor' => '#6942c8',
 ],
 [
-'icon' => 'fa-user-doctor',
+'icon' => 'medicalisation-des-evenements.png',
 'title' => __('services.events_medical.title'),
 'desc' => __('services.events_medical.desc'),
 'color' => '#eefbf7',
-'iconColor' => '#17896d',
 ],
 [
-'icon' => 'fa-laptop-medical',
+'icon' => 'teleconsultation.png',
 'title' => __('services.teleconsultation.title'),
 'desc' => __('services.teleconsultation.desc'),
 'color' => '#fff3eb',
-'iconColor' => '#ff7300',
 ],
 ];
 @endphp
@@ -82,28 +76,36 @@ $services = [
 <main class="container">
     <section class="stats">
         <article class="card">
-            <div class="icon">🏠</div>
+            <div class="service-icon blanc">
+                <img src="images/icons/home-care.png" alt="Home">
+            </div>
             <div>
                 <div class="n">4584</div>
                 <div>Consultations à domicile<br>& contre-visites</div>
             </div>
         </article>
         <article class="card">
-            <div class="icon">🚑</div>
+            <div class="service-icon rauge">
+                <img src="images/icons/home-hospitalization.png" alt="Home">
+            </div>
             <div>
                 <div class="n">236</div>
                 <div>Hospitalisations<br>à domicile</div>
             </div>
         </article>
         <article class="card">
-            <div class="icon">🚐</div>
+            <div class="service-icon blanc">
+                <img src="images/icons/medical-transport.png" alt="Home">
+            </div>
             <div>
                 <div class="n">7493</div>
                 <div>Transports médicaux<br>urbains & interurbains</div>
             </div>
         </article>
         <article class="card">
-            <div class="icon">👥</div>
+            <div class="service-icon voile">
+                <img src="images/icons/medical-staff.png" alt="Home">
+            </div>
             <div>
                 <div class="n">24</div>
                 <div>Salariés dont<br>08 médecins urgentistes</div>
@@ -125,9 +127,8 @@ $services = [
 
                 <div class="service-top">
 
-                    <div class="service-icon"
-                        style="background: {{ $service['color'] }}; color: {{ $service['iconColor'] }}">
-                        <i class="fa-solid {{ $service['icon'] }}"></i>
+                    <div class="service-icon" style="background: {{ $service['color'] }}; ">
+                        <img src="images/icons/{{ $service['icon'] }}" alt="Home">
                     </div>
 
                     <div class="service-content">
@@ -147,31 +148,74 @@ $services = [
 
         </div>
 
+
+
     </section>
-    <section class="band">
-        <div>
-            <h4>{{ __('home.zones.title') }}</h4>
-            <p>{{ __('home.zones.desc') }}</p>
-            <a class="assist-btn" href="#">{{ __('home.zones.cta') }}</a>
-        </div>
-        <div>
-            <h4>{{ __('home.why_choose_us.title') }}</h4>
-            <ul>
-                <li>{{ __('home.why_choose_us.item1') }}</li>
-                <li>{{ __('home.why_choose_us.item2') }}</li>
-                <li>{{ __('home.why_choose_us.item3') }}</li>
-                <li>{{ __('home.why_choose_us.item4') }}</li>
-            </ul>
-        </div>
-        <div>
-            <h4>{{ __('home.immediate_help.title') }}</h4>
-            <p>{{ __('home.immediate_help.desc') }}</p>
-            <div class="phone-big">06 60 23 10 10</div>
-            <br><a class="assist-btn" href="#">{{ __('home.immediate_help.cta') }}</a>
-        </div>
-    </section>
+
+
+
+
 </main>
 
+<section class="assist-banner">
+
+    <div class="assist-zones">
+        <img src="images/map.png" alt="Map">
+
+        <div>
+            <h3>OUR ASSISTANCE ZONES</h3>
+
+            <p>
+                Enjoy peace of mind with our extensive assistance network
+                available across multiple regions.
+            </p>
+
+            <a href="#" class="assist-zone-btn">
+                CHECK ASSISTANCE ZONES
+            </a>
+        </div>
+    </div>
+
+    <div class="assist-why">
+        <div class="why-content">
+            <h3>WHY CHOOSE US?</h3>
+
+            <ul>
+                <li>24/7 emergency support</li>
+                <li>Professional medical assistance</li>
+                <li>Wide regional coverage</li>
+                <li>Fast intervention services</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="assist-help">
+        <h3>NEED HELP?</h3>
+
+        <p>
+            Contact our assistance center any time.
+        </p>
+
+        <a href="tel:+212522000000" class="assist-phone">
+            +212 522 000 000
+        </a>
+
+        <a href="#" class="assist-online">
+            ONLINE ASSISTANCE
+        </a>
+    </div>
+
+    <div class="assist-side">
+        <div class="assist-side-box">
+            <div class="assist-icon">🚨</div>
+
+            <small>ASSISTANCE</small>
+
+            <strong>24/7</strong>
+        </div>
+    </div>
+
+</section>
 </body>
 
 

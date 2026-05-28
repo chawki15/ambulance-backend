@@ -1,7 +1,7 @@
 <article class="expertise-card">
 
     <div class="expertise-icon {{ $color }}">
-        <i class="fa-solid {{ $icon }}"></i>
+        <img src="images/icons/{{ $icon }}" alt="Home">
     </div>
 
     <h3>{{ $title }}</h3>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,18 @@ Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('lang.sw
 
 Route::prefix('admin')->group(function () {
     Route::view('/login', 'admin.login')->name('admin.login');
-    Route::view('/home', 'admin.home')->name('admin.dashboard');
-    Route::view('/users/create', 'admin.users-create')->name('admin.users.create');
     Route::redirect('/', '/admin/login')->name('admin.home');
+
+    Route::view('/home', 'admin.home')->name('admin.dashboard');
+
+    Route::view('/users/create', 'admin.users-create')->name('admin.users.create');
+    Route::get('/users', function () {
+        $users = \App\Models\User::query()->latest()->get();
+        return view('admin.users', compact('users'));
+    })->name('admin.users.index');
+
+    Route::view('/medicines', 'admin.medicines')->name('admin.medicines');
+    Route::view('/medicines/create', 'admin.medicines-create')->name('admin.medicines.create');
+
+    Route::view('/stock-movements/in', 'admin.stock-in')->name('admin.stock.in');
 });

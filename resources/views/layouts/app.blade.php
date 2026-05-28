@@ -22,7 +22,6 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: var(--light);
             color: var(--text)
         }
 
@@ -821,38 +820,53 @@
 
         .service-card {
             background: #fff;
-            border-radius: 18px;
-            padding: 22px 20px 18px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, .05);
-            transition: .25s ease;
+            border-radius: 28px;
+            padding: 24px;
+            border: 1px solid #edf0f6;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 185px;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+            min-height: 170px;
         }
 
         .service-top {
             display: flex;
             gap: 16px;
+            align-items: flex-start;
+            flex: 1;
         }
 
         .service-icon {
-            width: 68px;
-            min-width: 68px;
-            height: 68px;
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .service-icon i {
-            font-size: 31px;
+        .blanc {
+            border: 2px solid #f1f3f0;
+        }
+
+        .rauge {
+            background-color: #ffeff0;
+        }
+
+        .voile {
+            background-color: #f4f3fb;
+        }
+
+        .service-icon img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .service-content {
+            flex: 1;
         }
 
         .service-content h3 {
@@ -862,14 +876,18 @@
             color: #153a75;
             font-weight: 900;
             text-transform: uppercase;
+
+            min-height: 38px;
         }
 
         .service-content p {
             margin: 0;
             color: #5d6472;
             font-size: 14px;
-            line-height: 1.45;
+            line-height: 1.5;
             font-weight: 500;
+
+            min-height: 64px;
         }
 
         .service-arrow {

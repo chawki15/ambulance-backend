@@ -18,9 +18,10 @@ class AdminUserSeeder extends Seeder
         $data = [
             'name' => 'Admin Assistance',
             'phone' => '0600000000',
+
+            'profile_photo' => null,
             'password' => Hash::make('Admin@12345'),
             'role' => User::ROLE_ADMIN,
-            'specialty' => null,
         ];
 
         if (Schema::hasColumn('users', 'status')) {

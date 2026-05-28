@@ -17,7 +17,7 @@
         </button>
 
         <a href="#" class="yanis-logo">
-            <img src="{{ asset('images/logo-yanis.png') }}" alt="Yanis Assistance">
+            <img src="{{ asset('images/logo.png') }}" alt="Yanis Assistance">
         </a>
 
         <div class="mobile-spacer" aria-hidden="true"></div>
@@ -64,7 +64,7 @@
                 </button>
 
                 <a href="#" class="mobile-brand">
-                    <img src="{{ asset('images/logo-yanis.png') }}" alt="Yanis Assistance">
+                    <img src="{{ asset('images/logo.png') }}" alt="Yanis Assistance">
                 </a>
             </div>
 
