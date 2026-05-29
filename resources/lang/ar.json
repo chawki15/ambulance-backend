@@ -57,5 +57,18 @@
   "footer.follow_us": "تابعنا",
   "footer.rights": "© 2025 يانيس أسيستانس. جميع الحقوق محفوظة.",
   "footer.legal_notice": "الإشعارات القانونية",
-  "footer.privacy_policy": "سياسة الخصوصية"
+  "footer.privacy_policy": "سياسة الخصوصية",
+  "contact.title": "إتصل بنا", 
+  "contact.subtitle": "نحن هنا لمساعدتك. تواصل معنا في أي وقت", 
+  "contact.address": "العنوان", 
+  "contact.hours": "أوقات العمل", 
+  "contact.hours_text": "9 صباحا - 6 مساء", 
+  "contact.phone": "الهاتف", 
+  "contact.email": "البريد الإلكتروني", 
+  "contact.form_title": "أرسل لنا رسالة", 
+  "contact.name": "الإسم الكامل", 
+  "contact.subject": "الموضوع", 
+  "contact.message": "اكتب رسالتك هنا...", 
+  "contact.send": "إرسال رسالة", 
+  "contact.map_title": "موقعنا على الخريطة"
 }

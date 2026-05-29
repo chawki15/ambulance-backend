@@ -4,9 +4,51 @@
 
 @section('content')
 
-<section class="fleet-section">
+<section class="fleet-section {{ app()->getLocale() == 'ar' ? 'fleet-ar' : 'fleet-fr' }}">
+
+    @if(app()->getLocale() == 'ar')
+
+    <div class="fleet-image">
+        <img src="{{ asset('images/slidear-2.jpeg') }}" alt="">
+    </div>
+
+    <div class="fleet-content">
+        <h2>وسائلنا وأسطولنا</h2>
+        <div class="fleet-line"></div>
+
+        <p>
+            تتوفر Yanis Assistance على وسائل بشرية ومادية وتقنية
+            لضمان تدخل سريع وآمن وفعال داخل المغرب وخارجه.
+        </p>
+
+        <div class="fleet-features">
+            <div class="feature">
+                <span><i class="fa-solid fa-shield-halved"></i></span>
+                <p>معدات طبية مجهزة</p>
+            </div>
+
+            <div class="feature">
+                <span><i class="fa-solid fa-users"></i></span>
+                <p>فرق طبية مجربة</p>
+            </div>
+
+            <div class="feature">
+                <span><i class="fa-solid fa-location-dot"></i></span>
+                <p>تغطية وطنية ودولية</p>
+            </div>
+
+            <div class="feature">
+                <span><i class="fa-solid fa-clock"></i></span>
+                <p>متوفرون 24/24 - 7/7</p>
+            </div>
+        </div>
+    </div>
+
+    @else
+
     <div class="fleet-content">
         <h2>NOS MOYENS & NOTRE FLOTTE</h2>
+        <div class="fleet-line"></div>
 
         <p>
             Yanis Assistance dispose de moyens humains, matériels et techniques
@@ -15,31 +57,34 @@
         </p>
 
         <div class="fleet-features">
-            <div>
+            <div class="feature">
                 <span><i class="fa-solid fa-shield-halved"></i></span>
-                <p>Matériel<br>hautement équipé</p>
+                <p>Matériel hautement équipé</p>
             </div>
 
-            <div>
+            <div class="feature">
                 <span><i class="fa-solid fa-users"></i></span>
-                <p>Équipes médicales<br>expérimentées</p>
+                <p>Équipes médicales expérimentées</p>
             </div>
 
-            <div>
+            <div class="feature">
                 <span><i class="fa-solid fa-location-dot"></i></span>
-                <p>Couverture nationale<br>et internationale</p>
+                <p>Couverture nationale et internationale</p>
             </div>
 
-            <div>
+            <div class="feature">
                 <span><i class="fa-solid fa-clock"></i></span>
-                <p>Disponibilité<br>24h/24 - 7j/7</p>
+                <p>Disponibilité 24h/24 - 7j/7</p>
             </div>
         </div>
     </div>
 
     <div class="fleet-image">
-        <img src="images/ambulances.png" alt="Ambulances Yanis Assistance">
+        <img src="{{ asset('images/slide-2.jpeg') }}" alt="">
     </div>
+
+    @endif
+
 </section>
 
 
@@ -179,98 +224,83 @@
 
 <style>
     .fleet-section {
-        display: grid;
-        grid-template-columns: 45% 55%;
-        align-items: center;
+        width: 100%;
         min-height: 310px;
-        background: #f4f8ff;
+        display: grid;
+        grid-template-columns: 52% 48%;
+        background: #eef1f6;
         overflow: hidden;
     }
 
     .fleet-content {
-        padding: 55px 40px 45px 85px;
-        position: relative;
+        padding: 45px 30px;
         z-index: 2;
     }
 
     .fleet-content h2 {
-        color: #003b84;
-        font-size: 26px;
-        font-weight: 900;
-        margin: 0 0 22px;
+        color: #0b3d7a;
+        font-size: 24px;
+        font-weight: 800;
+        margin: 0;
+        line-height: 1.2;
         text-transform: uppercase;
-        position: relative;
     }
 
-    .fleet-content h2::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -10px;
+    .fleet-line {
         width: 55px;
         height: 3px;
-        background: #ef2146;
+        background: #e31b3f;
+        margin: 12px 0 16px;
     }
 
     .fleet-content>p {
-        color: #111;
+        max-width: 440px;
         font-size: 13px;
-        line-height: 1.65;
-        max-width: 520px;
-        margin: 0 0 28px;
+        line-height: 1.7;
+        color: #000;
+        margin: 0;
     }
 
     .fleet-features {
-        display: grid;
-        grid-template-columns: repeat(4, auto);
-        gap: 28px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 35px;
+        flex-wrap: nowrap;
     }
 
-    .fleet-features div {
+    .feature {
         display: flex;
         align-items: center;
         gap: 10px;
+        min-width: 135px;
     }
 
-    .fleet-features span {
+    .feature span {
         width: 42px;
         height: 42px;
+        min-width: 42px;
         border-radius: 50%;
         background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        flex-shrink: 0;
+        color: #0b3d7a;
+        font-size: 17px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
     }
 
-    .fleet-features i {
-        color: #003b84;
-        font-size: 18px;
-    }
-
-    .fleet-features p {
+    .feature p {
         margin: 0;
-        color: #111;
         font-size: 11px;
-        line-height: 1.35;
         font-weight: 600;
+        line-height: 1.3;
+        color: #000;
     }
 
     .fleet-image {
-        height: 100%;
         position: relative;
-    }
-
-    .fleet-image::before {
-        content: "";
-        position: absolute;
-        left: -120px;
-        top: 0;
-        width: 250px;
-        height: 100%;
-        background: linear-gradient(to right, #f4f8ff 25%, rgba(244, 248, 255, 0));
-        z-index: 1;
+        height: 310px;
     }
 
     .fleet-image img {
@@ -280,26 +310,106 @@
         display: block;
     }
 
-    @media(max-width:992px) {
-        .fleet-section {
+    /* الفرنسية */
+    .fleet-fr .fleet-image::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 260px;
+        height: 100%;
+        background: linear-gradient(to right,
+                #eef1f6 0%,
+                rgba(238, 241, 246, .85) 45%,
+                rgba(238, 241, 246, 0) 100%);
+        z-index: 2;
+    }
+
+    .fleet-fr .fleet-image img {
+        object-position: center right;
+    }
+
+    /* العربية */
+    .fleet-ar {
+        grid-template-columns: 52% 48%;
+    }
+
+    .fleet-ar .fleet-content {
+        text-align: right;
+        direction: rtl;
+    }
+
+    .fleet-ar .fleet-line {
+        margin-right: 0;
+        margin-left: auto;
+    }
+
+    .fleet-ar .fleet-features {
+        direction: rtl;
+    }
+
+    .fleet-ar .fleet-image::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 260px;
+        height: 100%;
+        background: linear-gradient(to left,
+                #eef1f6 0%,
+                rgba(238, 241, 246, .85) 45%,
+                rgba(238, 241, 246, 0) 100%);
+        z-index: 2;
+    }
+
+    .fleet-ar .fleet-image img {
+        object-position: center left;
+    }
+
+    @media(max-width:768px) {
+
+        .fleet-section,
+        .fleet-ar {
             grid-template-columns: 1fr;
         }
 
         .fleet-content {
-            padding: 40px 25px;
-        }
-
-        .fleet-features {
-            grid-template-columns: repeat(2, 1fr);
+            padding: 35px 25px;
         }
 
         .fleet-image {
-            height: 240px;
+            height: 230px;
+        }
+
+        .fleet-features {
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feature {
+            width: 45%;
         }
     }
 
+    .fleet-ar {
+        direction: ltr !important;
+    }
 
+    .fleet-ar .fleet-image {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
 
+    .fleet-ar .fleet-content {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        direction: rtl !important;
+        text-align: right !important;
+    }
+
+    /* =========================
+   MAIN
+========================= */
     * {
         margin: 0;
         padding: 0;
@@ -332,8 +442,6 @@
 
     .fleet-right {
         width: 35%;
-        border-left: 1px solid #d9dfe8;
-        padding-left: 14px;
     }
 
     /* =========================
@@ -352,11 +460,20 @@
     .fleet-layout h2::after {
         content: "";
         position: absolute;
-        left: 0;
         bottom: -7px;
         width: 42px;
         height: 2px;
         background: #ef2146;
+    }
+
+    /* Français */
+    html[dir="ltr"] .fleet-layout h2::after {
+        left: 0;
+    }
+
+    /* العربية */
+    html[dir="rtl"] .fleet-layout h2::after {
+        right: 0;
     }
 
     /* =========================
@@ -570,7 +687,6 @@
 
     .quality-card li {
         position: relative;
-        padding-left: 18px;
         color: #111;
         font-size: 8px;
         line-height: 1.35;
@@ -580,8 +696,6 @@
     .quality-card li::before {
         content: "✓";
         position: absolute;
-        left: 0;
-        top: 0;
         width: 12px;
         height: 12px;
         border-radius: 50%;
@@ -599,6 +713,30 @@
         object-fit: cover;
         border-radius: 8px;
         flex-shrink: 0;
+    }
+
+    /* Français */
+    html[dir="ltr"] .quality-card li {
+        padding-left: 18px;
+        padding-right: 0;
+        text-align: left;
+    }
+
+    html[dir="ltr"] .quality-card li::before {
+        left: 0;
+        right: auto;
+    }
+
+    /* العربية */
+    html[dir="rtl"] .quality-card li {
+        padding-right: 18px;
+        padding-left: 0;
+        text-align: right;
+    }
+
+    html[dir="rtl"] .quality-card li::before {
+        right: 0;
+        left: auto;
     }
 
     /* =========================

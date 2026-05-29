@@ -4,9 +4,10 @@
 
 @section('content')
 
-<section class="about-hero">
+<section class="about-hero {{ app()->getLocale() == 'ar' ? 'about-ar' : 'about-fr' }}">
+
     <div class="about-left">
-        <h1>À PROPOS DE<br><span>YANIS ASSISTANCE</span></h1>
+        <h1>À PROPOS DE<br>YANIS ASSISTANCE</h1>
         <p>
             Yanis Assistance est une société marocaine spécialisée dans l’assistance médicale,
             le transport sanitaire et les services d’aide à la personne.
@@ -20,13 +21,23 @@
     </div>
 
     <div class="about-right">
-        <img src="images/about-medical-team.png" alt="Yanis Assistance">
+        @if(app()->getLocale() == 'ar')
+        <img src="{{ asset('images/slidear-1.jpeg') }}" alt="">
+        @else
+        <img src="{{ asset('images/slide-1.jpeg') }}" alt="">
+        @endif
+
         <div class="mission-card">
             <i class="fa-solid fa-quote-left"></i>
-            <h3>Notre Mission</h3>
-            <p>Accompagner, agir rapidement et soulager le quotidien après un aléa est notre cœur de métier.</p>
+            <h3>{{ app()->getLocale() == 'ar' ? 'مهمتنا' : 'Notre Mission' }}</h3>
+            <p>
+                {{ app()->getLocale() == 'ar'
+                ? 'المرافقة، التدخل السريع، وتخفيف معاناة الأشخاص هي جوهر مهنتنا.'
+                : 'Accompagner, agir rapidement et soulager le quotidien après un aléa est notre cœur de métier.' }}
+            </p>
         </div>
     </div>
+
 </section>
 
 <section class="presentation-section">
@@ -189,36 +200,17 @@
 </section>
 
 <style>
-    .about-right {
-        position: relative;
-    }
-
-    .about-right::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg,
-                rgba(245, 248, 255, .95) 0%,
-                rgba(245, 248, 255, .55) 22%,
-                rgba(245, 248, 255, 0) 45%);
-        z-index: 1;
-    }
-
-    .about-right img {
-        position: relative;
-        z-index: 0;
-    }
-
-
     .about-hero {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 48% 52%;
         min-height: 380px;
+        background: #eef1f6;
         overflow: hidden;
     }
 
     .about-left {
         padding: 55px 0 40px 110px;
+        z-index: 2;
     }
 
     .about-left h1 {
@@ -229,8 +221,7 @@
         margin: 0 0 22px;
     }
 
-    .about-left h1::after,
-    .about-content h2::after {
+    .about-left h1::after {
         content: "";
         width: 45px;
         height: 3px;
@@ -240,7 +231,7 @@
     }
 
     .about-left p {
-        max-width: 360px;
+        max-width: 430px;
         font-size: 15px;
         line-height: 1.7;
         color: #1b2c46;
@@ -284,6 +275,18 @@
         position: relative;
     }
 
+    .about-right::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right,
+                #eef1f6 0%,
+                rgba(238, 241, 246, .80) 20%,
+                rgba(238, 241, 246, .15) 45%,
+                rgba(238, 241, 246, 0) 100%);
+        z-index: 1;
+    }
+
     .about-right img {
         width: 100%;
         height: 100%;
@@ -292,6 +295,78 @@
         display: block;
     }
 
+    .mission-card {
+        position: absolute;
+        right: 90px;
+        bottom: -45px;
+        width: 310px;
+        background: #fff;
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 12px 35px rgba(20, 60, 110, .15);
+        z-index: 3;
+    }
+
+    .mission-card i {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: #0b3168;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -58px;
+    }
+
+    .mission-card h3 {
+        color: #0b3168;
+        margin-bottom: 10px;
+    }
+
+
+    html[dir="rtl"] .about-hero {
+        display: grid;
+        grid-template-columns: 52% 48%;
+        direction: ltr;
+    }
+
+    html[dir="rtl"] .about-right {
+        grid-column: 1;
+        grid-row: 1;
+        height: 380px;
+    }
+
+    html[dir="rtl"] .about-left {
+        grid-column: 2;
+        grid-row: 1;
+        direction: rtl;
+        text-align: right;
+        padding: 55px 60px 0px 20px;
+    }
+
+    html[dir="rtl"] .about-right img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center left;
+    }
+
+    html[dir="rtl"] .mission-card {
+        right: auto;
+        left: 90px;
+        bottom: -45px;
+    }
+
+    html[dir="rtl"] .about-right::before {
+        background: linear-gradient(to left,
+                #eef1f6 0%,
+                rgba(238, 241, 246, .80) 18%,
+                rgba(238, 241, 246, .25) 35%,
+                rgba(238, 241, 246, 0) 55%) !important;
+    }
+
+    /* ddddddddddd **/
     .mission-card {
         position: absolute;
         right: 90px;
@@ -358,8 +433,21 @@
         height: 3px;
         background: #ef2146;
         position: absolute;
-        left: 0;
         bottom: -8px;
+    }
+
+    /* Français */
+    html[dir="ltr"] .presentation-text h2::after,
+    html[dir="ltr"] .clients-text h2::after,
+    html[dir="ltr"] .history-section h2::after {
+        left: 0;
+    }
+
+    /* العربية */
+    html[dir="rtl"] .presentation-text h2::after,
+    html[dir="rtl"] .clients-text h2::after,
+    html[dir="rtl"] .history-section h2::after {
+        right: 0;
     }
 
     .presentation-text p {
@@ -636,6 +724,82 @@
         margin: 0;
     }
 
+    .clients-row {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .clients-text h2 {
+        color: #003b84;
+        font-size: 15px;
+        font-weight: 900;
+        margin: 0 0 14px;
+        position: relative;
+    }
+
+    .clients-text h2::after {
+        content: "";
+        width: 38px;
+        height: 2px;
+        background: #ef2146;
+        position: absolute;
+        bottom: -7px;
+    }
+
+    .clients-text p {
+        font-size: 12px;
+        color: #25354d;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .clients-logos {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 6px 22px rgba(11, 49, 104, .08);
+        padding: 18px 28px;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        align-items: center;
+        gap: 22px 35px;
+    }
+
+    .clients-logos img {
+        max-width: 90px;
+        max-height: 38px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        margin: auto;
+        display: block;
+    }
+
+    @media(max-width:992px) {
+        .clients-row {
+            grid-template-columns: 1fr;
+        }
+
+        .clients-logos {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    @media(max-width:576px) {
+        .clients-logos {
+            grid-template-columns: repeat(2, 1fr);
+            padding: 18px;
+            gap: 22px;
+        }
+
+        .clients-logos img {
+            max-width: 80px;
+            max-height: 35px;
+        }
+    }
+
 
     .history-section {
         width: 100%;
@@ -656,7 +820,6 @@
     .history-section h2::after {
         content: "";
         position: absolute;
-        left: 0;
         bottom: -10px;
         width: 55px;
         height: 3px;
@@ -751,6 +914,32 @@
         color: #000;
     }
 
+    html[dir="rtl"] .history-timeline {
+        direction: rtl;
+    }
+
+    html[dir="rtl"] .history-timeline::before {
+        left: 12%;
+        right: 58%;
+    }
+
+    html[dir="rtl"] .history-content {
+        left: auto;
+        right: 72px;
+        text-align: right;
+    }
+
+    html[dir="rtl"] .history-item span {
+        text-align: right;
+    }
+
+    html[dir="rtl"] .history-icon::after,
+    html[dir="rtl"] .history-icon::before {
+        left: auto;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
     .history-item span {
         display: block;
         margin-top: 45px;
@@ -777,46 +966,12 @@
     }
 
 
-    .clients-row {
-        margin-top: 18px;
-        display: grid;
-        grid-template-columns: 260px 1fr;
-        align-items: center;
-        gap: 25px;
-    }
-
-    .clients-text p {
-        font-size: 12px;
-        color: #25354d;
-        line-height: 1.5;
-        margin: 0;
-    }
-
-    .clients-logos {
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 6px 22px rgba(11, 49, 104, .08);
-        padding: 18px 28px;
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        align-items: center;
-        gap: 25px;
-    }
-
-    .clients-logos img {
-        max-width: 105px;
-        max-height: 45px;
-        object-fit: contain;
-        margin: auto;
-    }
-
     @media (max-width: 992px) {
         .about-bottom {
             padding: 25px 20px;
         }
 
-        .values-history,
-        .clients-row {
+        .values-history {
             grid-template-columns: 1fr;
         }
 
@@ -828,10 +983,6 @@
         }
 
         .values-list {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .clients-logos {
             grid-template-columns: repeat(2, 1fr);
         }
     }

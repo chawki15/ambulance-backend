@@ -50,5 +50,17 @@
   "home.stats.consultations": "Consultations à domicile<br>& contre-visites",
   "home.stats.hospitalizations": "Hospitalisations<br>à domicile",
   "home.stats.transports": "Transports médicaux<br>urbains & interurbains",
-  "home.stats.staff": "Salariés dont<br>08 médecins urgentistes"
+  "home.stats.staff": "Salariés dont<br>08 médecins urgentistes",
+  "contact.title": "Contactez-nous", 
+  "contact.subtitle": "Nous sommes là pour vous aider. Contactez-nous à tout moment.", 
+  "contact.address": "Adresse", "contact.hours": "Horaires", 
+  "contact.hours_text": "9h00 - 18h00", 
+  "contact.phone": "Téléphone", 
+  "contact.email": "E-mail", 
+  "contact.form_title": "Envoyez-nous un message", 
+  "contact.name": "Nom complet", 
+  "contact.subject": "Sujet", 
+  "contact.message": "Écrivez votre message ici...", 
+  "contact.send": "Envoyer le message", 
+  "contact.map_title": "Notre localisation"
 }

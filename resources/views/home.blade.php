@@ -157,29 +157,24 @@ $services = [
 
 </main>
 
-<section class="assist-banner">
+<section class="help-banner">
 
-    <div class="assist-zones">
+    <div class="help-zones">
         <img src="images/map.png" alt="Map">
 
         <div>
             <h3>OUR ASSISTANCE ZONES</h3>
-
             <p>
                 Enjoy peace of mind with our extensive assistance network
                 available across multiple regions.
             </p>
-
-            <a href="#" class="assist-zone-btn">
-                CHECK ASSISTANCE ZONES
-            </a>
+            <a href="#" class="help-zone-btn">CHECK ASSISTANCE ZONES</a>
         </div>
     </div>
 
-    <div class="assist-why">
-        <div class="why-content">
+    <div class="help-why">
+        <div class="help-why-content">
             <h3>WHY CHOOSE US?</h3>
-
             <ul>
                 <li>24/7 emergency support</li>
                 <li>Professional medical assistance</li>
@@ -189,28 +184,23 @@ $services = [
         </div>
     </div>
 
-    <div class="assist-help">
+    <div class="help-contact">
         <h3>NEED HELP?</h3>
+        <p>Contact our assistance center any time.</p>
 
-        <p>
-            Contact our assistance center any time.
-        </p>
-
-        <a href="tel:+212522000000" class="assist-phone">
+        <a href="tel:+212522000000" class="help-phone">
             +212 522 000 000
         </a>
 
-        <a href="#" class="assist-online">
+        <a href="#" class="help-online">
             ONLINE ASSISTANCE
         </a>
     </div>
 
-    <div class="assist-side">
-        <div class="assist-side-box">
-            <div class="assist-icon">🚨</div>
-
+    <div class="help-side">
+        <div class="help-side-box">
+            <div class="help-icon">🚨</div>
             <small>ASSISTANCE</small>
-
             <strong>24/7</strong>
         </div>
     </div>

@@ -36,16 +36,15 @@
 }
 
 
-.assist-banner{
-    width:100%;
-    margin:0;
+
+.help-banner{
     display:grid;
-    grid-template-columns:1.3fr 2fr 1.1fr 82px;
-    background:#fff;
+    grid-template-columns:1.2fr 1.4fr 1fr 80px;
+    background:#0b3d7a;
     overflow:hidden;
 }
 
-.assist-zones{
+.help-zones{
     padding:24px 28px;
     display:flex;
     align-items:center;
@@ -53,14 +52,14 @@
     background:#0b3d7a;
 }
 
-.assist-zones img{
+.help-zones img{
     width:125px;
     flex-shrink:0;
 }
 
-.assist-zones h3,
-.assist-why h3,
-.assist-help h3{
+.help-zones h3,
+.help-why h3,
+.help-contact h3{
     color:#fff;
     margin:0 0 12px;
     font-size:14px;
@@ -69,15 +68,15 @@
     text-transform:uppercase;
 }
 
-.assist-zones p,
-.assist-help p{
+.help-zones p,
+.help-contact p{
     color:#fff;
     margin:0;
     font-size:12px;
     line-height:1.6;
 }
 
-.assist-zone-btn{
+.help-zone-btn{
     display:inline-block;
     margin-top:12px;
     padding:8px 16px;
@@ -89,34 +88,29 @@
     font-weight:900;
 }
 
-.assist-why{
+.help-why{
     position:relative;
     overflow:hidden;
     min-height:160px;
     padding:22px 28px;
     background:
-        linear-gradient(90deg,
-            rgba(11,61,122,1) 0%,
-            rgba(11,61,122,.95) 38%,
-            rgba(11,61,122,.55) 58%,
-            rgba(11,61,122,.15) 100%
-        ),
+        linear-gradient(90deg, rgba(11,61,122,1) 0%, rgba(11,61,122,.95) 38%, rgba(11,61,122,.55) 58%, rgba(11,61,122,.15) 100%),
         url("/images/doctors.png") right center / auto 100% no-repeat;
 }
 
-.why-content{
+.help-why-content{
     position:relative;
     z-index:2;
     width:100%;
 }
 
-.why-content ul{
+.help-why-content ul{
     margin:0;
     padding:0;
     list-style:none;
 }
 
-.why-content li{
+.help-why-content li{
     display:flex;
     align-items:center;
     gap:8px;
@@ -126,7 +120,7 @@
     line-height:1.3;
 }
 
-.why-content li::before{
+.help-why-content li::before{
     content:"✓";
     width:15px;
     height:15px;
@@ -141,14 +135,14 @@
     flex-shrink:0;
 }
 
-.assist-help{
+.help-contact{
     padding:24px 28px;
     text-align:center;
     background:#0b3d7a;
     border-top-right-radius:22px;
 }
 
-.assist-phone{
+.help-phone{
     display:block;
     max-width:190px;
     margin:16px auto 10px;
@@ -161,7 +155,7 @@
     font-weight:900;
 }
 
-.assist-online{
+.help-online{
     display:block;
     max-width:230px;
     margin:0 auto;
@@ -174,14 +168,14 @@
     font-weight:900;
 }
 
-.assist-side{
+.help-side{
     background:#fff;
     display:flex;
     align-items:flex-end;
     justify-content:center;
 }
 
-.assist-side-box{
+.help-side-box{
     width:62px;
     height:96px;
     margin-bottom:8px;
@@ -195,20 +189,20 @@
     text-align:center;
 }
 
-.assist-icon{
+.help-icon{
     font-size:18px;
     line-height:1;
     margin-bottom:6px;
 }
 
-.assist-side-box small{
+.help-side-box small{
     color:#fff;
     font-size:8px;
     font-weight:900;
     line-height:1;
 }
 
-.assist-side-box strong{
+.help-side-box strong{
     color:#fff;
     font-size:20px;
     font-weight:900;
@@ -219,125 +213,47 @@
 
 @media (max-width:768px){
 
-    .assist-banner{
-        grid-template-columns:1fr;
-        grid-template-areas:
-            "zones"
-            "why"
-            "help"
-            "side";
-    }
-
-    .assist-zones,
-    .assist-why,
-    .assist-help{
-        padding:20px;
-    }
-
-    .assist-zones{
+    .help-banner{
+        display:flex;
         flex-direction:column;
-        text-align:center;
     }
 
-    .why-content{
+    .help-zones,
+    .help-why,
+    .help-contact{
         width:100%;
-        text-align:center;
     }
 
-    .why-content li{
-        justify-content:center;
-    }
-
-    .assist-phone{
-        white-space:nowrap;
-        font-size:24px;
-    }
-
-    .assist-side{
-        padding:15px;
+    .help-side{
+        width:100%;
         background:#0b3d7a;
+        padding:15px;
+    }
+
+    .help-side-box{
+        width:100%;
+        height:70px;
+        margin:0;
+        border-radius:10px;
+
+        display:flex;
+        flex-direction:row;
         justify-content:center;
+        align-items:center;
+        gap:15px;
     }
 
-    .assist-side-box{
-        margin-bottom:0;
+    .help-icon{
+        margin:0;
+        font-size:22px;
     }
-}
 
-
-@media (max-width:992px){
-
-    .assist-banner{
-        grid-template-columns:1fr;
-        grid-template-areas:
-            "zones"
-            "why"
-            "help"
-            "side";
+    .help-side-box small{
+        font-size:12px;
     }
-}
 
-/* RTL FIX */
-
-.assist-banner{
-    grid-template-areas:"zones why help side";
-}
-
-.assist-zones{ grid-area:zones; }
-.assist-why{ grid-area:why; }
-.assist-help{ grid-area:help; }
-.assist-side{ grid-area:side; }
-
-html[lang="ar"] .assist-banner{
-    direction:ltr;
-    grid-template-columns:82px 1.1fr 2fr 1.3fr;
-    grid-template-areas:"side help why zones";
-}
-
-html[lang="ar"] .assist-zones,
-html[lang="ar"] .assist-why,
-html[lang="ar"] .assist-help,
-html[lang="ar"] .assist-side{
-    direction:ltr;
-}
-
-html[lang="ar"] .assist-zones{
-    flex-direction:row-reverse;
-    text-align:center;
-}
-
-html[lang="ar"] .assist-help{
-    text-align:center;
-    border-top-right-radius:0;
-    border-top-left-radius:22px;
-}
-
-html[lang="ar"] .assist-why{
-    text-align:left;
-    background:
-        linear-gradient(
-            360deg,
-            rgba(11,61,122,1) 0%,
-            rgba(11,61,122,.95) 38%,
-            rgba(11,61,122,.55) 58%,
-            rgba(11,61,122,.15) 100%
-        ),
-        url("/images/doctors.png") left center / auto 100% no-repeat;
-        background-color: #0b3d7a;
-}
-
-html[lang="ar"] .why-content li{
-    flex-direction:row-reverse;
-    justify-content:flex-end;
-}
-
-@media(max-width:768px){
-    html[lang="ar"] .assist-banner{
-        grid-template-columns:1fr;
-        grid-template-areas:
-            "zones"
-            "why"
-            "help"
-            "side";
+    .help-side-box strong{
+        margin:0;
+        font-size:28px;
     }
 }
