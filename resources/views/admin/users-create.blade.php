@@ -1,373 +1,275 @@
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
+@extends('admin.layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Ajouter utilisateur | Admin</title>
-    <style>
-        :root {
-            --bg: #f5f7fc;
-            --surface: #fff;
-            --border: #e4eaf5;
-            --primary: #4f46e5;
-            --text: #16223b;
-            --muted: #617191;
-            --danger: #dc2626;
-            --success: #16a34a
-        }
+@section('content')
 
-        * {
-            box-sizing: border-box
-        }
+<style>
+    h1 {
+        margin: 20px 0 8px;
+        font-size: 36px
+    }
 
-        body {
-            margin: 0;
-            background: var(--bg);
-            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-            color: var(--text)
-        }
+    .crumb {
+        color: var(--muted);
+        margin-bottom: 16px
+    }
 
-        .layout {
-            display: flex;
-            min-height: 100vh
-        }
+    .panel {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px
+    }
 
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(180deg, #182a56, #0f1d3a);
-            color: #eef2ff;
-            padding: 22px 16px
-        }
+    .steps {
+        display: flex;
+        gap: 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid #e9eef8;
+        margin-bottom: 16px
+    }
 
-        .brand {
-            font-size: 30px;
-            font-weight: 700;
-            margin-bottom: 24px
-        }
+    .step {
+        font-size: 13px;
+        color: #6b7a96;
+        font-weight: 600
+    }
 
-        .ttl {
-            font-size: 12px;
-            opacity: .7;
-            margin: 14px 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px
-        }
+    .step b {
+        display: inline-flex;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: #eef1ff;
+        color: #4338ca;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px
+    }
 
-        .item {
-            display: block;
-            color: inherit;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 10px;
-            margin: 4px 0;
-            font-weight: 600
-        }
+    .step.active b {
+        background: #4f46e5;
+        color: #fff
+    }
 
-        .item.active {
-            background: linear-gradient(90deg, #5f54ff, #4f46e5)
-        }
+    .grid {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 16px
+    }
 
-        .main {
-            flex: 1;
-            padding: 24px
-        }
+    .photo {
+        border: 1px dashed #cfd8ed;
+        border-radius: 12px;
+        padding: 14px;
+        text-align: center
+    }
 
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 14px 18px
-        }
+    .avatar {
+        width: 66px;
+        height: 66px;
+        border-radius: 999px;
+        background: #ebe8ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px
+    }
 
-        .search {
-            min-width: 300px;
-            border: 1px solid #d6dff0;
-            border-radius: 10px;
-            padding: 10px 14px
-        }
+    .form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px
+    }
 
-        h1 {
-            margin: 20px 0 8px;
-            font-size: 36px
-        }
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 6px
+    }
 
-        .crumb {
-            color: var(--muted);
-            margin-bottom: 16px
-        }
+    .req::after {
+        content: ' *';
+        color: var(--danger)
+    }
 
-        .panel {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px
-        }
+    input,
+    select {
+        width: 100%;
+        border: 1px solid #d6dff0;
+        border-radius: 10px;
+        padding: 11px 12px
+    }
 
-        .steps {
-            display: flex;
-            gap: 18px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid #e9eef8;
-            margin-bottom: 16px
-        }
+    .full {
+        grid-column: 1/-1
+    }
 
-        .step {
-            font-size: 13px;
-            color: #6b7a96;
-            font-weight: 600
-        }
+    .role-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px
+    }
 
-        .step b {
-            display: inline-flex;
-            width: 22px;
-            height: 22px;
-            border-radius: 999px;
-            background: #eef1ff;
-            color: #4338ca;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px
-        }
+    .role-card {
+        border: 1px solid #d6dff0;
+        border-radius: 10px;
+        padding: 12px;
+        text-align: center;
+        cursor: pointer
+    }
 
-        .step.active b {
-            background: #4f46e5;
-            color: #fff
-        }
+    .role-card.active {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 2px #ece9ff;
+        color: #4338ca;
+        font-weight: 700
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 16px
-        }
+    .role-panel,
+    .review-card {
+        margin-top: 12px;
+        border: 1px solid #e4eaf5;
+        border-radius: 10px;
+        padding: 14px;
+        background: #fcfdff
+    }
 
-        .photo {
-            border: 1px dashed #cfd8ed;
-            border-radius: 12px;
-            padding: 14px;
-            text-align: center
-        }
+    .switches {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 10px
+    }
 
-        .avatar {
-            width: 66px;
-            height: 66px;
-            border-radius: 999px;
-            background: #ebe8ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px
-        }
+    .review-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px
+    }
 
-        .form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px
-        }
+    .k {
+        color: var(--muted)
+    }
 
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 6px
-        }
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px
+    }
 
-        .req::after {
-            content: ' *';
-            color: var(--danger)
-        }
+    .btn {
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: 1px solid #d1dbef;
+        background: #fff;
+        font-weight: 700
+    }
 
-        input,
-        select {
-            width: 100%;
-            border: 1px solid #d6dff0;
-            border-radius: 10px;
-            padding: 11px 12px
-        }
+    .btn.primary {
+        background: linear-gradient(90deg, #5f54ff, #4f46e5);
+        color: #fff;
+        border: 0
+    }
 
-        .full {
-            grid-column: 1/-1
-        }
+    .status {
+        margin-top: 10px;
+        font-size: 14px
+    }
 
-        .role-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px
-        }
+    .ok {
+        color: var(--success)
+    }
 
-        .role-card {
-            border: 1px solid #d6dff0;
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer
-        }
+    .err {
+        color: var(--danger)
+    }
 
-        .role-card.active {
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 2px #ece9ff;
-            color: #4338ca;
-            font-weight: 700
-        }
-
-        .role-panel,
-        .review-card {
-            margin-top: 12px;
-            border: 1px solid #e4eaf5;
-            border-radius: 10px;
-            padding: 14px;
-            background: #fcfdff
-        }
-
-        .switches {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px
-        }
-
-        .review-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px
-        }
-
-        .k {
-            color: var(--muted)
-        }
-
-        .actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 16px
-        }
-
-        .btn {
-            padding: 10px 15px;
-            border-radius: 10px;
-            border: 1px solid #d1dbef;
-            background: #fff;
-            font-weight: 700
-        }
-
-        .btn.primary {
-            background: linear-gradient(90deg, #5f54ff, #4f46e5);
-            color: #fff;
-            border: 0
-        }
-
-        .status {
-            margin-top: 10px;
-            font-size: 14px
-        }
-
-        .ok {
-            color: var(--success)
-        }
-
-        .err {
-            color: var(--danger)
-        }
-
-        .hidden {
-            display: none
-        }
-    </style>
-</head>
-
-<body>
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="brand">StockSystem</div>
-            <div class="ttl">Principal</div><a class="item" href="/admin/home">Tableau de bord</a><a class="item active" href="/admin/users">Utilisateurs</a><a class="item" href="/admin/medicines">Médicaments</a><a class="item" href="/admin/stock-movements/in">Mouvements de stock</a>
-        </aside>
-        <main class="main">
-            <div class="topbar">
-                <div>☰</div><input class="search" placeholder="Rechercher..." disabled>
-                <div>Admin</div>
+    .hidden {
+        display: none
+    }
+</style>
+<div class="layout">
+    @include('admin.layouts.sidebar')
+    <main class="main">
+        @include('admin.layouts.header')
+        <h1>Add New User</h1>
+        <div class="crumb">Home › Users › Add New User</div>
+        <div class="panel">
+            <div class="steps">
+                <div class="step active" id="s1"><b>1</b>Basic Information</div>
+                <div class="step" id="s2"><b>2</b>Role & Profile Information</div>
+                <div class="step" id="s3"><b>3</b>Review & Confirm</div>
             </div>
-            <h1>Add New User</h1>
-            <div class="crumb">Home › Users › Add New User</div>
-            <div class="panel">
-                <div class="steps">
-                    <div class="step active" id="s1"><b>1</b>Basic Information</div>
-                    <div class="step" id="s2"><b>2</b>Role & Profile Information</div>
-                    <div class="step" id="s3"><b>3</b>Review & Confirm</div>
+            <form id="create-user-form" novalidate>
+                <div id="step1">
+                    <div class="grid">
+                        <div class="photo">
+                            <div class="avatar" id="avatarPreview">📷</div><strong>Upload Photo (optionnel)</strong><br><small>JPG/PNG max 2Mo (preview uniquement)</small><br><br><input id="photo" type="file" accept="image/png,image/jpeg,image/jpg">
+                        </div>
+                        <div class="form">
+                            <div><label class="req">Full Name</label><input name="name" required minlength="3"></div>
+                            <div><label class="req">Email Address</label><input name="email" type="email" required></div>
+                            <div><label class="req">Phone Number</label><input name="phone" required pattern="^\+?[0-9\s\-]{8,20}$"></div>
+                            <div><label class="req">Role</label><select name="role" id="roleSelect" required>
+                                    <option value="">Select role</option>
+                                    <option value="driver">Driver</option>
+                                    <option value="nurse">Nurse</option>
+                                    <option value="general_doctor">General Doctor</option>
+                                    <option value="specialist_doctor">Specialist Doctor</option>
+                                </select></div>
+                            <div><label class="req">Mot de passe</label><input name="password" type="password" required minlength="10"></div>
+                            <div><label class="req">Confirm Mot de passe</label><input name="password_confirmation" type="password" required minlength="10"></div>
+                        </div>
+                    </div>
                 </div>
-                <form id="create-user-form" novalidate>
-                    <div id="step1">
-                        <div class="grid">
-                            <div class="photo">
-                                <div class="avatar" id="avatarPreview">📷</div><strong>Upload Photo (optionnel)</strong><br><small>JPG/PNG max 2Mo (preview uniquement)</small><br><br><input id="photo" type="file" accept="image/png,image/jpeg,image/jpg">
-                            </div>
-                            <div class="form">
-                                <div><label class="req">Full Name</label><input name="name" required minlength="3"></div>
-                                <div><label class="req">Email Address</label><input name="email" type="email" required></div>
-                                <div><label class="req">Phone Number</label><input name="phone" required pattern="^\+?[0-9\s\-]{8,20}$"></div>
-                                <div><label class="req">Role</label><select name="role" id="roleSelect" required>
-                                        <option value="">Select role</option>
-                                        <option value="driver">Driver</option>
-                                        <option value="nurse">Nurse</option>
-                                        <option value="general_doctor">General Doctor</option>
-                                        <option value="specialist_doctor">Specialist Doctor</option>
-                                    </select></div>
-                                <div><label class="req">Mot de passe</label><input name="password" type="password" required minlength="10"></div>
-                                <div><label class="req">Confirm Mot de passe</label><input name="password_confirmation" type="password" required minlength="10"></div>
-                            </div>
+                <div id="step2" class="hidden"><label class="req">Select Role</label>
+                    <div class="role-grid">
+                        <div class="role-card" data-role="driver">Driver</div>
+                        <div class="role-card" data-role="nurse">Nurse</div>
+                        <div class="role-card" data-role="general_doctor">General Doctor</div>
+                        <div class="role-card" data-role="specialist_doctor">Specialist Doctor</div>
+                    </div>
+                    <small style="color:#7a88a4;display:block;margin-top:10px">Please fill in the information specific to the selected role.</small>
+                    <div class="role-panel">
+                        <h3 id="roleTitle" style="margin:0 0 10px;color:#4338ca">Specialist Doctor Information</h3>
+                        <div class="form">
+                            <div id="f-specialty"><label class="req">Specialty</label><select name="specialty">
+                                    <option value="">Select specialty</option>
+                                    <option>Cardiology</option>
+                                    <option>Pediatrics</option>
+                                    <option>Orthopedics</option>
+                                    <option>Dermatology</option>
+                                </select></div>
+                            <div><label class="req">License Number</label><input name="license_number" placeholder="Enter license number" required></div>
+                            <div><label class="req">Experience Years</label><input name="experience_years" type="number" min="0" max="60" required></div>
+                            <div id="f-diploma" class="hidden"><label>Diploma</label><input name="diploma" placeholder="Enter diploma"></div>
+                        </div>
+                        <div class="switches" id="availabilitySwitches">
+                            <div><label>Is Available</label><select name="is_available">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select></div>
+                            <div><label>Is Active</label><select name="is_active">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select></div>
                         </div>
                     </div>
-                    <div id="step2" class="hidden"><label class="req">Select Role</label>
-                        <div class="role-grid">
-                            <div class="role-card" data-role="driver">Driver</div>
-                            <div class="role-card" data-role="nurse">Nurse</div>
-                            <div class="role-card" data-role="general_doctor">General Doctor</div>
-                            <div class="role-card" data-role="specialist_doctor">Specialist Doctor</div>
-                        </div>
-                        <small style="color:#7a88a4;display:block;margin-top:10px">Please fill in the information specific to the selected role.</small>
-                        <div class="role-panel">
-                            <h3 id="roleTitle" style="margin:0 0 10px;color:#4338ca">Specialist Doctor Information</h3>
-                            <div class="form">
-                                <div id="f-specialty"><label class="req">Specialty</label><select name="specialty">
-                                        <option value="">Select specialty</option>
-                                        <option>Cardiology</option>
-                                        <option>Pediatrics</option>
-                                        <option>Orthopedics</option>
-                                        <option>Dermatology</option>
-                                    </select></div>
-                                <div><label class="req">License Number</label><input name="license_number" placeholder="Enter license number" required></div>
-                                <div><label class="req">Experience Years</label><input name="experience_years" type="number" min="0" max="60" required></div>
-                                <div id="f-diploma" class="hidden"><label>Diploma</label><input name="diploma" placeholder="Enter diploma"></div>
-                            </div>
-                            <div class="switches" id="availabilitySwitches">
-                                <div><label>Is Available</label><select name="is_available">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select></div>
-                                <div><label>Is Active</label><select name="is_active">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select></div>
-                            </div>
-                        </div>
+                </div>
+                <div id="step3" class="hidden">
+                    <h3>Review & Confirm</h3>
+                    <div class="review-grid">
+                        <div class="review-card" id="reviewBasic"></div>
+                        <div class="review-card" id="reviewRole"></div>
                     </div>
-                    <div id="step3" class="hidden">
-                        <h3>Review & Confirm</h3>
-                        <div class="review-grid">
-                            <div class="review-card" id="reviewBasic"></div>
-                            <div class="review-card" id="reviewRole"></div>
-                        </div>
-                    </div>
-                    <div class="actions"><button type="button" class="btn" id="prevBtn">Previous</button><button type="button" class="btn primary" id="nextBtn">Next Step →</button></div>
-                    <div class="status" id="status" role="status" aria-live="polite"></div>
-                </form>
-            </div>
-        </main>
-    </div>
+                </div>
+                <div class="actions"><button type="button" class="btn" id="prevBtn">Previous</button><button type="button" class="btn primary" id="nextBtn">Next Step →</button></div>
+                <div class="status" id="status" role="status" aria-live="polite"></div>
+            </form>
+        </div>
+    </main>
     <script>
         const form = document.getElementById('create-user-form'),
             statusBox = document.getElementById('status'),
@@ -569,6 +471,4 @@
         syncRoleUI('');
         loadDraft();
     </script>
-</body>
-
-</html>
+</div>
