@@ -15,7 +15,9 @@ use App\Http\Controllers\Api\AuthController;
 |
 */
 
-
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/users/check-email', [AuthController::class, 'checkEmail']);
+Route::get('/users/check-duplicates', [AuthController::class, 'checkDuplicates']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {

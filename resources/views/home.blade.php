@@ -1,8 +1,27 @@
 @php
+$lang = app()->getLocale();
+
 $heroSlides = [
-['title'=>__('hero.slide1.title'),'lead'=>__('hero.slide1.lead'),'desc'=>__('hero.slide1.desc'),'image'=>'https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&w=1900&q=80','position'=>'center center','align'=>'left'],
-['title'=>__('hero.slide2.title'),'lead'=>__('hero.slide2.lead'),'desc'=>__('hero.slide2.desc'),'image'=>'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&w=1900&q=80','position'=>'center 32%','align'=>'right'],
-['title'=>__('hero.slide3.title'),'lead'=>__('hero.slide3.lead'),'desc'=>__('hero.slide3.desc'),'image'=>'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1900&q=80','position'=>'center 40%','align'=>'left'],
+[
+'title' => __('hero.slide1.title'),
+'lead' => __('hero.slide1.lead'),
+'desc' => __('hero.slide1.desc'),
+'image' => $lang === 'ar'
+? 'images/slider1-ar.jpeg'
+: 'images/slider1.jpeg',
+'position' => 'center center',
+'align' => $lang === 'ar' ? 'left' : 'left',
+],
+[
+'title' => __('hero.slide2.title'),
+'lead' => __('hero.slide2.lead'),
+'desc' => __('hero.slide2.desc'),
+'image' => $lang === 'ar'
+? 'images/slider2-ar.jpeg'
+: 'images/slider2.jpeg',
+'position' => 'center 32%',
+'align' => $lang === 'ar' ? 'left' : 'left',
+],
 ];
 
 $services = [
@@ -51,7 +70,7 @@ $services = [
 
 <section class="hero" id="heroSlider">
     @foreach ($heroSlides as $index => $slide)
-    <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ $slide['image'] }}'); --hero-pos: {{ $slide['position'] }};"></div>
+    <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ asset($slide['image']) }}'); --hero-pos: {{ $slide['position'] }};"></div>
     @endforeach
 
     <div class="container hero-content align-{{ $heroSlides[0]['align'] }}" id="heroContent">
@@ -59,10 +78,6 @@ $services = [
             <h1 id="heroTitle">{{ $heroSlides[0]['title'] }}</h1>
             <p class="lead" id="heroLead">{{ $heroSlides[0]['lead'] }}</p>
             <p class="desc" id="heroDesc">{{ $heroSlides[0]['desc'] }}</p>
-        </div>
-        <div class="cta-row">
-            <a class="btn btn-red" href="#" id="heroCtaPrimary">DEMANDER UNE ASSISTANCE</a>
-            <a class="btn btn-white" href="#" id="heroCtaSecondary">NOUS CONTACTER</a>
         </div>
     </div>
 
@@ -81,7 +96,7 @@ $services = [
             </div>
             <div>
                 <div class="n">4584</div>
-                <div>Consultations à domicile<br>& contre-visites</div>
+                <div>{!! __('home.stats.consultations') !!}</div>
             </div>
         </article>
         <article class="card">
@@ -90,7 +105,7 @@ $services = [
             </div>
             <div>
                 <div class="n">236</div>
-                <div>Hospitalisations<br>à domicile</div>
+                <div>{!! __('home.stats.hospitalizations') !!}</div>
             </div>
         </article>
         <article class="card">
@@ -99,7 +114,7 @@ $services = [
             </div>
             <div>
                 <div class="n">7493</div>
-                <div>Transports médicaux<br>urbains & interurbains</div>
+                <div>{!! __('home.stats.transports') !!}</div>
             </div>
         </article>
         <article class="card">
@@ -108,7 +123,7 @@ $services = [
             </div>
             <div>
                 <div class="n">24</div>
-                <div>Salariés dont<br>08 médecins urgentistes</div>
+                <div>{!! __('home.stats.staff') !!}</div>
             </div>
         </article>
     </section>
@@ -163,44 +178,41 @@ $services = [
         <img src="images/map.png" alt="Map">
 
         <div>
-            <h3>OUR ASSISTANCE ZONES</h3>
-            <p>
-                Enjoy peace of mind with our extensive assistance network
-                available across multiple regions.
-            </p>
-            <a href="#" class="help-zone-btn">CHECK ASSISTANCE ZONES</a>
+            <h3>{{ __('home.zones.title') }}</h3>
+            <p>{{ __('home.zones.desc') }}</p>
+            <a href="#" class="help-zone-btn">{{ __('home.zones.cta') }}</a>
         </div>
     </div>
 
     <div class="help-why">
         <div class="help-why-content">
-            <h3>WHY CHOOSE US?</h3>
+            <h3>{{ __('home.why_choose_us.title') }}</h3>
             <ul>
-                <li>24/7 emergency support</li>
-                <li>Professional medical assistance</li>
-                <li>Wide regional coverage</li>
-                <li>Fast intervention services</li>
+                <li>{{ __('home.why_choose_us.item1') }}</li>
+                <li>{{ __('home.why_choose_us.item2') }}</li>
+                <li>{{ __('home.why_choose_us.item3') }}</li>
+                <li>{{ __('home.why_choose_us.item4') }}</li>
             </ul>
         </div>
     </div>
 
     <div class="help-contact">
-        <h3>NEED HELP?</h3>
-        <p>Contact our assistance center any time.</p>
+        <h3>{{ __('home.immediate_help.title') }}</h3>
+        <p>{{ __('home.immediate_help.desc') }}</p>
 
         <a href="tel:+212522000000" class="help-phone">
             +212 522 000 000
         </a>
 
         <a href="#" class="help-online">
-            ONLINE ASSISTANCE
+            {{ __('home.immediate_help.cta') }}
         </a>
     </div>
 
     <div class="help-side">
         <div class="help-side-box">
             <div class="help-icon">🚨</div>
-            <small>ASSISTANCE</small>
+            <small>{{ __('home.assistance_label') }}</small>
             <strong>24/7</strong>
         </div>
     </div>

@@ -1,22 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'À propos')
+@section('title', __('about.title'))
 
 @section('content')
 
 <section class="about-hero {{ app()->getLocale() == 'ar' ? 'about-ar' : 'about-fr' }}">
 
     <div class="about-left">
-        <h1>À PROPOS DE<br>YANIS ASSISTANCE</h1>
-        <p>
-            Yanis Assistance est une société marocaine spécialisée dans l’assistance médicale,
-            le transport sanitaire et les services d’aide à la personne.
-        </p>
+        <h1>{!! __('about.hero.title') !!}</h1>
+        <p>{{ __('about.hero.desc') }}</p>
 
         <div class="about-features">
-            <div><i class="fa-solid fa-users"></i><strong>Relation humaine</strong><span>Au cœur de notre métier</span></div>
-            <div><i class="fa-solid fa-stopwatch"></i><strong>Réactivité</strong><span>Intervention rapide 24/7</span></div>
-            <div><i class="fa-solid fa-shield-halved"></i><strong>Fiabilité</strong><span>Prestations de qualité</span></div>
+            <div><i class="fa-solid fa-users"></i><strong>{{ __('about.feature.human.title') }}</strong><span>{{ __('about.feature.human.desc') }}</span></div>
+            <div><i class="fa-solid fa-stopwatch"></i><strong>{{ __('about.feature.reactive.title') }}</strong><span>{{ __('about.feature.reactive.desc') }}</span></div>
+            <div><i class="fa-solid fa-shield-halved"></i><strong>{{ __('about.feature.reliable.title') }}</strong><span>{{ __('about.feature.reliable.desc') }}</span></div>
         </div>
     </div>
 
@@ -29,12 +26,8 @@
 
         <div class="mission-card">
             <i class="fa-solid fa-quote-left"></i>
-            <h3>{{ app()->getLocale() == 'ar' ? 'مهمتنا' : 'Notre Mission' }}</h3>
-            <p>
-                {{ app()->getLocale() == 'ar'
-                ? 'المرافقة، التدخل السريع، وتخفيف معاناة الأشخاص هي جوهر مهنتنا.'
-                : 'Accompagner, agir rapidement et soulager le quotidien après un aléa est notre cœur de métier.' }}
-            </p>
+            <h3>{{ __('about.mission.title') }}</h3>
+            <p>{{ __('about.mission.desc') }}</p>
         </div>
     </div>
 
@@ -42,12 +35,8 @@
 
 <section class="presentation-section">
     <div class="presentation-text">
-        <h2>PRÉSENTATION GÉNÉRALE</h2>
-        <p>
-            Créée pour répondre aux besoins croissants du secteur de la santé et de l’assurance,
-            Yanis Assistance propose des solutions d’assistance sur-mesure en marque blanche
-            pour les compagnies d’assurance, entreprises, institutions et particuliers.
-        </p>
+        <h2>{{ __('about.presentation.title') }}</h2>
+        <p>{{ __('about.presentation.desc') }}</p>
     </div>
 
     <div class="stats-boxes">
@@ -55,7 +44,7 @@
             <div class="stat-icon blue">
                 <img src="images/icons/capital.png" alt="Capital">
             </div>
-            <span>Capital</span>
+            <span>{{ __('about.stats.capital') }}</span>
             <strong>100.000 MAD</strong>
         </div>
 
@@ -63,27 +52,27 @@
             <div class="stat-icon red">
                 <img src="images/icons/effectif.png" alt="Effectif">
             </div>
-            <span>Effectif</span>
-            <strong>24 salariés</strong>
-            <p>dont 08 médecins urgentistes</p>
+            <span>{{ __('about.stats.staff') }}</span>
+            <strong>{{ __('about.stats.staff_value') }}</strong>
+            <p>{{ __('about.stats.staff_desc') }}</p>
         </div>
 
         <div class="stat-card">
             <div class="stat-icon blue">
                 <img src="images/icons/type-de-clientele.png" alt="Type de clientèle">
             </div>
-            <span>Type de clientèle</span>
-            <strong>Tout Public</strong>
-            <p>Organismes d’assistance, entreprises, hôpitaux, assurances...</p>
+            <span>{{ __('about.stats.client_type') }}</span>
+            <strong>{{ __('about.stats.client_value') }}</strong>
+            <p>{{ __('about.stats.client_desc') }}</p>
         </div>
 
         <div class="stat-card">
             <div class="stat-icon blue">
                 <img src="images/icons/experience.png" alt="Expérience">
             </div>
-            <span>Expérience</span>
-            <strong>Expertise &<br>savoir-faire</strong>
-            <p>au service de la santé</p>
+            <span>{{ __('about.stats.experience') }}</span>
+            <strong>{{ __('about.stats.experience_value_line1') }}<br>{{ __('about.stats.experience_value_line2') }}</strong>
+            <p>{{ __('about.stats.experience_desc') }}</p>
         </div>
     </div>
 </section>
@@ -93,46 +82,46 @@
     <div class="values-history">
 
         <div class="values-box">
-            <h2>NOS VALEURS</h2>
+            <h2>{{ __('about.values.title') }}</h2>
 
             <div class="values-list">
                 <div class="value-item">
                     <div class="value-icon red">
                         <img src="images/icons/humanite.png" alt="Humanité">
                     </div>
-                    <h4>Humanité</h4>
-                    <p>Placer l’humain au centre de chaque intervention.</p>
+                    <h4>{{ __('about.value.human.title') }}</h4>
+                    <p>{{ __('about.value.human.desc') }}</p>
                 </div>
 
                 <div class="value-item">
                     <div class="value-icon blue">
                         <img src="images/icons/reactivite.png" alt="Réactivité">
                     </div>
-                    <h4>Réactivité</h4>
-                    <p>Intervenir rapidement pour chaque situation d’urgence.</p>
+                    <h4>{{ __('about.value.reactive.title') }}</h4>
+                    <p>{{ __('about.value.reactive.desc') }}</p>
                 </div>
 
                 <div class="value-item">
                     <div class="value-icon blue">
                         <img src="images/icons/integrite.png" alt="Intégrité">
                     </div>
-                    <h4>Intégrité</h4>
-                    <p>Agir avec éthique, transparence et professionnalisme.</p>
+                    <h4>{{ __('about.value.integrity.title') }}</h4>
+                    <p>{{ __('about.value.integrity.desc') }}</p>
                 </div>
 
                 <div class="value-item">
                     <div class="value-icon red">
                         <img src="images/icons/engagement.png" alt="Engagement">
                     </div>
-                    <h4>Engagement</h4>
-                    <p>S’engager à fournir des prestations de haute qualité.</p>
+                    <h4>{{ __('about.value.commitment.title') }}</h4>
+                    <p>{{ __('about.value.commitment.desc') }}</p>
                 </div>
             </div>
         </div>
 
         <div class="history-section">
 
-            <h2>NOTRE HISTOIRE</h2>
+            <h2>{{ __('about.history.title') }}</h2>
 
             <div class="history-timeline">
 
@@ -142,8 +131,8 @@
                     </div>
 
                     <div class="history-content">
-                        <h4>Création</h4>
-                        <p>De Yanis Assistance</p>
+                        <h4>{{ __('about.history.creation.title') }}</h4>
+                        <p>{{ __('about.history.creation.desc') }}</p>
                     </div>
 
                     <span>2022</span>
@@ -155,8 +144,8 @@
                     </div>
 
                     <div class="history-content">
-                        <h4>Croissance</h4>
-                        <p>Extension des zones d’intervention</p>
+                        <h4>{{ __('about.history.growth.title') }}</h4>
+                        <p>{{ __('about.history.growth.desc') }}</p>
                     </div>
 
                     <span>2021</span>
@@ -168,8 +157,8 @@
                     </div>
 
                     <div class="history-content">
-                        <h4>Aujourd’hui</h4>
-                        <p>Toujours plus proches de nos assurés</p>
+                        <h4>{{ __('about.history.today.title') }}</h4>
+                        <p>{{ __('about.history.today.desc') }}</p>
                     </div>
 
                     <span>2025</span>
@@ -182,8 +171,8 @@
 
     <div class="clients-row">
         <div class="clients-text">
-            <h2>NOS CLIENTS</h2>
-            <p>Nous collaborons avec un large réseau de partenaires et clients qui nous font confiance.</p>
+            <h2>{{ __('about.clients.title') }}</h2>
+            <p>{{ __('about.clients.desc') }}</p>
         </div>
 
         <div class="clients-logos">

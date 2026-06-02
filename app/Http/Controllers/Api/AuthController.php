@@ -15,9 +15,9 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:120',
-            'email' => 'required|email|unique:users',
-            'phone' => 'nullable|string|max:20',
+            'name' => 'required|string|max:120|unique:users,name',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|string|max:20|unique:users,phone',
             'profile_photo' => 'nullable|image|max:2048',
             'password' => 'required|min:6|confirmed',
             'role' => 'required|in:driver,nurse,general_doctor,emergency_doctor,specialist_doctor',
@@ -31,6 +31,11 @@ class AuthController extends Controller
             'specialty' => 'nullable|string|max:120',
             'is_available' => 'sometimes|boolean',
             'blocked_reason' => 'nullable|string|max:255',
+        ], [
+            'name.unique' => 'Nom déjà utilisé.',
+            'email.unique' => 'Email déjà utilisé.',
+            'phone.unique' => 'Numéro téléphone déjà utilisé.',
+            'password.confirmed' => 'Password confirmation does not match.',
         ]);
 
         $rawRole = $data['role'];
@@ -95,6 +100,32 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $user,
+        ]);
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $data = $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        return response()->json([
+            'exists' => User::whereRaw('LOWER(email) = ?', [strtolower($data['email'])])->exists(),
+        ]);
+    }
+
+    public function checkDuplicates(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:120',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+        ]);
+
+        return response()->json([
+            'name_exists' => User::whereRaw('LOWER(name) = ?', [strtolower($data['name'])])->exists(),
+            'email_exists' => User::whereRaw('LOWER(email) = ?', [strtolower($data['email'])])->exists(),
+            'phone_exists' => User::where('phone', $data['phone'])->exists(),
         ]);
     }
 

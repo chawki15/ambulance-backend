@@ -20,7 +20,7 @@
         </div>
 
         <div class="footer-col">
-            <h4>Informations</h4>
+            <h4>{{ __('footer.information') }}</h4>
             <a href="#">{{ __('footer.partners') }}</a>
             <a href="#">{{ __('footer.news') }}</a>
             <a href="#">{{ __('footer.careers') }}</a>
@@ -36,21 +36,20 @@
         <div class="footer-social">
             <h4>{{ __('footer.follow_us') }}</h4>
             <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><img src="{{ asset('images/icons/facebook-icon.png') }}" alt="Facebook"></a>
+                <a href="#"><img src="{{ asset('images/icons/instagram-icon.png') }}" alt="Instagram"></a>
+                <a href="https://www.youtube.com/@YanisAssistance"><img src="{{ asset('images/icons/youtube-icon.png') }}" alt="YouTube"></a>
             </div>
         </div>
 
     </div>
 
     <div class="footer-bottom">
-        <p>© 2025 Yanis Assistance. Tous droits réservés.</p>
+        <p>{{ __('footer.rights') }}</p>
         <div>
-            <a href="#">Mentions légales</a>
+            <a href="#">{{ __('footer.legal_notice') }}</a>
             <span>|</span>
-            <a href="#">Politique de confidentialité</a>
+            <a href="#">{{ __('footer.privacy_policy') }}</a>
         </div>
     </div>
 </footer>

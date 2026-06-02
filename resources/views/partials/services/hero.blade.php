@@ -7,34 +7,21 @@
     </div>
 
     <div class="services-left">
-        <span class="mini-title">خدماتنا</span>
+        <span class="mini-title">{{ __('services_page.hero.mini') }}</span>
 
-        <h1>
-            حلول مساعدة طبية<br>
-            مناسبة لكل مريض
-        </h1>
+        <h1>{!! __('services_page.hero.title') !!}</h1>
 
-        <p>
-            تقدم Yanis Assistance مجموعة متكاملة من الخدمات الطبية وخدمات المساعدة
-            لمرافقة المرضى والمؤمنين والشركات في مختلف الحالات.
-        </p>
+        <p>{{ __('services_page.hero.desc') }}</p>
     </div>
 
     @else
 
     <div class="services-left">
-        <span class="mini-title">NOS SERVICES</span>
+        <span class="mini-title">{{ __('services_page.hero.mini') }}</span>
 
-        <h1>
-            DES SOLUTIONS D’ASSISTANCE<br>
-            ADAPTÉES À CHAQUE PATIENT
-        </h1>
+        <h1>{!! __('services_page.hero.title') !!}</h1>
 
-        <p>
-            Yanis Assistance propose une gamme complète de prestations
-            médicales et d’assistance pour accompagner vos assurés,
-            collaborateurs et entreprises.
-        </p>
+        <p>{{ __('services_page.hero.desc') }}</p>
     </div>
 
     <div class="services-right">

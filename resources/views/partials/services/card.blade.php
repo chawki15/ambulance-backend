@@ -7,18 +7,18 @@
     <h3>{{ $title }}</h3>
 
     <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        {{ $desc }}
     </p>
 
     <ul>
-        <li>Service professionnel</li>
-        <li>Intervention rapide</li>
-        <li>Disponible 24/7</li>
-        <li>Support médical</li>
+        @foreach ($items as $item)
+        <li>{{ $item }}</li>
+        @endforeach
     </ul>
 
-    <a href="#">
-        Voir plus
+    <a href="#" class="card-btn">
+        {{ __('Voir plus') }}
+        <i class="fa-solid fa-arrow-right"></i>
     </a>
 
 </article>

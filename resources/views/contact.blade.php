@@ -7,10 +7,9 @@
     <p>{{ __('contact.subtitle') }}</p>
 
     <div class="cards">
-        <div class="card">📍<h3>{{ __('contact.address') }}</h3><span>Lotissement Addoha 2</span></div>
-        <div class="card">🕒<h3>{{ __('contact.hours') }}</h3><span>{{ __('contact.hours_text') }}</span></div>
-        <div class="card">📞<h3>{{ __('contact.phone') }}</h3><span>0522 123 456</span></div>
-        <div class="card">✉️<h3>{{ __('contact.email') }}</h3><span>contact@domain.ma</span></div>
+        <div class="card">📍<span>Lotissement Addoha 2 Imm B 5 N° 3 Sidi Moumen Aljadid / Casablanca</span></div>
+        <div class="card">📞<span>0522 123 456</span></div>
+        <div class="card">✉️<span> contact@yanis-assistance.ma</span></div>
     </div>
 
     <div class="content">
@@ -66,16 +65,6 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 14px;
         margin-bottom: 24px;
-    }
-
-    .card {
-        background: #fff;
-        padding: 20px 16px;
-        border-radius: 14px;
-        text-align: center;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
-        color: #073b7a;
-        font-size: 24px;
     }
 
     .card h3 {

@@ -12,6 +12,17 @@
         <span>Utilisateurs</span>
     </a>
 
+    <a class="item item {{ request()->is('admin/drivers*') ? 'active' : '' }}" href="/admin/drivers">
+        <span>🚑</span>
+        <span>Ambulance</span>
+    </a>
+
+    <a class="item item {{ request()->is('admin/equipement-ambulances*') ? 'active' : '' }}" href="/admin/drivers">
+        <span>🚑</span>
+        <span>Équipement ambulances</span>
+    </a>
+
+
     <a class="item item {{ request()->is('admin/medicines*') ? 'active' : '' }}" href="/admin/medicines">
         <span>💊</span>
         <span>Médicaments</span>

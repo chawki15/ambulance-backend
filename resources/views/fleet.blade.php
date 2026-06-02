@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Flotte & Moyens')
+@section('title', __('fleet.title'))
 
 @section('content')
 
@@ -92,72 +92,72 @@
 
     <div class="fleet-left">
 
-        <h2>COMPOSITION DE NOTRE FLOTTE</h2>
+        <h2>{{ __('fleet.composition.title') }}</h2>
 
         <div class="fleet-cards">
             <div class="fleet-card">
-                <img src="images/ambulance-1.jpg" alt="">
+                <img src="images/ambulance-1.jpeg" alt="">
                 <strong>7</strong>
-                <h4>AMBULANCES<br>MÉDICALISÉES</h4>
-                <p>Équipées pour les soins intensifs et le transport médicalisé.</p>
+                <h4>{!! __('fleet.cards.medicalized.title') !!}</h4>
+                <p>{{ __('fleet.cards.medicalized.desc') }}</p>
             </div>
 
             <div class="fleet-card">
-                <img src="images/ambulance-2.jpg" alt="">
+                <img src="images/ambulance-2.jpeg" alt="">
                 <strong>4</strong>
-                <h4>AMBULANCES<br>SIMPLES</h4>
-                <p>Pour le transport sanitaire non médicalisé.</p>
+                <h4>{!! __('fleet.cards.simple.title') !!}</h4>
+                <p>{{ __('fleet.cards.simple.desc') }}</p>
             </div>
 
             <div class="fleet-card">
-                <img src="images/ambulance-3.jpg" alt="">
+                <img src="images/ambulance-3.jpeg" alt="">
                 <strong>1</strong>
-                <h4>TAXI<br>AMBULANCE</h4>
-                <p>Solution rapide et adaptée aux besoins urgents.</p>
+                <h4>{!! __('fleet.cards.taxi.title') !!}</h4>
+                <p>{{ __('fleet.cards.taxi.desc') }}</p>
             </div>
 
             <div class="fleet-card">
-                <img src="images/ambulance-4.jpg" alt="">
-                <h4>MATÉRIEL<br>MÉDICAL DE POINTE</h4>
-                <p>Défibrillateurs, respirateurs, moniteurs, brancards électriques.</p>
+                <img src="images/materiel-medical.jpeg" alt="">
+                <h4>{!! __('fleet.cards.equipment.title') !!}</h4>
+                <p>{{ __('fleet.cards.equipment.desc') }}</p>
             </div>
         </div>
 
         <div class="human-box">
-            <h2>NOS RESSOURCES HUMAINES</h2>
+            <h2>{{ __('fleet.human.title') }}</h2>
 
             <div class="human-list">
                 <div class="human-item">
                     <span><i class="fa-solid fa-users"></i></span>
                     <div>
                         <strong>24</strong>
-                        <h4>SALARIÉS</h4>
-                        <p>Une équipe engagée à votre service.</p>
+                        <h4>{{ __('fleet.human.employees.title') }}</h4>
+                        <p>{{ __('fleet.human.employees.desc') }}</p>
                     </div>
                 </div>
 
                 <div class="human-item">
                     <span><i class="fa-solid fa-user-doctor"></i></span>
                     <div>
-                        <strong>02</strong>
-                        <h4>MÉDECINS URGENTISTES</h4>
-                        <p>Expérience et expertise à chaque intervention.</p>
+                        <strong>08</strong>
+                        <h4>{!! __('fleet.human.doctors.title') !!}</h4>
+                        <p>{{ __('fleet.human.doctors.desc') }}</p>
                     </div>
                 </div>
 
                 <div class="human-item">
                     <span class="red"><i class="fa-solid fa-user-nurse"></i></span>
                     <div>
-                        <h4>ÉQUIPES PARAMÉDICALES</h4>
-                        <p>Infirmiers, ambulanciers et assistants qualifiés.</p>
+                        <h4>{{ __('fleet.human.paramedics.title') }}</h4>
+                        <p>{{ __('fleet.human.paramedics.desc') }}</p>
                     </div>
                 </div>
 
                 <div class="human-item">
                     <span class="green"><i class="fa-solid fa-headset"></i></span>
                     <div>
-                        <h4>FORMATION CONTINUE</h4>
-                        <p>Des équipes formées aux dernières pratiques.</p>
+                        <h4>{{ __('fleet.human.training.title') }}</h4>
+                        <p>{{ __('fleet.human.training.desc') }}</p>
                     </div>
                 </div>
             </div>
@@ -167,21 +167,21 @@
 
     <div class="fleet-right">
 
-        <h2>ZONES D’INTERVENTION & MOYENS DÉPLOYÉS</h2>
+        <h2>{{ __('fleet.zones.title') }}</h2>
 
         <div class="zone-card">
             <div class="map-circle"></div>
 
             <div class="zone-title">
-                <h4>GRAND CASABLANCA</h4>
-                <p>Casablanca, Mohammedia, Dar Bouazza, Bouskoura, Aéroport...</p>
-                <h4>BERRECHID, BOUZNIKA</h4>
+                <h4>{{ __('fleet.zones.casablanca.title') }}</h4>
+                <p>{{ __('fleet.zones.casablanca.desc') }}</p>
+                <h4>{{ __('fleet.zones.berrechid') }}</h4>
             </div>
 
             <div class="zone-count">
-                <p><i class="fa-solid fa-truck-medical"></i> <strong>7</strong> Ambulances médicalisées</p>
-                <p><i class="fa-solid fa-truck-medical"></i> <strong>4</strong> Ambulances simples</p>
-                <p><i class="fa-solid fa-car"></i> <strong>1</strong> Taxi ambulance</p>
+                <p><i class="fa-solid fa-truck-medical"></i> <strong>7</strong> {{ __('fleet.zones.medicalized') }}</p>
+                <p><i class="fa-solid fa-truck-medical"></i> <strong>4</strong> {{ __('fleet.zones.simple') }}</p>
+                <p><i class="fa-solid fa-car"></i> <strong>1</strong> {{ __('fleet.zones.taxi') }}</p>
             </div>
         </div>
 
@@ -189,22 +189,22 @@
             <div class="map-circle"></div>
 
             <div class="zone-title">
-                <h4>KHOURIBGA ET RÉGIONS</h4>
+                <h4>{{ __('fleet.zones.khouribga') }}</h4>
             </div>
 
             <div class="zone-count">
-                <p><i class="fa-solid fa-truck-medical"></i> <strong>2</strong> Ambulances médicalisées</p>
+                <p><i class="fa-solid fa-truck-medical"></i> <strong>2</strong> {{ __('fleet.zones.medicalized') }}</p>
             </div>
         </div>
 
         <div class="quality-card">
             <div>
-                <h2>NOTRE ENGAGEMENT QUALITÉ</h2>
+                <h2>{{ __('fleet.quality.title') }}</h2>
                 <ul>
-                    <li>Respect des normes sanitaires et réglementaires</li>
-                    <li>Entretien rigoureux et contrôle régulier de nos véhicules</li>
-                    <li>Traçabilité et suivi des interventions en temps réel</li>
-                    <li>Amélioration continue de nos services</li>
+                    <li>{{ __('fleet.quality.item1') }}</li>
+                    <li>{{ __('fleet.quality.item2') }}</li>
+                    <li>{{ __('fleet.quality.item3') }}</li>
+                    <li>{{ __('fleet.quality.item4') }}</li>
                 </ul>
             </div>
 
@@ -407,19 +407,7 @@
         text-align: right !important;
     }
 
-    /* =========================
-   MAIN
-========================= */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
 
-    body {
-        background: #f5f5f5;
-        font-family: Arial, sans-serif;
-    }
 
     /* =========================
    MAIN LAYOUT
@@ -433,7 +421,6 @@
         display: flex;
         gap: 14px;
         align-items: flex-start;
-        background: #fff;
     }
 
     .fleet-left {

@@ -64,6 +64,8 @@ Route::prefix('admin')->group(function () {
         return view('admin.users', compact('users'));
     })->name('admin.users.index');
 
+    Route::view('/drivers', 'admin.drivers')->name('admin.drivers');
+
     Route::view('/medicines', 'admin.medicines')->name('admin.medicines');
     Route::view('/medicines/create', 'admin.medicines-create')->name('admin.medicines.create');
 

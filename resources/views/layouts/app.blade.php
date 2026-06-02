@@ -22,7 +22,8 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            color: var(--text)
+            color: var(--text);
+            background-color: #f7f8fb;
         }
 
         .container {
@@ -343,6 +344,23 @@
             align-items: flex-end;
         }
 
+        html[dir="rtl"] .hero-content {
+            text-align: right;
+            align-items: flex-end;
+            justify-content: center;
+            padding-left: 58%;
+            padding-right: 40px;
+        }
+
+        html[dir="rtl"] .hero-copy {
+            max-width: 480px;
+            direction: rtl;
+        }
+
+        html[dir="rtl"] .cta-row {
+            justify-content: flex-end;
+        }
+
         .hero-dots {
             position: absolute;
             left: 50%;
@@ -657,22 +675,6 @@
             font-size: 15px;
         }
 
-        .social-icons a:nth-child(1) {
-            background: #2d6cdf;
-        }
-
-        .social-icons a:nth-child(2) {
-            background: #1e9bd7;
-        }
-
-        .social-icons a:nth-child(3) {
-            background: #e8407a;
-        }
-
-        .social-icons a:nth-child(4) {
-            background: #ff0000;
-        }
-
         .footer-bottom {
             max-width: 1320px;
             margin: 16px auto 0;
@@ -952,7 +954,7 @@
 
         .service-content h3 {
             margin: 0 0 7px;
-            font-size: 11px;
+            font-size: 14px;
             line-height: 1.2;
             color: #153a75;
             font-weight: 900;
@@ -962,7 +964,7 @@
         .service-content p {
             margin: 0;
             color: #5d6472;
-            font-size: 10px;
+            font-size: 12px;
             line-height: 1.45;
             font-weight: 500;
         }

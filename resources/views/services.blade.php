@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nos Services')
+@section('title', __('menu.services'))
 
 @section('content')
 
@@ -185,17 +185,18 @@
         max-width: 1450px;
         margin: auto;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 10px;
     }
 
     .expertise-card {
         background: #fff;
-        border: 1px solid #edf1f7;
+        border: 1px solid #edf2f7;
         border-radius: 18px;
-        padding: 15px 10px;
-        transition: .25s;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, .03);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 
     .expertise-card:hover {
@@ -204,16 +205,14 @@
     }
 
     .expertise-icon {
-        width: 70px;
-        height: 70px;
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 18px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 22px;
     }
-
-
 
     .expertise-icon img {
         width: 36px;
@@ -248,10 +247,11 @@
     }
 
     .expertise-card h3 {
-        color: #0b3168;
+        text-align: center;
         font-size: 13px;
-        line-height: 1.3;
         font-weight: 800;
+        color: #0b2c68;
+        margin-bottom: 16px;
         text-transform: uppercase;
     }
 
@@ -263,14 +263,34 @@
     }
 
     .expertise-card ul {
-        padding-left: 18px;
+        list-style: none;
+        padding: 0;
         margin: 0 0 24px;
     }
 
     .expertise-card ul li {
+        position: relative;
+        padding-left: 22px;
         font-size: 13px;
         color: #24344d;
         margin-bottom: 8px;
+        line-height: 1.5;
+    }
+
+    .expertise-card ul li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 3px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #003b84;
+        color: #fff;
+        font-size: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .expertise-card a {
@@ -290,6 +310,31 @@
     .expertise-card a:hover {
         background: #0b3168;
         color: #fff;
+    }
+
+    .card-btn {
+        margin-top: 20px;
+        width: 140px;
+        height: 42px;
+        border: 1px solid #cfd8ea;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #0b2c68;
+        font-weight: 700;
+    }
+
+    html[dir="rtl"] .expertise-card ul li {
+        padding-left: 0;
+        padding-right: 22px;
+    }
+
+    html[dir="rtl"] .expertise-card ul li::before {
+        left: auto;
+        right: 0;
     }
 
     /* =========================================================
@@ -555,7 +600,7 @@
     @media(max-width:1400px) {
 
         .expertise-grid {
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(5, 1fr);
         }
 
     }

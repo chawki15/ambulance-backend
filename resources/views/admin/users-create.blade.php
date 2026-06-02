@@ -3,6 +3,21 @@
 @section('content')
 
 <style>
+    #roleTitle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: #4f46e5;
+        margin-bottom: 16px;
+    }
+
+    #roleTitle i {
+        color: #4f46e5;
+        font-size: 14px;
+    }
+
+
     h1 {
         margin: 20px 0 8px;
         font-size: 36px
@@ -108,31 +123,66 @@
     .role-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 10px
+        gap: 12px;
     }
 
     .role-card {
-        border: 1px solid #d6dff0;
+        border: 1px solid #e5e7eb;
         border-radius: 10px;
-        padding: 12px;
+        padding: 10px 6px;
         text-align: center;
-        cursor: pointer
+        cursor: pointer;
+        background: #fff;
+        transition: .2s;
+    }
+
+    .role-card:hover {
+        border-color: #6d5dfc;
     }
 
     .role-card.active {
-        border-color: #4f46e5;
-        box-shadow: 0 0 0 2px #ece9ff;
-        color: #4338ca;
-        font-weight: 700
+        border: 2px solid #6d5dfc;
+        background: #faf9ff;
     }
 
-    .role-panel,
-    .review-card {
-        margin-top: 12px;
-        border: 1px solid #e4eaf5;
-        border-radius: 10px;
-        padding: 14px;
-        background: #fcfdff
+    .role-card i {
+        font-size: 16px;
+        color: #6d5dfc;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .role-card span {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: #374151;
+        line-height: 1.3;
+    }
+
+    #step2 {
+        display: grid;
+        grid-template-columns: 330px 1fr;
+        gap: 22px;
+        align-items: start;
+    }
+
+    #step2.hidden {
+        display: none;
+    }
+
+    .role-panel {
+        margin-top: 0;
+        border: 1px solid #dfe5f3;
+        border-radius: 8px;
+        padding: 18px;
+        background: #fbfaff;
+    }
+
+    #roleTitle {
+        font-size: 13px !important;
+        color: #4f46e5 !important;
+        margin-bottom: 16px !important;
     }
 
     .switches {
@@ -224,39 +274,69 @@
                         </div>
                     </div>
                 </div>
-                <div id="step2" class="hidden"><label class="req">Select Role</label>
-                    <div class="role-grid">
-                        <div class="role-card" data-role="driver">Driver</div>
-                        <div class="role-card" data-role="nurse">Nurse</div>
-                        <div class="role-card" data-role="general_doctor">General Doctor</div>
-                        <div class="role-card" data-role="specialist_doctor">Specialist Doctor</div>
+                <div id="step2" class="hidden">
+
+                    <div class="role-left">
+                        <label class="req">Select Role</label>
+
+                        <div class="role-grid">
+                            <div class="role-card active" data-role="driver">
+                                <i class="fa-solid fa-truck-medical"></i>
+                                <span>Driver</span>
+                            </div>
+
+                            <div class="role-card" data-role="nurse">
+                                <i class="fa-solid fa-user-nurse"></i>
+                                <span>Nurse</span>
+                            </div>
+
+                            <div class="role-card" data-role="general_doctor">
+                                <i class="fa-solid fa-user-doctor"></i>
+                                <span>General<br>Doctor</span>
+                            </div>
+
+                            <div class="role-card" data-role="specialist_doctor">
+                                <i class="fa-solid fa-briefcase-medical"></i>
+                                <span>Specialist<br>Doctor</span>
+                            </div>
+                        </div>
                     </div>
-                    <small style="color:#7a88a4;display:block;margin-top:10px">Please fill in the information specific to the selected role.</small>
+
                     <div class="role-panel">
-                        <h3 id="roleTitle" style="margin:0 0 10px;color:#4338ca">Specialist Doctor Information</h3>
+                        <h3 id="roleTitle">
+                            <i class="fa-solid fa-truck-medical"></i>
+                            Driver Information
+                        </h3>
+
                         <div class="form">
-                            <div id="f-specialty"><label class="req">Specialty</label><select name="specialty">
+                            <div id="f-specialty">
+                                <label class="req">Specialty</label>
+                                <select name="specialty">
                                     <option value="">Select specialty</option>
                                     <option>Cardiology</option>
                                     <option>Pediatrics</option>
                                     <option>Orthopedics</option>
                                     <option>Dermatology</option>
-                                </select></div>
-                            <div><label class="req">License Number</label><input name="license_number" placeholder="Enter license number" required></div>
-                            <div><label class="req">Experience Years</label><input name="experience_years" type="number" min="0" max="60" required></div>
-                            <div id="f-diploma" class="hidden"><label>Diploma</label><input name="diploma" placeholder="Enter diploma"></div>
-                        </div>
-                        <div class="switches" id="availabilitySwitches">
-                            <div><label>Is Available</label><select name="is_available">
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select></div>
-                            <div><label>Is Active</label><select name="is_active">
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select></div>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="req">License Number</label>
+                                <input name="license_number" placeholder="Enter license number" required>
+                            </div>
+
+                            <div>
+                                <label class="req">Experience Years</label>
+                                <input name="experience_years" type="number" min="0" max="60" required>
+                            </div>
+
+                            <div id="f-diploma" class="hidden">
+                                <label>Diploma</label>
+                                <input name="diploma" placeholder="Enter diploma">
+                            </div>
                         </div>
                     </div>
+
                 </div>
                 <div id="step3" class="hidden">
                     <h3>Review & Confirm</h3>
@@ -307,8 +387,95 @@
             statusBox.className = 'status ' + (e ? 'err' : 'ok')
         }
 
-        function strongPassword(v) {
-            return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{10,}$/.test(v)
+        function showValidationErrors(errors) {
+            statusBox.className = 'status err';
+            statusBox.innerHTML = errors.map(e =>
+                `<div style="color:#dc2626;margin:5px 0">${e}</div>`
+            ).join('');
+        }
+
+        function getStepOneErrors() {
+            const errors = [];
+
+            if (!form.name.value.trim()) {
+                errors.push('الاسم إجباري.');
+            }
+
+            if (!form.email.value.trim()) {
+                errors.push('البريد الإلكتروني إجباري.');
+            }
+
+            if (!form.phone.value.trim()) {
+                errors.push('رقم الهاتف إجباري.');
+            }
+
+            if (!form.role.value) {
+                errors.push('الرجاء اختيار الدور.');
+            }
+
+            if (!form.password.value) {
+                errors.push('كلمة المرور إجبارية.');
+            }
+
+            if (!form.password_confirmation.value) {
+                errors.push('تأكيد كلمة المرور إجباري.');
+            }
+
+            return errors;
+        }
+
+        function isEmailAlreadyUsedError(data) {
+            const duplicateMessages = [
+                'validation.unique',
+                'The email has already been taken.',
+                'Email déjà utilisé.',
+                'هذا الإيميل ديجا مستعمل / Email déjà utilisé.'
+            ];
+            const emailErrors = data?.errors?.email || [];
+            return emailErrors.some(message => duplicateMessages.includes(message)) || duplicateMessages.includes(data?.message);
+        }
+
+        function showEmailAlreadyUsedError() {
+            setStep(1);
+            form.email.focus();
+            setStatus('هذا الإيميل ديجا مستعمل / Email déjà utilisé.', true);
+        }
+
+        async function checkDuplicates() {
+            const params = new URLSearchParams({
+                name: form.name.value.trim(),
+                email: form.email.value.trim().toLowerCase(),
+                phone: form.phone.value.trim()
+            });
+
+            const res = await fetch(`/api/users/check-duplicates?${params.toString()}`, {
+                headers: {
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data?.message || 'تعذر التحقق من البيانات.');
+            }
+
+            const errors = [];
+
+            if (data.name_exists) {
+                errors.push('الاسم مستعمل من قبل.');
+            }
+
+            if (data.email_exists) {
+                errors.push('الإيميل مستعمل من قبل.');
+            }
+
+            if (data.phone_exists) {
+                errors.push('رقم الهاتف مستعمل من قبل.');
+            }
+
+            return errors;
         }
 
         function setStep(n) {
@@ -329,7 +496,13 @@
                 general_doctor: 'General Doctor',
                 specialist_doctor: 'Specialist Doctor'
             };
-            roleTitle.textContent = (names[role] || 'Role') + ' Information';
+            const icons = {
+                driver: 'fa-truck-medical',
+                nurse: 'fa-user-nurse',
+                general_doctor: 'fa-user-doctor',
+                specialist_doctor: 'fa-briefcase-medical'
+            };
+            roleTitle.innerHTML = `<i class="fa-solid ${icons[role] || 'fa-user'}"></i> ${(names[role] || 'Role')} Information`;
             fSpecialty.classList.toggle('hidden', role === 'driver');
             fDiploma.classList.toggle('hidden', role !== 'nurse');
             const showSwitches = !['driver', 'nurse'].includes(role);
@@ -396,18 +569,57 @@
         nextBtn.addEventListener('click', async () => {
             setStatus('');
             if (currentStep === 1) {
+                const errors = getStepOneErrors();
+                if (errors.length) {
+                    showValidationErrors(errors);
+                    return;
+                }
+
                 if (!form.name.checkValidity() || !form.email.checkValidity() || !form.phone.checkValidity() || !form.role.checkValidity() || !form.password.checkValidity() || !form.password_confirmation.checkValidity()) {
                     form.reportValidity();
-                    setStatus('Please fill required fields.', true);
+                    setStatus('Please verify the highlighted fields.', true);
                     return;
                 }
+
+                const allErrors = [];
+
                 if (form.password.value !== form.password_confirmation.value) {
-                    setStatus('Password confirmation does not match.', true);
-                    return;
+                    allErrors.push('تأكيد كلمة المرور غير مطابق.');
                 }
-                if (!strongPassword(form.password.value)) {
-                    setStatus('Password too weak.', true);
+
+                nextBtn.disabled = true;
+
+                try {
+                    const duplicateErrors = await checkDuplicates();
+
+                    allErrors.push(...duplicateErrors);
+
+                    if (allErrors.length > 0) {
+
+                        statusBox.innerHTML = allErrors.map(error =>
+                            `<div style="color:#dc2626;margin:4px 0;">• ${error}</div>`
+                        ).join('');
+
+                        setStep(1);
+
+                        if (allErrors.some(e => e.includes('كلمة المرور'))) {
+                            form.password_confirmation.focus();
+                        } else if (allErrors.some(e => e.includes('الاسم'))) {
+                            form.name.focus();
+                        } else if (allErrors.some(e => e.includes('الإيميل'))) {
+                            form.email.focus();
+                        } else if (allErrors.some(e => e.includes('الهاتف'))) {
+                            form.phone.focus();
+                        }
+
+                        return;
+                    }
+
+                } catch (err) {
+                    setStatus(err.message || 'تعذر التحقق من البيانات.', true);
                     return;
+                } finally {
+                    nextBtn.disabled = false;
                 }
                 setStep(2);
                 syncRoleUI(form.role.value);
@@ -434,21 +646,50 @@
                 formData.set('email', form.email.value.trim().toLowerCase());
                 if (photo.files?.[0]) formData.append('profile_photo', photo.files[0]);
                 try {
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+                    const headers = {
+                        'Accept': 'application/json'
+                    };
+                    if (csrfToken) headers['X-CSRF-TOKEN'] = csrfToken;
                     const res = await fetch('/api/register', {
                         method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        },
+                        headers,
                         credentials: 'same-origin',
                         body: formData
                     });
-                    const data = await res.json();
+                    const contentType = res.headers.get('content-type') || '';
+                    const data = contentType.includes('application/json') ? await res.json() : null;
                     if (!res.ok) {
-                        let first = data?.errors ? Object.values(data.errors)[0]?.[0] : null;
-                        if (first === 'validation.unique') first = 'Email déjà utilisé.';
-                        if (first === 'validation.confirmed') first = 'Confirmation du mot de passe invalide.';
-                        throw new Error(first || data.message || 'Creation failed.');
+
+                        if (data?.errors?.name) {
+                            setStep(1);
+                            form.name.focus();
+                            throw new Error(data.errors.name[0]);
+                        }
+
+                        if (data?.errors?.email) {
+                            setStep(1);
+                            form.email.focus();
+                            throw new Error(data.errors.email[0]);
+                        }
+
+                        if (data?.errors?.phone) {
+                            setStep(1);
+                            form.phone.focus();
+                            throw new Error(data.errors.phone[0]);
+                        }
+
+                        let first = data?.errors ?
+                            Object.values(data.errors)[0]?.[0] :
+                            null;
+
+                        if (first === 'validation.confirmed') {
+                            first = 'Confirmation du mot de passe invalide.';
+                        }
+
+                        throw new Error(
+                            first || data?.message || 'Creation failed. Please try again.'
+                        );
                     }
                     setStatus('User created successfully. Redirecting...');
                     localStorage.removeItem(DRAFT_KEY);
