@@ -6,6 +6,9 @@
   "menu.partners": "الشركاء",
   "menu.news": "الأخبار",
   "menu.contact": "اتصل بنا",
+  "menu.formation": "التكوين",
+  "menu.video": "الفيديوهات",
+  "menu.gallery": "معرض الصور",
   "assist_24_7": "مساعدة 24/7",
   "urgent_assistance": "مساعدة مستعجلة",
   "hero.slide1.title": "المساعدة الطبية",
@@ -55,7 +58,7 @@
   "footer.information": "معلومات",
   "footer.recruitment": "التوظيف",
   "footer.follow_us": "تابعنا",
-  "footer.rights": "© 2025 يانيس أسيستانس. جميع الحقوق محفوظة.",
+  "footer.rights": "© 2026 يانيس أسيستانس. جميع الحقوق محفوظة.",
   "footer.legal_notice": "الإشعارات القانونية",
   "footer.privacy_policy": "سياسة الخصوصية",
   "contact.title": "إتصل بنا",
@@ -224,5 +227,35 @@
   "fleet.quality.item1": "احترام المعايير الصحية والتنظيمية",
   "fleet.quality.item2": "صيانة دقيقة ومراقبة منتظمة لسيارات الإسعاف",
   "fleet.quality.item3": "تتبع التدخلات في الوقت الحقيقي",
-  "fleet.quality.item4": "تحسين مستمر لجودة خدماتنا"
+  "fleet.quality.item4": "تحسين مستمر لجودة خدماتنا",
+
+
+   "recrutement.join_us": "انضم إلينا",
+    "recrutement.title": "كن جزءاً من فريق يانيس أسيستانس",
+    "recrutement.description": "معاً، نضع خبرتنا والتزامنا وإنسانيتنا في خدمة الصحة والمساعدة الطبية.",
+    "recrutement.send_cv": "أرسل سيرتك الذاتية",
+
+    "recrutement.why_title": "لماذا تنضم إلينا؟",
+
+    "recrutement.card1.title": "روح الفريق",
+    "recrutement.card1.desc": "نؤمن بقوة العمل الجماعي والتعاون المستمر.",
+
+    "recrutement.card2.title": "الالتزام",
+    "recrutement.card2.desc": "التزامك يصنع الفرق في كل مهمة نقوم بها.",
+
+    "recrutement.card3.title": "أثر إيجابي",
+    "recrutement.card3.desc": "كل مهمة تحدث فرقاً، وكل تدخل ينقذ حياة.",
+
+    "recrutement.card4.title": "التطور المهني",
+    "recrutement.card4.desc": "طوّر مهاراتك المهنية داخل بيئة محفزة.",
+
+    "recrutement.jobs_title": "الوظائف المطلوبة",
+
+    "recrutement.job1": "مسعف نقل طبي",
+    "recrutement.job2": "ممرض(ة)",
+    "recrutement.job3": "مستشار(ة) هاتفي",
+    "recrutement.job4": "منسق طبي",
+
+    "recrutement.spontaneous_title": "ترشيح تلقائي",
+    "recrutement.spontaneous_desc": "هل ترغب في الانضمام إلى يانيس أسيستانس؟ أرسل لنا سيرتك الذاتية وسندرس طلبك بعناية."
 }

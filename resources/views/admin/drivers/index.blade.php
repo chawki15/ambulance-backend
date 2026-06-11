@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Liste des utilisateurs')
+
 @section('content')
 
 <style>
@@ -11,7 +13,7 @@
 
     body {
         background: #f4f7fb;
-        font-family: Tahoma, Arial, sans-serif;
+        font-family: 'Montserrat', sans-serif;
         color: #0f172a;
     }
 
@@ -153,12 +155,7 @@
     }
 </style>
 
-<div class="layout">
 
-    @include('admin.layouts.sidebar')
-    <main class="main">
-
-        @include('admin.layouts.header')
         <h1 class="page-title">Ajouter une ambulance</h1>
 
         <div class="breadcrumb">
@@ -244,5 +241,4 @@
             </form>
 
         </div>
-    </main>
-</div>
+  @endsection

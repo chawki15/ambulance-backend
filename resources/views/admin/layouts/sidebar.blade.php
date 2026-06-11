@@ -1,47 +1,27 @@
-<aside class="sidebar">
-    <div class="brand">StockSystem</div>
+<aside class="sidebar" id="sidebar">
+    <div class="brand">
+        <img src="{{ asset('assets/admin/images/logo.png') }}" alt="Yanis Assistance">
+    </div>
 
+    <nav class="nav">
+        <a class="nav-item active" href="/admin/"><span>🏠</span> Tableau de bord</a>
+        <a class="nav-item" href="/admin/users"><span>👥</span> Utilisateurs</a>
+        <a class="nav-item" href="/admin/drivers"><span>🚑</span> Ambulance</a>
+        <a class="nav-item" href="/admin/drivers"><span>🚚</span> Équipement ambulances</a>
+        <a class="nav-item" href="/admin/medicines"><span>💊</span> Médicaments</a>
+        <a class="nav-item" href="/admin/movements"><span>📦</span> Mouvements de stock</a>
+        <a class="nav-item" href="/admin/reports"><span>📊</span> Rapports</a>
 
-    <a class="item item {{ request()->is('admin/home') ? 'active' : '' }}" href="/admin/home">
-        <span>🏠</span>
-        <span>Tableau de board</span>
-    </a>
+        <p class="nav-title">Paramètres</p>
+        <a class="nav-item" href="#"><span>⚙️</span> Paramètres</a>
+    </nav>
 
-    <a class="item item {{ request()->is('admin/users*') ? 'active' : '' }}" href="/admin/users">
-        <span>👥</span>
-        <span>Utilisateurs</span>
-    </a>
-
-    <a class="item item {{ request()->is('admin/drivers*') ? 'active' : '' }}" href="/admin/drivers">
-        <span>🚑</span>
-        <span>Ambulance</span>
-    </a>
-
-    <a class="item item {{ request()->is('admin/equipement-ambulances*') ? 'active' : '' }}" href="/admin/drivers">
-        <span>🚑</span>
-        <span>Équipement ambulances</span>
-    </a>
-
-
-    <a class="item item {{ request()->is('admin/medicines*') ? 'active' : '' }}" href="/admin/medicines">
-        <span>💊</span>
-        <span>Médicaments</span>
-    </a>
-
-    <a class="item item {{ request()->is('admin/movements') ? 'active' : '' }}" href="/admin/movements">
-        <span>📦</span>
-        <span> Mouvements de stock </span>
-    </a>
-
-    <a class="item item {{ request()->is('admin/reports') ? 'active' : '' }}" href="/admin/reports">
-        <span>📊</span>
-        <span>Rapports</span>
-    </a>
-
-    <div class="ttl">Paramètres</div>
-
-    <a class="item item {{ request()->is('admin/settings') ? 'active' : '' }}" href="/admin/settings">
-        <span>⚙️</span>
-        <span>Paramètres</span>
-    </a>
+    <div class="side-user">
+        <div class="avatar">A</div>
+        <div>
+            <strong>Administrateur</strong>
+            <small>Responsable système</small>
+        </div>
+        <span>⌄</span>
+    </div>
 </aside>

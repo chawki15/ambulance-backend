@@ -208,7 +208,7 @@
                 </ul>
             </div>
 
-            <img src="images/interieur-ambulance.jpg" alt="">
+            <img src="images/interieur-ambulance.png" alt="">
         </div>
 
     </div>

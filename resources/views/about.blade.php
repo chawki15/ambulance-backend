@@ -77,6 +77,35 @@
     </div>
 </section>
 
+
+<section class="doctor-section">
+
+    <div class="doctor-photo">
+        <img src="{{ asset('images/docteur.jpeg') }}" alt="Dr Youssef El A.">
+    </div>
+
+    <div class="doctor-info">
+        <span>Direction médicale</span>
+        <h2>Dr. Youssef El A.</h2>
+        <h4>Médecin urgentiste</h4>
+
+        <p>
+            Médecin référent de Yanis Assistance, il assure le suivi médical,
+            la coordination des interventions et la qualité des prestations 24h/24 et 7j/7.
+        </p>
+    </div>
+
+    <div class="doctor-list">
+        <p><i class="fa-solid fa-circle-check"></i> Assistance médicale 24/7</p>
+        <p><i class="fa-solid fa-circle-check"></i> Coordination des urgences</p>
+        <p><i class="fa-solid fa-circle-check"></i> Expertise médicale</p>
+        <p><i class="fa-solid fa-circle-check"></i> Suivi des patients</p>
+        <p><i class="fa-solid fa-circle-check"></i> Qualité & sécurité</p>
+    </div>
+
+</section>
+
+
 <section class="about-bottom">
 
     <div class="values-history">
@@ -353,6 +382,95 @@
                 rgba(238, 241, 246, .80) 18%,
                 rgba(238, 241, 246, .25) 35%,
                 rgba(238, 241, 246, 0) 55%) !important;
+    }
+
+
+    @media(max-width:768px) {
+
+        html[dir="rtl"] .about-hero,
+        .about-hero {
+            display: flex !important;
+            flex-direction: column !important;
+            min-height: auto !important;
+            direction: rtl !important;
+        }
+
+        html[dir="rtl"] .about-left,
+        .about-left {
+            order: 2;
+            width: 100%;
+            padding: 35px 22px !important;
+            text-align: center !important;
+            direction: rtl !important;
+        }
+
+        html[dir="rtl"] .about-right,
+        .about-right {
+            order: 1;
+            width: 100%;
+            height: 260px !important;
+            grid-column: auto !important;
+            grid-row: auto !important;
+        }
+
+        html[dir="rtl"] .about-right img,
+        .about-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        html[dir="rtl"] .about-right::before {
+            background: linear-gradient(180deg,
+                    rgba(238, 241, 246, 0) 0%,
+                    rgba(238, 241, 246, .45) 55%,
+                    #eef1f6 100%) !important;
+        }
+
+        .about-left h1 {
+            font-size: 34px !important;
+            line-height: 1.25 !important;
+        }
+
+        .about-left h1::after {
+            margin: 12px auto 0 !important;
+        }
+
+        .about-left p {
+            max-width: 100%;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .about-features {
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .about-features div {
+            max-width: 100%;
+            align-items: center;
+            text-align: center;
+        }
+
+        html[dir="rtl"] .mission-card,
+        .mission-card {
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            width: auto !important;
+            margin: -35px 22px 25px !important;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .mission-card i {
+            margin: -58px auto 15px !important;
+        }
     }
 
     /* ddddddddddd **/
@@ -973,6 +1091,140 @@
 
         .values-list {
             grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+
+
+    .doctor-section {
+        max-width: 1100px;
+        margin: 35px auto;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(10, 47, 103, .08);
+        display: grid;
+        grid-template-columns: 260px 1fr 330px;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .doctor-photo img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+
+    .doctor-info {
+        padding: 30px 35px;
+    }
+
+    .doctor-info span {
+        color: #e71f3c;
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .doctor-info h2 {
+        color: #0a2f67;
+        font-size: 30px;
+        margin: 8px 0 8px;
+        font-weight: 900;
+    }
+
+    .doctor-info h2::after {
+        content: "";
+        display: block;
+        width: 45px;
+        height: 3px;
+        background: #e71f3c;
+        margin-top: 10px;
+    }
+
+    .doctor-info h4 {
+        color: #0a2f67;
+        font-size: 15px;
+        margin: 15px 0 10px;
+    }
+
+    .doctor-info p {
+        color: #25354d;
+        font-size: 14px;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .doctor-list {
+        border-left: 1px solid #e5ebf5;
+        padding: 30px;
+    }
+
+    .doctor-list p {
+        margin: 0 0 13px;
+        color: #25354d;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .doctor-list i {
+        color: #e71f3c;
+        margin-right: 8px;
+    }
+
+    /* Mobile */
+    @media(max-width:768px) {
+        .doctor-section {
+            margin: 25px 18px;
+            grid-template-columns: 1fr;
+            border-radius: 18px;
+        }
+
+        .doctor-photo img {
+            height: 260px;
+        }
+
+        .doctor-info {
+            padding: 25px 22px;
+            text-align: left;
+        }
+
+        .doctor-info h2 {
+            font-size: 26px;
+        }
+
+        .doctor-list {
+            border-left: 0;
+            border-top: 1px solid #e5ebf5;
+            padding: 22px;
+        }
+    }
+
+    /* Arabic RTL */
+    html[dir="rtl"] .doctor-info {
+        text-align: right;
+    }
+
+    html[dir="rtl"] .doctor-info h2::after {
+        margin-right: 0;
+        margin-left: auto;
+    }
+
+    html[dir="rtl"] .doctor-list {
+        border-left: 0;
+        border-right: 1px solid #e5ebf5;
+    }
+
+    html[dir="rtl"] .doctor-list i {
+        margin-right: 0;
+        margin-left: 8px;
+    }
+
+    @media(max-width:768px) {
+        html[dir="rtl"] .doctor-list {
+            border-right: 0;
+            border-top: 1px solid #e5ebf5;
         }
     }
 </style>

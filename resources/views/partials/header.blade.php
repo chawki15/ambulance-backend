@@ -6,7 +6,7 @@
     ['label' => __('menu.services'), 'url' => route('services')],
     ['label' => __('menu.fleet'), 'url' => route('fleet')],
     ['label' => __('menu.partners'), 'url' => route('partners')],
-    ['label' => __('menu.news'), 'url' => route('news')],
+    ['label' => __('menu.news'), 'url' => '#', 'dropdown' => true],
     ['label' => __('menu.contact'), 'url' => route('contact')],
     ];
     @endphp
@@ -24,9 +24,27 @@
 
         <nav class="yanis-menu" id="mainMenu">
             @foreach ($menuItems as $item)
+
+            @if(isset($item['dropdown']))
+            <div class="nav-dropdown">
+                <a href="#">
+                    {{ $item['label'] }}
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+
+                <div class="dropdown-menu">
+                    <a href="#">{{ __('menu.formation') }}</a>
+                    <a href="{{ route('videos') }}">{{ __('menu.video') }}</a>
+                    <a href="{{ route('galeries') }}">{{ __('menu.gallery') }}</a>
+                    <a href="{{ route('news') }}">{{ __('menu.news') }}</a>
+                </div>
+            </div>
+            @else
             <a href="{{ $item['url'] }}" class="{{ request()->url() === $item['url'] ? 'active' : '' }}">
                 {{ $item['label'] }}
             </a>
+            @endif
+
             @endforeach
         </nav>
 
@@ -42,7 +60,7 @@
                 </div>
             </div>
 
-            <a href="#" class="urgent-btn">
+            <a href="tel:0522123456" class="urgent-btn">
                 <i class="fa-regular fa-bell"></i>
                 {{ __('urgent_assistance') }}
             </a>
@@ -70,11 +88,25 @@
 
             <nav class="mobile-links">
                 @foreach ($menuItems as $item)
-                <a href="{{ $item['url'] }}" class="{{ request()->url() === $item['url'] ? 'active' : '' }}">{{ $item['label'] }}</a>
+
+                @if(isset($item['dropdown']))
+                <details class="mobile-dropdown">
+                    <summary>{{ $item['label'] }}</summary>
+                    <a href="#">{{ __('menu.formation') }}</a>
+                    <a href="{{ route('videos') }}">{{ __('menu.video') }}</a>
+                    <a href="{{ route('galeries') }}">{{ __('menu.gallery') }}</a>
+                    <a href="{{ route('news') }}">{{ __('menu.news') }}</a>
+                </details>
+                @else
+                <a href="{{ $item['url'] }}" class="{{ request()->url() === $item['url'] ? 'active' : '' }}">
+                    {{ $item['label'] }}
+                </a>
+                @endif
+
                 @endforeach
             </nav>
 
-            <a href="#" class="mobile-urgent-btn">
+            <a href="tel:0522123456" class="mobile-urgent-btn">
                 <i class="fa-regular fa-bell"></i>
                 {{ __('urgent_assistance') }}
             </a>
@@ -87,6 +119,8 @@
         </div>
     </div>
 </header>
+
+
 
 
 

@@ -68,25 +68,31 @@ $services = [
 @section('content')
 
 
-<section class="hero" id="heroSlider">
+<section class="hero-new" id="heroSlider">
     @foreach ($heroSlides as $index => $slide)
-    <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ asset($slide['image']) }}'); --hero-pos: {{ $slide['position'] }};"></div>
-    @endforeach
+    <div class="hero-new-slide {{ $index === 0 ? 'active' : '' }}"
+        style="background-image:url('{{ asset($slide['image']) }}'); background-position:{{ $slide['position'] }};">
 
-    <div class="container hero-content align-{{ $heroSlides[0]['align'] }}" id="heroContent">
-        <div class="hero-copy">
-            <h1 id="heroTitle">{{ $heroSlides[0]['title'] }}</h1>
-            <p class="lead" id="heroLead">{{ $heroSlides[0]['lead'] }}</p>
-            <p class="desc" id="heroDesc">{{ $heroSlides[0]['desc'] }}</p>
+        <div class="hero-new-image">
+            <img src="{{ asset($slide['image']) }}" alt="">
+        </div>
+
+        <div class="hero-new-content">
+            <h1>{{ $slide['title'] }}</h1>
+            <p class="hero-new-lead">{{ $slide['lead'] }}</p>
+            <p class="hero-new-desc">{{ $slide['desc'] }}</p>
         </div>
     </div>
+    @endforeach
 
-    <div class="hero-dots" aria-label="Navigation du slider hero">
+    <div class="hero-dots">
         @foreach ($heroSlides as $index => $slide)
-        <button type="button" class="hero-dot {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}" aria-label="Aller au slide {{ $index + 1 }}"></button>
+        <button type="button" class="hero-dot {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}"></button>
         @endforeach
     </div>
 </section>
+
+
 
 <main class="container">
     <section class="stats">
@@ -153,10 +159,6 @@ $services = [
 
                 </div>
 
-                <div class="service-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </div>
-
             </article>
 
             @endforeach
@@ -200,12 +202,8 @@ $services = [
         <h3>{{ __('home.immediate_help.title') }}</h3>
         <p>{{ __('home.immediate_help.desc') }}</p>
 
-        <a href="tel:+212522000000" class="help-phone">
-            +212 522 000 000
-        </a>
-
-        <a href="#" class="help-online">
-            {{ __('home.immediate_help.cta') }}
+        <a href="tel:+212522123456" class="help-phone">
+            +212 522 123 456
         </a>
     </div>
 

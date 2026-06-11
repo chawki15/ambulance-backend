@@ -20,7 +20,7 @@
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background: linear-gradient(160deg, #f7fafe 0%, #e9f0fb 100%);
             color: var(--text);
             display: grid;
@@ -113,8 +113,13 @@
     <main class="card">
         <h1>Connexion Admin</h1>
         <p>Accès indépendant pour l'administration Assistance Médicale.</p>
-
-        <form id="standalone-login-form">
+        @if ($errors->any())
+        <div class="status error">
+            {{ $errors->first() }}
+        </div>
+        @endif
+        <form id="standalone-login-form" method="POST" action="{{ route('admin.login.post') }}">
+            @csrf
             <label for="email">Email</label>
             <input id="email" name="email" type="email" required>
 
@@ -129,7 +134,6 @@
     </main>
 
     <script>
-        const form = document.getElementById('standalone-login-form');
         const statusBox = document.getElementById('status');
         const tokenBox = document.getElementById('token-box');
 
@@ -166,7 +170,7 @@
                 if (data.token) {
                     tokenBox.style.display = 'block';
                     tokenBox.textContent = `Token: ${data.token}`;
-                    window.location.href = '/admin/home';
+                    window.location.href = '/admin/dashboard';
                 }
             } catch (error) {
                 statusBox.className = 'status error';

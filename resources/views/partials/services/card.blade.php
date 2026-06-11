@@ -16,9 +16,5 @@
         @endforeach
     </ul>
 
-    <a href="#" class="card-btn">
-        {{ __('Voir plus') }}
-        <i class="fa-solid fa-arrow-right"></i>
-    </a>
 
 </article>

@@ -6,6 +6,9 @@
   "menu.partners": "Partenaires",
   "menu.news": "Actualités",
   "menu.contact": "Contact",
+  "menu.formation": "Formation",
+  "menu.video": "Vidéo",
+  "menu.gallery": "Galerie",
   "assist_24_7": "Assistance 24/7",
   "urgent_assistance": "Assistance Urgente",
   "hero.slide1.title": "L’ASSISTANCE MÉDICALE",
@@ -137,7 +140,7 @@
   "footer.contact": "Contact",
   "footer.follow_us": "Suivez-nous",
   "footer.information": "Informations",
-  "footer.rights": "© 2025 Yanis Assistance. Tous droits réservés.",
+  "footer.rights": "© 2026 Yanis Assistance. Tous droits réservés.",
   "footer.legal_notice": "Mentions légales",
   "footer.privacy_policy": "Politique de confidentialité",
   "home.slider_nav_label": "Navigation du slider hero",
@@ -224,5 +227,35 @@
   "fleet.quality.item1": "Respect des normes sanitaires et réglementaires",
   "fleet.quality.item2": "Entretien rigoureux et contrôle régulier de nos véhicules",
   "fleet.quality.item3": "Traçabilité et suivi des interventions en temps réel",
-  "fleet.quality.item4": "Amélioration continue de nos services"
+  "fleet.quality.item4": "Amélioration continue de nos services",
+
+
+  "recrutement.join_us": "REJOIGNEZ-NOUS",
+    "recrutement.title": "REJOIGNEZ L’ÉQUIPE YANIS ASSISTANCE",
+    "recrutement.description": "Ensemble, mettons notre expertise, notre engagement et notre humanité au service de la santé et de l’assistance médicale.",
+    "recrutement.send_cv": "Envoyer mon CV",
+
+    "recrutement.why_title": "Pourquoi nous rejoindre ?",
+
+    "recrutement.card1.title": "Esprit d’équipe",
+    "recrutement.card1.desc": "Nous croyons en la force du collectif et de la collaboration.",
+
+    "recrutement.card2.title": "Engagement",
+    "recrutement.card2.desc": "Votre implication fait la différence chaque jour.",
+
+    "recrutement.card3.title": "Impact positif",
+    "recrutement.card3.desc": "Chaque mission compte, chaque geste sauve une vie.",
+
+    "recrutement.card4.title": "Évolution professionnelle",
+    "recrutement.card4.desc": "Développez vos compétences dans un environnement stimulant.",
+
+    "recrutement.jobs_title": "Profils recherchés",
+
+    "recrutement.job1": "Ambulancier(ère)",
+    "recrutement.job2": "Infirmier(ère)",
+    "recrutement.job3": "Téléconseiller(ère)",
+    "recrutement.job4": "Coordinateur médical",
+
+    "recrutement.spontaneous_title": "Candidature spontanée",
+    "recrutement.spontaneous_desc": "Vous souhaitez rejoindre Yanis Assistance ? Envoyez-nous votre CV et nous étudierons votre candidature avec attention."
 }

@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Liste des utilisateurs')
+
 @section('content')
 
 <style>
@@ -151,10 +153,7 @@
         }
     }
 </style>
-<div class="layout">
-    @include('admin.layouts.sidebar')
-    <main class="main">
-        @include('admin.layouts.header')
+
 
         <h1>Médicaments</h1>
         <p class="sub">Gérez tous les médicaments, leur stock et leurs détails.</p>
@@ -224,5 +223,4 @@
             </tbody>
         </table>
         <div class="foot"><span>Affichage de 1 à 3 sur 248 résultats</span><span>Page 1</span></div>
-    </main>
-</div>
+@endsection

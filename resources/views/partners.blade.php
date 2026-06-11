@@ -100,7 +100,6 @@
                 <img src="{{ asset('images/clients/atlanta.png') }}">
                 <img src="{{ asset('images/clients/axa.png') }}">
             </div>
-            <a href="#">Voir tous nos partenaires</a>
         </div>
 
         <div class="partner-card">
@@ -110,7 +109,6 @@
                 <img src="{{ asset('images/clients/inter-mutuelles.png') }}">
                 <img src="{{ asset('images/clients/europ-assistance.png') }}">
             </div>
-            <a href="#">Voir tous nos partenaires</a>
         </div>
 
         <div class="partner-card">
@@ -120,7 +118,6 @@
                 <img src="{{ asset('images/clients/hopitaux.png') }}">
                 <img src="{{ asset('images/clients/clinique.png') }}">
             </div>
-            <a href="#">Voir tous nos partenaires</a>
         </div>
 
         <div class="partner-card">
@@ -130,7 +127,6 @@
                 <img src="{{ asset('images/clients/maroc-telecom.png') }}">
                 <img src="{{ asset('images/clients/cosumar.png') }}">
             </div>
-            <a href="#">Voir tous nos partenaires</a>
         </div>
     </div>
 

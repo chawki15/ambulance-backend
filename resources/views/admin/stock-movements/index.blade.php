@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Liste des utilisateurs')
+
 @section('content')
 <style>
     h1 {
@@ -147,10 +149,7 @@
         }
     }
 </style>
-<div class="layout">
-    @include('admin.layouts.sidebar')
-    <main class="main">
-        @include('admin.layouts.header')
+
         <h1>Entrée de stock</h1>
         <div class="crumb">Accueil › Mouvements de stock › Entrée de stock</div>
         <form id="stockInForm" class="panel">
@@ -168,7 +167,6 @@
             <div class="actions"><button type="button" class="btn" onclick="window.location.href='/admin/medicines'">Annuler</button><button type="submit" class="btn primary" id="saveBtn">Enregistrer entrée stock</button></div>
             <div id="status" class="status" aria-live="polite"></div>
         </form>
-    </main>
     <script>
         const rows = document.getElementById('rows');
         const addRowBtn = document.getElementById('addRow');
@@ -250,4 +248,4 @@
             }
         });
     </script>
-</div>
+@endsection
