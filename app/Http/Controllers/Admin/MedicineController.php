@@ -10,4 +10,9 @@ class MedicineController extends Controller
     {
         return view('admin.medicines.index');
     }
+
+    public function create()
+    {
+        return view('admin.medicines.create');
+    }
 }

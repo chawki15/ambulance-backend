@@ -24,39 +24,7 @@
         margin-bottom: 16px
     }
 
-    .panel {
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        overflow-x: auto;
-        overflow-y: visible;
-    }
-
-    .panel {
-        width: 100%;
-    }
-
-    .stats {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .main {
-        margin-left: 245px;
-        width: calc(100vw - 245px);
-        max-width: none;
-        min-height: 100vh;
-        padding: 18px 24px 60px;
-        overflow-x: hidden;
-    }
-
-        @media (max-width:820px) {
-            .main {
-                margin-left: 0;
-                width: 100%;
-                max-width: 100%;
-            }
-        }
-    
+   
         .head {
             display: flex;
             justify-content: space-between;

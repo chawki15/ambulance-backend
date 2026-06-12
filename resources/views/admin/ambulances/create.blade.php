@@ -156,89 +156,89 @@
 </style>
 
 
-        <h1 class="page-title">Ajouter une ambulance</h1>
+<h1 class="page-title">Ajouter une ambulance</h1>
 
-        <div class="breadcrumb">
-            Home › Ambulances › Ajouter une ambulance
+<div class="breadcrumb">
+    Home › Ambulances › Ajouter une ambulance
+</div>
+
+<div class="card">
+
+    <div class="card-header">
+        <div class="icon-box">
+            <i class="fa-solid fa-truck-medical"></i>
         </div>
 
-        <div class="card">
+        <div>
+            <h2>Informations de l'ambulance</h2>
+            <p>Remplissez les détails de l'ambulance ci-dessous.</p>
+        </div>
+    </div>
 
-            <div class="card-header">
-                <div class="icon-box">
-                    <i class="fa-solid fa-truck-medical"></i>
-                </div>
+    <form class="form">
 
-                <div>
-                    <h2>Informations de l'ambulance</h2>
-                    <p>Remplissez les détails de l'ambulance ci-dessous.</p>
-                </div>
+        <div class="form-group">
+            <label>
+                Type d'ambulance <span>*</span>
+            </label>
+
+            <div class="input-wrap">
+                <select>
+                    <option>Sélectionnez le type d'ambulance</option>
+                    <option>Ambulance médicalisée</option>
+                    <option>Ambulance de transport</option>
+                    <option>Ambulance d'urgence</option>
+                </select>
+
+                <i class="fa-solid fa-truck-medical"></i>
             </div>
+        </div>
 
-            <form class="form">
+        <div class="form-group">
+            <label>
+                Numéro d'immatriculation <span>*</span>
+            </label>
 
-                <div class="form-group">
-                    <label>
-                        Type d'ambulance <span>*</span>
-                    </label>
+            <div class="input-wrap">
+                <input
+                    type="text"
+                    placeholder="12345-A-1">
 
-                    <div class="input-wrap">
-                        <select>
-                            <option>Sélectionnez le type d'ambulance</option>
-                            <option>Ambulance médicalisée</option>
-                            <option>Ambulance de transport</option>
-                            <option>Ambulance d'urgence</option>
-                        </select>
+                <i class="fa-solid fa-car"></i>
+            </div>
+        </div>
 
-                        <i class="fa-solid fa-truck-medical"></i>
-                    </div>
-                </div>
+        <div class="form-group">
+            <label>
+                Date d'expiration de la licence <span>*</span>
+            </label>
 
-                <div class="form-group">
-                    <label>
-                        Numéro d'immatriculation <span>*</span>
-                    </label>
+            <div class="input-wrap">
+                <input type="date">
 
-                    <div class="input-wrap">
-                        <input
-                            type="text"
-                            placeholder="12345-A-1">
+                <i class="fa-regular fa-calendar"></i>
+            </div>
+        </div>
 
-                        <i class="fa-solid fa-car"></i>
-                    </div>
-                </div>
+        <div class="actions">
 
-                <div class="form-group">
-                    <label>
-                        Date d'expiration de la licence <span>*</span>
-                    </label>
+            <button
+                type="button"
+                class="btn btn-cancel">
+                <i class="fa-solid fa-arrow-left"></i>
+                Annuler
+            </button>
 
-                    <div class="input-wrap">
-                        <input type="date">
-
-                        <i class="fa-regular fa-calendar"></i>
-                    </div>
-                </div>
-
-                <div class="actions">
-
-                    <button
-                        type="button"
-                        class="btn btn-cancel">
-                        <i class="fa-solid fa-arrow-left"></i>
-                        Annuler
-                    </button>
-
-                    <button
-                        type="submit"
-                        class="btn btn-save">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                        Ajouter une ambulance
-                    </button>
-
-                </div>
-
-            </form>
+            <button
+                type="submit"
+                class="btn btn-save">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Ajouter une ambulance
+            </button>
 
         </div>
-  @endsection
+
+    </form>
+
+</div>
+@endsection

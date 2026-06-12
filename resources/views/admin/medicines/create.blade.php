@@ -3,7 +3,204 @@
 @section('title', 'Liste des utilisateurs')
 
 @section('content')
+<style>
+    body {
+        background: #f5f7fb;
+    }
 
+    h1 {
+        margin: 20px 0 5px;
+        font-size: 32px;
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .crumb {
+        color: #6b7280;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .panel {
+        background: #fff;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+        border: 1px solid #e5e7eb;
+    }
+
+    .panel-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .num {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #2563eb;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .grid2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #374151;
+    }
+
+    .req::after {
+        content: " *";
+        color: #dc2626;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        outline: none;
+        transition: .3s;
+        font-size: 14px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    small {
+        display: block;
+        margin-top: 6px;
+        color: #6b7280;
+        font-size: 12px;
+    }
+
+    .upload {
+        border: 2px dashed #cbd5e1;
+        border-radius: 12px;
+        padding: 40px;
+        text-align: center;
+        background: #f8fafc;
+        transition: .3s;
+    }
+
+    .upload:hover {
+        border-color: #2563eb;
+        background: #eff6ff;
+    }
+
+    .upload input[type="file"] {
+        margin-top: 15px;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .btn {
+        border: none;
+        padding: 12px 22px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .btn.primary {
+        background: #2563eb;
+        color: white;
+    }
+
+    .btn.primary:hover {
+        background: #1d4ed8;
+    }
+
+    .btn:not(.primary) {
+        background: #e5e7eb;
+        color: #374151;
+    }
+
+    .btn:not(.primary):hover {
+        background: #d1d5db;
+    }
+
+    .status {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 8px;
+        display: none;
+    }
+
+    .status.ok {
+        display: block;
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
+    }
+
+    .status.err {
+        display: block;
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+    }
+
+    @media(max-width:768px) {
+
+        .grid2,
+        .grid3 {
+            grid-template-columns: 1fr;
+        }
+
+        .actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>
 <h1>Ajouter un médicament</h1>
 <div class="crumb">Accueil &nbsp;›&nbsp; Médicaments &nbsp;›&nbsp; Ajouter un médicament</div>
 

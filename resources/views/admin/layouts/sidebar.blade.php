@@ -6,10 +6,10 @@
     <nav class="nav">
         <a class="nav-item active" href="/admin/"><span>🏠</span> Tableau de bord</a>
         <a class="nav-item" href="/admin/users"><span>👥</span> Utilisateurs</a>
-        <a class="nav-item" href="/admin/drivers"><span>🚑</span> Ambulance</a>
+        <a class="nav-item" href="/admin/ambulances"><span>🚑</span> Ambulance</a>
         <a class="nav-item" href="/admin/drivers"><span>🚚</span> Équipement ambulances</a>
         <a class="nav-item" href="/admin/medicines"><span>💊</span> Médicaments</a>
-        <a class="nav-item" href="/admin/movements"><span>📦</span> Mouvements de stock</a>
+        <a class="nav-item" href="/admin/stock"><span>📦</span> Mouvements de stock</a>
         <a class="nav-item" href="/admin/reports"><span>📊</span> Rapports</a>
 
         <p class="nav-title">Paramètres</p>

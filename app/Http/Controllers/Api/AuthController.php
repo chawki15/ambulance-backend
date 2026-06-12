@@ -167,4 +167,50 @@ class AuthController extends Controller
             'message' => 'Logout successful',
         ]);
     }
+
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $data = $request->validate([
+            'name' => 'required|string|max:120|unique:users,name,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
+            'phone' => 'required|string|max:20|unique:users,phone,' . $id,
+            'role' => 'required|in:driver,nurse,general_doctor,emergency_doctor,specialist_doctor',
+            'is_active' => 'sometimes|boolean',
+        ]);
+
+        $user->update($data);
+
+        return response()->json([
+            'message' => 'User updated successfully',
+            'user' => $user
+        ]);
+    }
+
+
+    public function blockUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $data = $request->validate([
+            'blocked_reason' => 'nullable|string|max:255',
+        ]);
+
+        $user->update([
+            'is_active' => false,
+        ]);
+
+        DB::table('user_blocks')->insert([
+            'user_id' => $user->id,
+            'blocked_reason' => $data['blocked_reason'] ?? null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json([
+            'message' => 'User blocked successfully'
+        ]);
+    }
 }

@@ -378,18 +378,34 @@
 
                 <td class="actions">
 
-                    <button class="btn-icon view">
+                    {{-- VIEW --}}
+                    <a href="{{ route('admin.users.show', $user->id) }}" class="btn-icon view">
                         <i class="fa-solid fa-eye"></i>
-                    </button>
+                    </a>
 
-                    <button class="btn-icon edit">
+                    {{-- EDIT (Wizard) --}}
+                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn-icon edit">
                         <i class="fa-solid fa-pen"></i>
-                    </button>
+                    </a>
 
-                    <button class="btn-icon delete">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                    {{-- DELETE --}}
+                    <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" onsubmit="return confirm('Delete user?')">
+                        @csrf
+                        @method('DELETE')
 
+                        <button type="submit" class="btn-icon delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                    @if($user->is_active)
+                    <button class="btn-icon off" onclick="blockUser({{ $user->id }})">
+                        <i class="fa-solid fa-ban"></i>
+                    </button>
+                    @else
+                    <button class="btn-icon ok" onclick="unblockUser({{ $user->id }})">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    @endif
                 </td>
 
             </tr>

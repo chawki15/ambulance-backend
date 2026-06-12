@@ -9,7 +9,9 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\AmbulanceController;
+use App\Http\Controllers\Admin\MedicineController;
+use App\Http\Controllers\Admin\StockMovementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,13 +111,18 @@ Route::prefix('admin')->group(function () {
     Route::view('/users/create', 'admin.users.create')->name('admin.users.create');
 
 
-    Route::get('/drivers', [DriverController::class, 'index'])
-        ->name('admin.drivers.index');
-    Route::view('/drivers/create', 'admin.drivers.create')
-        ->name('admin.drivers.create');
+    Route::resource('ambulances', AmbulanceController::class);
+    Route::get('/ambulances/create', [AmbulanceController::class, 'create'])
+        ->name('ambulances.create');
 
-    Route::view('/medicines', 'admin.medicines')->name('admin.medicines');
-    Route::view('/medicines/create', 'admin.medicines-create')->name('admin.medicines.create');
+    Route::get('/medicines', [MedicineController::class, 'index'])->name('medicines.index');
+    Route::get('/medicines/create', [MedicineController::class, 'create'])
+        ->name('medicines.create');
 
-    Route::view('/stock-movements/in', 'admin.stock-in')->name('admin.stock.in');
+    Route::get(
+        '/stock/',
+        [StockMovementController::class, 'stockIn']
+    )->name('admin.stock.index');
+
+
 });
