@@ -1,17 +1,25 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Liste des utilisateurs')
+@section('title', 'Médicaments')
 
 @section('content')
 
 <style>
+    .medicines-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin: 20px 0 18px;
+    }
+
     h1 {
-        margin: 20px 0 6px;
+        margin: 0px 0 6px;
         font-size: 40px;
     }
 
     .sub {
-        margin: 0 0 18px;
+        margin: 0;
         color: var(--muted);
     }
 
@@ -122,12 +130,23 @@
     }
 
     .add-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
         background: linear-gradient(90deg, #5f54ff, #4f46e5);
         color: #fff;
         border: 0;
         border-radius: 10px;
-        padding: 11px 16px;
+        padding: 13px 8px;
         font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 12px 24px rgba(79, 70, 229, .22);
+        white-space: nowrap;
+    }
+
+    .add-btn:hover {
+        transform: translateY(-1px);
     }
 
     @media (max-width:1100px) {
@@ -137,6 +156,14 @@
 
         .toolbar {
             grid-template-columns: 1fr;
+        }
+
+        .medicines-header {
+            flex-direction: column;
+        }
+
+        .add-btn {
+            width: 100%;
         }
 
         .layout {
@@ -155,72 +182,79 @@
 </style>
 
 
+<div class="medicines-header">
+    <div>
         <h1>Médicaments</h1>
         <p class="sub">Gérez tous les médicaments, leur stock et leurs détails.</p>
+    </div>
+    <a class="add-btn" href="{{ route('medicines.create') }}">
+        <i class="fa-solid fa-plus"></i>
+        Ajouter un médicament
+    </a>
+</div>
+<section class="stats">
+    <div class="card"><small>Total médicaments</small>
+        <h3>248</h3><small>Tous enregistrés</small>
+    </div>
+    <div class="card"><small>En stock</small>
+        <h3>186</h3><small>Disponibles</small>
+    </div>
+    <div class="card"><small>Stock faible</small>
+        <h3>32</h3><small>À surveiller</small>
+    </div>
+    <div class="card"><small>Rupture</small>
+        <h3>30</h3><small>Indisponibles</small>
+    </div>
+</section>
 
-        <section class="stats">
-            <div class="card"><small>Total médicaments</small>
-                <h3>248</h3><small>Tous enregistrés</small>
-            </div>
-            <div class="card"><small>En stock</small>
-                <h3>186</h3><small>Disponibles</small>
-            </div>
-            <div class="card"><small>Stock faible</small>
-                <h3>32</h3><small>À surveiller</small>
-            </div>
-            <div class="card"><small>Rupture</small>
-                <h3>30</h3><small>Indisponibles</small>
-            </div>
-        </section>
+<section class="toolbar">
+    <input placeholder="Rechercher par nom, générique...">
+    <select>
+        <option>Toutes catégories</option>
+    </select>
+    <select>
+        <option>Tous statuts</option>
+    </select>
+    <button>Filtres</button>
+</section>
 
-        <section class="toolbar">
-            <input placeholder="Rechercher par nom, générique...">
-            <select>
-                <option>Toutes catégories</option>
-            </select>
-            <select>
-                <option>Tous statuts</option>
-            </select>
-            <button>Filtres</button>
-        </section>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Médicament</th>
-                    <th>Nom générique</th>
-                    <th>Catégorie</th>
-                    <th>Stock</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Paracétamol 500mg</td>
-                    <td>Paracétamol</td>
-                    <td>Antalgique</td>
-                    <td>120</td>
-                    <td><span class="badge ok">En stock</span></td>
-                    <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
-                </tr>
-                <tr>
-                    <td>Ibuprofène 400mg</td>
-                    <td>Ibuprofène</td>
-                    <td>Anti-inflammatoire</td>
-                    <td>8</td>
-                    <td><span class="badge low">Stock faible</span></td>
-                    <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
-                </tr>
-                <tr>
-                    <td>Metformine 850mg</td>
-                    <td>Metformine</td>
-                    <td>Diabète</td>
-                    <td>0</td>
-                    <td><span class="badge out">Rupture</span></td>
-                    <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="foot"><span>Affichage de 1 à 3 sur 248 résultats</span><span>Page 1</span></div>
+<table>
+    <thead>
+        <tr>
+            <th>Médicament</th>
+            <th>Nom générique</th>
+            <th>Catégorie</th>
+            <th>Stock</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Paracétamol 500mg</td>
+            <td>Paracétamol</td>
+            <td>Antalgique</td>
+            <td>120</td>
+            <td><span class="badge ok">En stock</span></td>
+            <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
+        </tr>
+        <tr>
+            <td>Ibuprofène 400mg</td>
+            <td>Ibuprofène</td>
+            <td>Anti-inflammatoire</td>
+            <td>8</td>
+            <td><span class="badge low">Stock faible</span></td>
+            <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
+        </tr>
+        <tr>
+            <td>Metformine 850mg</td>
+            <td>Metformine</td>
+            <td>Diabète</td>
+            <td>0</td>
+            <td><span class="badge out">Rupture</span></td>
+            <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
+        </tr>
+    </tbody>
+</table>
+<div class="foot"><span>Affichage de 1 à 3 sur 248 résultats</span><span>Page 1</span></div>
 @endsection

@@ -330,19 +330,7 @@
                 </td>
                 <td>{{ $ambulance->created_at?->format('d/m/Y') }}</td>
                 <td>
-                    @if($ambulance->status == 'available')
-                    <span class="badge badge-success">Disponible</span>
-                    @elseif($ambulance->status == 'mission')
-                    <span class="badge badge-warning">En mission</span>
-                    @else
-                    <span class="badge badge-danger">Maintenance</span>
-                    @endif
-                <td>{{ $ambulance->created_at?->format('d/m/Y') }}</td>
-                <td>
                     <div class="ambulance-actions">
-                        <a href="{{ route('ambulances.show', $ambulance->id) }}" class="btn-icon view">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
                         <a href="{{ route('ambulances.edit', $ambulance->id) }}" class="btn-icon edit">
                             <i class="fa-solid fa-pen"></i>
                         </a>

@@ -74,9 +74,9 @@ class AmbulanceController extends Controller
     private function validatedData(Request $request, ?Ambulance $ambulance = null): array
     {
         $validated = $request->validate([
-            'vehicle_type' => 'required_without:new_type|nullable|string|max:255',
+            'type' => 'required_without:new_type|nullable|string|max:255',
             'new_type' => 'required_if:type,__other|nullable|string|max:255',
-            'vehicle_plate' => [
+            'registration' => [
                 'required',
                 'string',
                 'max:255',
@@ -87,9 +87,12 @@ class AmbulanceController extends Controller
         ]);
 
         $registration = strtoupper(trim($validated['registration']));
+        $type = ($validated['type'] ?? null) === '__other'
+            ? $validated['new_type']
+            : $validated['type'];
 
         return [
-            'vehicle_type' => trim(($validated['type'] ?? null) === '__other' ? $validated['new_type'] : $validated['type']),
+            'vehicle_type' => trim($type),
             'vehicle_plate' => $registration,
             'license_number' => $registration,
             'license_expiry' => $validated['license_expiry'],

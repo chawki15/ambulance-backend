@@ -20,4 +20,14 @@ class Ambulance extends Model
     protected $casts = [
         'license_expiry' => 'date',
     ];
+
+    public function getTypeAttribute(): ?string
+    {
+        return $this->vehicle_type;
+    }
+
+    public function getRegistrationAttribute(): ?string
+    {
+        return $this->vehicle_plate;
+    }
 }
