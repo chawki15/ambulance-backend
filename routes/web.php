@@ -107,8 +107,16 @@ Route::prefix('admin')->group(function () {
     })->middleware('auth')->name('admin.dashboard');
 
 
-    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
-    Route::view('/users/create', 'admin.users.create')->name('admin.users.create');
+    Route::middleware('auth')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+        Route::view('/users/create', 'admin.users.create')->name('admin.users.create');
+        Route::get('/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::patch('/users/{user}/activate', [UserController::class, 'activate'])->name('admin.users.activate');
+        Route::patch('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('admin.users.deactivate');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    });
 
 
     Route::resource('ambulances', AmbulanceController::class);

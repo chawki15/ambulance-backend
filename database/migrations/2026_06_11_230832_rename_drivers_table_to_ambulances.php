@@ -27,6 +27,6 @@ return new class extends Migration
             $table->dropColumn('status');
         });
 
-        Schema::rename('ambulances', 'drivers');
+        Schema::rename('ambulances', 'driver');
     }
 };

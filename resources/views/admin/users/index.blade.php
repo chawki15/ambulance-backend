@@ -55,6 +55,29 @@
         color: #dc2626;
     }
 
+    .off {
+        background: #fef2f2;
+        color: #b91c1c;
+    }
+
+    .ok {
+        background: #ecfdf5;
+        color: #047857;
+    }
+
+    .alert {
+        border-radius: 12px;
+        margin-bottom: 16px;
+        padding: 14px 16px;
+        font-weight: 600;
+    }
+
+    .alert-success {
+        background: #ecfdf5;
+        color: #047857;
+        border: 1px solid #a7f3d0;
+    }
+
     .btn-icon:hover {
         transform: translateY(-2px);
     }
@@ -287,6 +310,12 @@
     </a>
 </div>
 
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
 <section class="stats">
     <div class="card">
         <small>Total utilisateurs</small>
@@ -308,8 +337,8 @@
 
     <div class="card">
         <small>Dernier utilisateur</small>
-        <h3>{{ $users->count() }}</h3>
-        <small>Enregistré récemment</small>
+        <h3>{{ $users->first()?->name ?? '-' }}</h3>
+        <small>{{ $users->first()?->created_at?->format('d/m/Y') ?? 'Aucun enregistrement' }}</small>
     </div>
 </section>
 
@@ -377,35 +406,42 @@
                 </td>
 
                 <td class="actions">
-
-                    {{-- VIEW --}}
-                    <a href="{{ route('admin.users.show', $user->id) }}" class="btn-icon view">
+                    <a href="{{ route('admin.users.show', $user) }}" class="btn-icon view" title="Afficher">
                         <i class="fa-solid fa-eye"></i>
                     </a>
 
-                    {{-- EDIT (Wizard) --}}
-                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn-icon edit">
+                    <a href="{{ route('admin.users.edit', $user) }}" class="btn-icon edit" title="Modifier">
                         <i class="fa-solid fa-pen"></i>
                     </a>
+                    
+                    @if($user->is_active)
+                    <form method="POST" action="{{ route('admin.users.deactivate', $user) }}" onsubmit="return confirm('Désactiver cet utilisateur ?')">
+                        @csrf
+                        @method('PATCH')
 
-                    {{-- DELETE --}}
-                    <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" onsubmit="return confirm('Delete user?')">
+                        <button type="submit" class="btn-icon off" title="Désactiver">
+                            <i class="fa-solid fa-ban"></i>
+                        </button>
+                    </form>
+                    @else
+                    <form method="POST" action="{{ route('admin.users.activate', $user) }}" onsubmit="return confirm('Activer cet utilisateur ?')">
+                        @csrf
+                        @method('PATCH')
+
+                        <button type="submit" class="btn-icon ok" title="Activer">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </form>
+                    @endif
+
+                    <form method="POST" action="{{ route('admin.users.destroy', $user) }}" onsubmit="return confirm('Supprimer cet utilisateur ?')">
                         @csrf
                         @method('DELETE')
 
-                        <button type="submit" class="btn-icon delete">
+                        <button type="submit" class="btn-icon delete" title="Supprimer">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </form>
-                    @if($user->is_active)
-                    <button class="btn-icon off" onclick="blockUser({{ $user->id }})">
-                        <i class="fa-solid fa-ban"></i>
-                    </button>
-                    @else
-                    <button class="btn-icon ok" onclick="unblockUser({{ $user->id }})">
-                        <i class="fa-solid fa-check"></i>
-                    </button>
-                    @endif
                 </td>
 
             </tr>
@@ -413,7 +449,7 @@
             @empty
 
             <tr>
-                <td colspan="9" style="text-align:center">
+                <td colspan="8" style="text-align:center">
                     Aucun utilisateur trouvé.
                 </td>
             </tr>

@@ -5,185 +5,139 @@
 @section('content')
 
 <style>
-    .page-header {
+    .ambulance-page-header {
+        align-items: center;
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
+        margin: 20px 1px;
     }
 
-    .page-title {
-        font-size: 38px;
-        font-weight: 800;
-        color: #0f172a;
+    .ambulance-page-header h1 {
+        font-size: 40px;
         margin: 0;
     }
 
-    .breadcrumb {
-        margin-top: 8px;
-        color: #64748b;
-        font-size: 14px;
-    }
-
-    .add-btn {
-        background: #2563eb;
-        color: #fff;
-        text-decoration: none;
-        padding: 14px 22px;
+    .ambulance-add-btn {
+        background: linear-gradient(135deg, #0a2f67, #1d4ed8);
         border-radius: 12px;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        transition: .3s;
+        box-shadow: 0 6px 18px rgba(37, 99, 235, .2);
+        color: #fff;
+        padding: 12px 20px;
+        text-decoration: none;
     }
 
-    .add-btn:hover {
+    .ambulance-add-btn:hover {
         background: #1d4ed8;
     }
 
-    .stats-grid {
+    .ambulance-stats {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 25px;
+        gap: 14px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-bottom: 14px;
     }
 
-    .stat-card {
+    .ambulance-card {
         background: #fff;
-        border-radius: 18px;
-        padding: 25px;
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
     }
 
-    .stat-icon {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 28px;
+    .ambulance-card h3 {
+        font-size: 36px;
+        margin: 7px 0 4px;
     }
 
-    .icon-blue {
-        background: #eaf2ff;
-        color: #2563eb;
+    .ambulance-card small {
+        color: var(--muted);
     }
 
-    .icon-green {
-        background: #e8faef;
-        color: #16a34a;
-    }
 
-    .icon-orange {
-        background: #fff3e6;
-        color: #f97316;
-    }
-
-    .icon-red {
-        background: #ffe9e9;
-        color: #ef4444;
-    }
-
-    .stat-content h2 {
-        margin: 0;
-        font-size: 34px;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .stat-content p {
-        margin-top: 5px;
-        color: #64748b;
-    }
-
-    .table-card {
+    .ambulance-panel {
         background: #fff;
-        border-radius: 18px;
-        padding: 25px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow-x: auto;
+        overflow-y: visible;
+        width: 100%;
     }
 
-    .table-header {
+    .ambulance-panel-head {
+        align-items: center;
+        border-bottom: 1px solid #edf1f9;
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
+        padding: 16px 18px;
     }
 
-    .table-title {
-        font-size: 28px;
-        font-weight: 700;
-        color: #0f172a;
+    .ambulance-panel-head h2 {
+        margin: 0;
     }
 
-    .table-tools {
+    .ambulance-tools {
         display: flex;
         gap: 10px;
     }
 
-    .filter-btn {
-        border: none;
-        background: #f1f5f9;
-        padding: 12px 18px;
+    .ambulance-filter-btn {
+        background: #fff;
+        border: 1px solid #d8e0f1;
         border-radius: 10px;
         cursor: pointer;
+        padding: 10px 14px;
     }
 
-    .search-input {
-        width: 260px;
-        height: 45px;
-        border: 1px solid #e2e8f0;
+    .ambulance-search-input {
+        border: 1px solid #d6dff0;
         border-radius: 10px;
-        padding: 0 15px;
-        outline: none;
+        min-width: 260px;
+        padding: 11px 12px;
     }
 
-    .table-responsive {
-        overflow-x: auto;
-    }
-
-    .custom-table {
-        width: 100%;
+    .ambulance-table {
         border-collapse: collapse;
+        min-width: 900px;
+        width: 100%;
     }
 
-    .custom-table thead {
-        background: #f8fafc;
-    }
-
-    .custom-table th {
+    .ambulance-table th,
+    .ambulance-table td {
+        border-bottom: 1px solid #edf1f9;
+        padding: 14px 12px;
         text-align: left;
-        padding: 16px;
-        color: #0f172a;
-        font-weight: 700;
-        font-size: 14px;
+        vertical-align: middle;
     }
 
-    .custom-table td {
-        padding: 16px;
-        border-top: 1px solid #e2e8f0;
-        color: #334155;
+    .ambulance-table th {
+        background: #fafbff;
+        color: #475569;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .ambulance-table tbody tr {
+        transition: .25s;
+    }
+
+    .ambulance-table tbody tr:hover {
+        background: #f8fbff;
     }
 
     .plate {
-        background: #edf4ff;
-        color: #2563eb;
-        padding: 8px 12px;
+        background: #eff6ff;
         border-radius: 10px;
-        font-size: 13px;
+        color: #2563eb;
+        display: inline-block;
         font-weight: 700;
+        padding: 8px 12px;
     }
 
     .badge {
-        padding: 7px 12px;
-        border-radius: 20px;
+        border-radius: 30px;
         font-size: 12px;
         font-weight: 600;
+        padding: 6px 12px;
     }
 
     .badge-success {
@@ -192,8 +146,8 @@
     }
 
     .badge-warning {
-        background: #fef3c7;
-        color: #b45309;
+        background: #fff3e7;
+        color: #e07b11;
     }
 
     .badge-danger {
@@ -201,281 +155,217 @@
         color: #dc2626;
     }
 
-    .actions {
+    .ambulance-actions {
         display: flex;
         gap: 8px;
     }
 
-    .action-btn {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        border: 1px solid #e2e8f0;
-        display: flex;
-        justify-content: center;
+    .btn-icon {
         align-items: center;
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        height: 38px;
+        justify-content: center;
         text-decoration: none;
-        transition: .3s;
+        transition: .25s;
+        width: 38px;
+    }
+
+    .btn-icon:hover {
+        transform: translateY(-2px);
     }
 
     .view {
+        background: #eff6ff;
         color: #2563eb;
     }
 
     .edit {
-        color: #f59e0b;
+        background: #fef3c7;
+        color: #d97706;
     }
 
     .delete {
-        color: #ef4444;
-        background: none;
-        cursor: pointer;
+        background: #fee2e2;
+        color: #dc2626;
     }
 
-    .empty {
-        text-align: center;
-        padding: 40px;
-        color: #64748b;
+    .ambulance-empty {
+        text-align: center !important;
     }
 
-    @media(max-width:1200px) {
-        .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
+    .ambulance-foot {
+        align-items: center;
+        color: var(--muted);
+        display: flex;
+        font-size: 14px;
+        justify-content: space-between;
+        padding: 14px 18px;
+    }
+
+    .success-message {
+        background: #dcfce7;
+        border: 1px solid #86efac;
+        border-radius: 12px;
+        color: #15803d;
+        font-weight: 700;
+        margin-bottom: 14px;
+        padding: 14px 18px;
+    }
+
+    .pagination-wrapper {
+        margin-top: 18px;
+    }
+
+    @media(max-width:1100px) {
+        .ambulance-stats {
+            grid-template-columns: 1fr 1fr;
         }
     }
+
 
     @media(max-width:768px) {
 
-        .page-header {
-            flex-direction: column;
+        .ambulance-page-header,
+        .ambulance-panel-head,
+        .ambulance-tools {
             align-items: flex-start;
-            gap: 15px;
+            flex-direction: column;
         }
 
-        .stats-grid {
+        .ambulance-stats {
             grid-template-columns: 1fr;
         }
 
-        .table-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .table-tools {
-            width: 100%;
-        }
-
-        .search-input {
+        .ambulance-search-input {
+            min-width: 100%;
             width: 100%;
         }
     }
 </style>
 
-<div class="page-header">
+<div class="ambulance-page-header">
+    <h1>Liste des ambulances</h1>
 
-    <div>
-        <h1 class="page-title">Liste des ambulances</h1>
-
-        <div class="breadcrumb">
-            Accueil / Ambulances / Liste des ambulances
-        </div>
-    </div>
-
-    <a href="{{ route('ambulances.create') }}" class="add-btn">
-        <i class="fa-solid fa-plus"></i>
-        Ajouter une ambulance
+    <a href="{{ route('ambulances.create') }}" class="ambulance-add-btn">
+        + Ajouter une ambulance
     </a>
 
 </div>
 
-<div class="stats-grid">
-
-    <div class="stat-card">
-        <div class="stat-icon icon-blue">
-            <i class="fa-solid fa-truck-medical"></i>
-        </div>
-
-        <div class="stat-content">
-            <h2>{{ $ambulances->count() }}</h2>
-            <p>Total ambulances</p>
-        </div>
+<section class="ambulance-stats">
+    <div class="ambulance-card">
+        <small>Total ambulances</small>
+        <h3>{{ $stats['total'] }}</h3>
+        <small>Toutes les ambulances</small>
     </div>
 
-    <div class="stat-card">
-        <div class="stat-icon icon-green">
-            <i class="fa-solid fa-circle-check"></i>
-        </div>
-
-        <div class="stat-content">
-            <h2>{{ $ambulances->where('status','available')->count() }}</h2>
-            <p>Disponibles</p>
-        </div>
+    <div class="ambulance-card">
+        <small>Disponibles</small>
+        <h3>{{ $stats['available'] }}</h3>
+        <small>Prêtes au service</small>
     </div>
 
-    <div class="stat-card">
-        <div class="stat-icon icon-orange">
-            <i class="fa-solid fa-wrench"></i>
-        </div>
-
-        <div class="stat-content">
-            <h2>{{ $ambulances->where('status','mission')->count() }}</h2>
-            <p>En mission</p>
-        </div>
+    <div class="ambulance-card">
+        <small>En mission</small>
+        <h3>{{ $stats['mission'] }}</h3>
+        <small>Ambulances sorties</small>
     </div>
 
-    <div class="stat-card">
-        <div class="stat-icon icon-red">
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-        </div>
-
-        <div class="stat-content">
-            <h2>{{ $ambulances->where('status','maintenance')->count() }}</h2>
-            <p>Maintenance</p>
-        </div>
+    <div class="ambulance-card">
+        <small>Maintenance</small>
+        <h3>{{ $stats['maintenance'] }}</h3>
+        <small>Hors service</small>
     </div>
+</section>
 
-</div>
 
-<div class="table-card">
+@if(session('success'))
+<div class="success-message">{{ session('success') }}</div>
+@endif
 
-    <div class="table-header">
-
-        <h2 class="table-title">
-            Liste des ambulances
-        </h2>
-
-        <div class="table-tools">
-
-            <button class="filter-btn">
+<section class="ambulance-panel">
+    <div class="ambulance-panel-head">
+        <h2>Liste des ambulances</h2>
+        <div class="ambulance-tools">
+            <button class="ambulance-filter-btn" type="button">
                 <i class="fa-solid fa-filter"></i>
                 Filtrer
             </button>
-
-            <input
-                type="text"
-                class="search-input"
-                placeholder="Rechercher...">
-
+            <input class="ambulance-search-input" type="text" placeholder="Rechercher...">
         </div>
-
     </div>
+    <table class="ambulance-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Immatriculation</th>
+                <th>Licence</th>
+                <th>Expiration</th>
+                <th>Statut</th>
+                <th>Date création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-    <div class="table-responsive">
-
-        <table class="custom-table">
-
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Type</th>
-                    <th>Immatriculation</th>
-                    <th>Licence</th>
-                    <th>Expiration</th>
-                    <th>Statut</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                @forelse($ambulances as $ambulance)
-
-                <tr>
-
-                    <td>{{ $loop->iteration }}</td>
-
-                    <td>{{ $ambulance->type }}</td>
-
-                    <td>
-                        <span class="plate">
-                            {{ $ambulance->registration }}
-                        </span>
-                    </td>
-
-                    <td>
-                        {{ $ambulance->license_number }}
-                    </td>
-
-                    <td>
-                        {{ $ambulance->license_expiry }}
-                    </td>
-
-                    <td>
-
-                        @if($ambulance->status == 'available')
-                        <span class="badge badge-success">
-                            Disponible
-                        </span>
-
-                        @elseif($ambulance->status == 'mission')
-                        <span class="badge badge-warning">
-                            En mission
-                        </span>
-
-                        @else
-                        <span class="badge badge-danger">
-                            Maintenance
-                        </span>
-                        @endif
-
-                    </td>
-
-                    <td>
-                        {{ $ambulance->created_at?->format('d/m/Y') }}
-                    </td>
-
-                    <td>
-
-                        <div class="actions">
-
-                            <a href="{{ route('ambulances.show',$ambulance->id) }}"
-                                class="action-btn view">
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
-
-                            <a href="{{ route('ambulances.edit',$ambulance->id) }}"
-                                class="action-btn edit">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-
-                            <form action="{{ route('ambulances.destroy',$ambulance->id) }}"
-                                method="POST">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit"
-                                    class="action-btn delete"
-                                    onclick="return confirm('Supprimer cette ambulance ?')">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-
-                            </form>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-                @empty
-
-                <tr>
-                    <td colspan="8" class="empty">
-                        Aucune ambulance trouvée
-                    </td>
-                </tr>
-
-                @endforelse
-
-            </tbody>
-
-        </table>
-
+        <tbody>
+            @forelse($ambulances as $ambulance)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $ambulance->type }}</td>
+                <td><span class="plate">{{ $ambulance->registration }}</span></td>
+                <td>{{ $ambulance->license_number }}</td>
+                <td>{{ $ambulance->license_expiry?->format('d/m/Y') }}</td>
+                <td>
+                    @if($ambulance->status == 'available')
+                    <span class="badge badge-success">Disponible</span>
+                    @elseif($ambulance->status == 'mission')
+                    <span class="badge badge-warning">En mission</span>
+                    @else
+                    <span class="badge badge-danger">Maintenance</span>
+                    @endif
+                </td>
+                <td>{{ $ambulance->created_at?->format('d/m/Y') }}</td>
+                <td>
+                    @if($ambulance->status == 'available')
+                    <span class="badge badge-success">Disponible</span>
+                    @elseif($ambulance->status == 'mission')
+                    <span class="badge badge-warning">En mission</span>
+                    @else
+                    <span class="badge badge-danger">Maintenance</span>
+                    @endif
+                <td>{{ $ambulance->created_at?->format('d/m/Y') }}</td>
+                <td>
+                    <div class="ambulance-actions">
+                        <a href="{{ route('ambulances.show', $ambulance->id) }}" class="btn-icon view">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <a href="{{ route('ambulances.edit', $ambulance->id) }}" class="btn-icon edit">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <form action="{{ route('ambulances.destroy', $ambulance->id) }}" method="POST" onsubmit="return confirm('Supprimer cette ambulance ?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-icon delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="8" class="ambulance-empty">Aucune ambulance trouvée</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+    <div class="ambulance-foot">
+        <span>Total : {{ $stats['total'] }} ambulance(s)</span>
+        {{ $ambulances->links() }}
     </div>
-
-</div>
-
+</section>
 @endsection

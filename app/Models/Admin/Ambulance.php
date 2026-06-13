@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ambulance extends Model
 {
-    protected $fillable = ['type', 'registration', 'license_number', 'license_expiry', 'status',];
+    use HasFactory;
+
+    protected $fillable = [
+        'vehicle_type',
+        'vehicle_plate',
+        'license_number',
+        'license_expiry',
+        'status',
+    ];
+
+    protected $casts = [
+        'license_expiry' => 'date',
+    ];
 }
