@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AmbulanceController;
 use App\Http\Controllers\Admin\MedicineController;
 use App\Http\Controllers\Admin\StockMovementController;
+use App\Http\Controllers\Admin\AmbulanceStockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +146,14 @@ Route::prefix('admin')->group(function () {
             '/stock/{stockEntry}/pdf',
             [StockMovementController::class, 'pdf']
         )->name('admin.stock.pdf');
+
+
+        Route::get('/admin/ambulance-stock/create', [AmbulanceStockController::class, 'create'])
+            ->name('admin.ambulance-stock.create');
+        Route::post('/admin/ambulance-stock/standard', [AmbulanceStockController::class, 'storeStandard'])
+            ->name('admin.ambulance-stock.standard');
+        Route::post('/admin/ambulance-stock/fill', [AmbulanceStockController::class, 'storeFill'])
+            ->name('admin.ambulance-stock.fill');
     });
 
 });

@@ -30,4 +30,14 @@ class Ambulance extends Model
     {
         return $this->vehicle_plate;
     }
+
+    public function medicineStocks()
+    {
+        return $this->hasMany(AmbulanceMedicineStock::class);
+    }
+
+    public function stockStandards()
+    {
+        return $this->hasMany(AmbulanceStockStandard::class);
+    }
 }
