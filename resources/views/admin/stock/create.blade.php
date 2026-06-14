@@ -103,7 +103,7 @@
     .items-head,
     .stock-row {
         display: grid;
-        grid-template-columns: minmax(280px, 1.35fr) minmax(210px, .85fr) minmax(180px, 1fr) 62px;
+        grid-template-columns: minmax(280px, 1.35fr) minmax(180px, 1fr) 62px;
         gap: 28px;
         align-items: center;
     }
@@ -406,7 +406,6 @@
         <div class="items-box">
             <div class="items-head">
                 <div>Nom médicament *</div>
-                <div>Catégorie *</div>
                 <div>Quantité *</div>
                 <div></div>
             </div>
@@ -431,28 +430,7 @@
 </div>
 
 <script>
-    const medicines = [{
-            name: 'Doliprane 1000 mg',
-            generic: 'Paracétamol',
-            package: 'Boîte de 8 comprimés',
-            category: 'Antalgique',
-            image: '/images/logo.png'
-        },
-        {
-            name: 'Amoxicilline 1 g',
-            generic: 'Amoxicilline',
-            package: 'Boîte de 12 comprimés',
-            category: 'Antibiotique',
-            image: '/images/icons/medical-staff.png'
-        },
-        {
-            name: 'Ibuprofène 400 mg',
-            generic: 'Ibuprofène',
-            package: 'Boîte de 20 comprimés',
-            category: 'Anti-inflammatoire',
-            image: '/images/icons/aujourdhui.png'
-        },
-    ];
+    const medicines = @json($medicines);
 
     const rows = document.getElementById('rows');
     const addRowBtn = document.getElementById('addRow');
@@ -460,29 +438,76 @@
     const status = document.getElementById('status');
     const saveBtn = document.getElementById('saveBtn');
 
+    function escapeHtml(value = '') {
+        return String(value).replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;',
+        } [char]));
+    }
+
+    function selectedMedicineIds(currentSelect = null) {
+        return [...rows.querySelectorAll('select[name="medicine_id[]"]')]
+            .filter((select) => select !== currentSelect)
+            .map((select) => select.value)
+            .filter(Boolean);
+    }
+
+    function refreshMedicineOptions() {
+        rows.querySelectorAll('select[name="medicine_id[]"]').forEach((select) => {
+            const selectedIds = selectedMedicineIds(select);
+            [...select.options].forEach((option) => {
+                option.hidden = selectedIds.includes(option.value);
+            });
+        });
+    }
+
+    function firstAvailableMedicineIndex() {
+        const usedIds = selectedMedicineIds();
+        return medicines.findIndex((medicine) => !usedIds.includes(String(medicine.id)));
+    }
+
     function rowTemplate(index = 0, quantity = '') {
-        const options = medicines.map((medicine, medicineIndex) => (
-            `<option value="${medicine.name}" data-index="${medicineIndex}" ${medicineIndex === index ? 'selected' : ''}>${medicine.name}</option>`
-        )).join('');
         const medicine = medicines[index];
+        const options = medicines.map((medicineItem, medicineIndex) => (
+            `<option value="${escapeHtml(medicineItem.id)}" data-index="${medicineIndex}" ${medicineIndex === index ? 'selected' : ''}>${escapeHtml(medicineItem.name)}</option>`
+        )).join('');
+
+        if (!medicine) {
+            return `<div class="stock-row">
+                <div class="medicine-select empty">
+                    <div>Aucun médicament disponible</div>
+                </div>
+                <input name="quantity[]" type="number" min="1" placeholder="Quantité" value="${escapeHtml(quantity)}" disabled>
+                <button type="button" class="remove-row" title="Supprimer cette ligne"><i class="fa-regular fa-trash-can"></i></button>
+            </div>`;
+        }
 
         return `<div class="stock-row">
             <div class="medicine-select">
-                <img class="medicine-thumb" src="${medicine.image}" alt="">
+             <img class="medicine-thumb" src="${escapeHtml(medicine.image)}" alt="">
                 <div>
-                    <select name="medicine_name[]" required>${options}</select>
-                    <small>${medicine.generic}<br>${medicine.package}</small>
+                <select name="medicine_id[]" required>${options}</select>
+                    <small>${escapeHtml(medicine.generic)}<br>${escapeHtml(medicine.package)}</small>
                 </div>
             </div>
-            <input name="category[]" value="${medicine.category}" readonly required>
-            <input name="quantity[]" type="number" min="1" placeholder="Quantité" value="${quantity}" required>
+            <input name="quantity[]" type="number" min="1" placeholder="Quantité" value="${escapeHtml(quantity)}" required>
             <button type="button" class="remove-row" title="Supprimer cette ligne"><i class="fa-regular fa-trash-can"></i></button>
         </div>`;
     }
 
-    function addRow(index = 0, quantity = '') {
-        rows.insertAdjacentHTML('beforeend', rowTemplate(index, quantity));
+    function addRow(index = null, quantity = '') {
+        const medicineIndex = index ?? firstAvailableMedicineIndex();
+        if (medicineIndex === -1 && medicines.length) {
+            setStatus('Tous les médicaments disponibles sont déjà sélectionnés.', true);
+            return;
+        }
+
+        rows.insertAdjacentHTML('beforeend', rowTemplate(medicineIndex, quantity));
         refreshRemoveButtons();
+        refreshMedicineOptions();
     }
 
     function refreshRemoveButtons() {
@@ -495,28 +520,29 @@
     }
 
     function updateMedicineDetails(row) {
-        const selected = row.querySelector('select[name="medicine_name[]"]').selectedOptions[0];
+        const selected = row.querySelector('select[name="medicine_id[]"]').selectedOptions[0];
         const medicine = medicines[Number(selected.dataset.index)] ?? medicines[0];
         row.querySelector('.medicine-thumb').src = medicine.image;
-        row.querySelector('small').innerHTML = `${medicine.generic}<br>${medicine.package}`;
-        row.querySelector('input[name="category[]"]').value = medicine.category;
+        row.querySelector('small').replaceChildren(
+            document.createTextNode(medicine.generic),
+            document.createElement('br'),
+            document.createTextNode(medicine.package)
+        );
     }
 
     function collectItems() {
         return [...rows.querySelectorAll('.stock-row')].map((row) => ({
-            medicine_name: row.querySelector('select[name="medicine_name[]"]').value,
-            category: row.querySelector('input[name="category[]"]').value,
+            medicine_id: Number(row.querySelector('select[name="medicine_id[]"]')?.value) || 0,
             quantity: Number(row.querySelector('input[name="quantity[]"]').value) || 0,
-        })).filter((item) => item.medicine_name && item.category && item.quantity > 0);
+        })).filter((item) => item.medicine_id && item.quantity > 0);
     }
-
-    addRow(0, 10);
-    addRow(1, 5);
+    addRow(0, '');
 
     addRowBtn.addEventListener('click', () => addRow());
     rows.addEventListener('change', (event) => {
-        if (event.target.matches('select[name="medicine_name[]"]')) {
+        if (event.target.matches('select[name="medicine_id[]"]')) {
             updateMedicineDetails(event.target.closest('.stock-row'));
+            refreshMedicineOptions();
         }
     });
     rows.addEventListener('click', (event) => {
@@ -529,6 +555,7 @@
         }
         button.closest('.stock-row').remove();
         refreshRemoveButtons();
+        refreshMedicineOptions();
     });
 
     function setStatus(message, isError = false) {
@@ -542,6 +569,10 @@
         if (!form.checkValidity()) {
             form.reportValidity();
             setStatus('Veuillez compléter correctement les champs obligatoires.', true);
+            return;
+        }
+        if (!collectItems().length) {
+            setStatus('Veuillez sélectionner au moins un médicament disponible.', true);
             return;
         }
         saveBtn.disabled = true;
