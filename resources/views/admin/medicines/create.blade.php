@@ -122,7 +122,7 @@
 
     .medicine-layout {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 360px;
+        grid-template-columns: minmax(0, 1fr) 300px;
         gap: 32px;
         padding: 28px 28px 22px;
     }
@@ -252,7 +252,7 @@
     .photo-panel {
         border: 1px solid #e1e6f1;
         border-radius: 12px;
-        padding: 24px 22px 22px;
+        padding: 20px 18px 18px;
         align-self: start;
         background: #fff;
     }
@@ -260,14 +260,14 @@
     .upload-zone {
         display: grid;
         place-items: center;
-        min-height: 256px;
-        margin-top: 26px;
+        min-height: 180px;
+        margin-top: 18px;
         border: 2px dashed #cbd5ee;
         border-radius: 12px;
         background: #fbfcff;
         cursor: pointer;
         text-align: center;
-        padding: 22px;
+        padding: 18px;
         transition: border-color .2s, background .2s;
     }
 
@@ -283,13 +283,13 @@
     }
 
     .preview-empty-icon {
-        width: 100px;
-        height: 100px;
+        width: 72px;
+        height: 72px;
         border-radius: 50%;
-        margin: 0 auto 24px;
+        margin: 0 auto 16px;
         background: #e7e5ff;
         color: var(--medicine-primary);
-        font-size: 40px;
+        font-size: 30px;
     }
 
     .upload-zone strong {
@@ -306,7 +306,7 @@
     }
 
     .preview-wrap {
-        margin-top: 34px;
+        margin-top: 22px;
     }
 
     .preview-wrap h3 {
@@ -316,7 +316,7 @@
 
     .image-preview {
         width: 100%;
-        min-height: 252px;
+        min-height: 170px;
         border: 1px solid #e2e8f5;
         border-radius: 9px;
         background: linear-gradient(135deg, #f8fbff, #eef2ff);
@@ -327,7 +327,7 @@
 
     .image-preview img {
         width: 100%;
-        height: 252px;
+        height: 170px;
         object-fit: cover;
         display: none;
     }
@@ -338,6 +338,26 @@
 
     .image-preview.has-image .preview-help {
         display: none;
+    }
+
+    .remove-photo-btn {
+        width: 100%;
+        margin-top: 12px;
+        min-height: 42px;
+        border: 1px solid #fecaca;
+        border-radius: 8px;
+        background: #fff5f5;
+        color: #b91c1c;
+        font-weight: 800;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .remove-photo-btn.is-visible {
+        display: inline-flex;
     }
 
     .medicine-actions {
@@ -469,7 +489,19 @@
         </div>
     </header>
 
-    <form id="medicineForm" class="medicine-card">
+    @if ($errors->any())
+    <div class="status err" style="display:block;margin:0 0 24px;">
+        <strong>Veuillez corriger les erreurs suivantes :</strong>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form id="medicineForm" class="medicine-card" action="{{ route('medicines.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="medicine-layout">
             <div>
                 <section class="form-section">
@@ -479,7 +511,7 @@
                             <label for="name" class="required">Nom du médicament</label>
                             <div class="control">
                                 <span class="input-icon"><i class="fa-solid fa-capsules"></i></span>
-                                <input id="name" name="name" required maxlength="120" placeholder="Ex : Paracétamol 500mg">
+                                <input id="name" name="name" value="{{ old('name') }}" required maxlength="120" placeholder="Ex : Paracétamol 500mg">
                             </div>
                         </div>
                         <div class="field">
@@ -488,14 +520,24 @@
                                 <span class="input-icon"><i class="fa-solid fa-prescription-bottle"></i></span>
                                 <select id="unit" name="unit" required>
                                     <option value="">Sélectionnez l'unité</option>
-                                    <option>Comprimé</option>
-                                    <option>Capsule</option>
-                                    <option>Flacon</option>
-                                    <option>Ampoule</option>
-                                    <option>Sachet</option>
-                                    <option>Tube</option>
-                                    <option>mg</option>
-                                    <option>ml</option>
+                                    @foreach([
+                                    'Pièce',
+                                    'Boîte',
+                                    'Paire',
+                                    'Rouleau',
+                                    'Paquet',
+                                    'Flacon',
+                                    'Ampoule',
+                                    'Poche',
+                                    'Tube',
+                                    'Sachet',
+                                    'ml',
+                                    'Litre',
+                                    'mg',
+                                    'g'
+                                    ] as $unit)
+                                    <option value="{{ $unit }}" @selected(old('unit')===$unit)>{{ $unit }}</option>
+                                    @endforeach
                                 </select>
                                 <span class="select-chevron"><i class="fa-solid fa-chevron-down"></i></span>
                             </div>
@@ -511,7 +553,7 @@
                                     <option value="">Sélectionnez une catégorie</option>
 
                                     @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">
+                                    <option value="{{ $category->id }}" @selected((int) old('category_id')===$category->id)>
                                         {{ $category->name }}
                                     </option>
                                     @endforeach
@@ -532,14 +574,14 @@
                             <label for="quantity" class="required">Quantité actuelle</label>
                             <div class="control">
                                 <span class="input-icon"><i class="fa-solid fa-cube"></i></span>
-                                <input id="quantity" name="quantity" type="number" min="0" required placeholder="Ex : 250">
+                                <input id="quantity" name="quantity" type="number" min="0" value="{{ old('quantity') }}" required placeholder="Ex : 250">
                             </div>
                         </div>
                         <div class="field">
                             <label for="min_quantity" class="required">Stock minimum</label>
                             <div class="control">
                                 <span class="input-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
-                                <input id="min_quantity" name="min_quantity" type="number" min="0" required placeholder="Ex : 50">
+                                <input id="min_quantity" name="minimum_quantity" type="number" min="0" value="{{ old('minimum_quantity') }}" required placeholder="Ex : 50">
                             </div>
                         </div>
                     </div>
@@ -557,7 +599,7 @@
             <aside class="photo-panel">
                 <h2 class="section-title"><span class="section-icon"><i class="fa-solid fa-camera"></i></span>Photo du médicament</h2>
                 <label class="upload-zone" for="image">
-                    <input type="file" id="image" accept="image/png,image/jpeg,image/jpg">
+                    <input type="file" id="image" name="photo" accept="image/png,image/jpeg,image/jpg">
                     <span>
                         <span class="preview-empty-icon"><i class="fa-regular fa-image"></i></span>
                         <strong>Cliquez pour ajouter une photo</strong>
@@ -570,6 +612,9 @@
                         <img id="previewImage" alt="Aperçu du médicament">
                         <span class="preview-help">Aucune photo sélectionnée</span>
                     </div>
+                    <button type="button" class="remove-photo-btn" id="removePhotoBtn">
+                        <i class="fa-solid fa-trash-can"></i> Supprimer la photo
+                    </button>
                 </div>
             </aside>
         </div>
@@ -582,12 +627,12 @@
 </div>
 
 <script>
-    const form = document.getElementById('medicineForm');
     const status = document.getElementById('status');
-    const saveBtn = document.getElementById('saveBtn');
     const image = document.getElementById('image');
     const preview = document.getElementById('imagePreview');
     const previewImage = document.getElementById('previewImage');
+    const removePhotoBtn = document.getElementById('removePhotoBtn');
+    let previewUrl = null;
     image.addEventListener('change', () => {
         const file = image.files?.[0];
         if (!file) {
@@ -602,65 +647,36 @@
             return;
         }
 
-        previewImage.src = URL.createObjectURL(file);
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+        }
+
+        previewUrl = URL.createObjectURL(file);
+        previewImage.src = previewUrl;
         preview.classList.add('has-image');
+        removePhotoBtn.classList.add('is-visible');
         setStatus('');
     });
 
+    removePhotoBtn.addEventListener('click', () => {
+        image.value = '';
+        clearPreview();
+        setStatus('Photo supprimée.');
+    });
+
     function clearPreview() {
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+            previewUrl = null;
+        }
         previewImage.removeAttribute('src');
         preview.classList.remove('has-image');
+        removePhotoBtn.classList.remove('is-visible');
     }
 
     function setStatus(message, isError = false) {
         status.textContent = message;
         status.className = message ? 'status ' + (isError ? 'err' : 'ok') : 'status';
     }
-
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        setStatus('');
-        const quantity = Number(form.quantity.value);
-        const minQuantity = Number(form.min_quantity.value);
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            setStatus('Veuillez corriger les champs obligatoires.', true);
-            return;
-        }
-        if (quantity < minQuantity) {
-            setStatus('La quantité actuelle ne doit pas être inférieure à la quantité minimum.', true);
-            return;
-        }
-        saveBtn.disabled = true;
-        setStatus('Enregistrement en cours...');
-
-        const payload = {
-            name: form.name.value.trim(),
-            unit: form.unit.value,
-            quantity,
-            min_quantity: minQuantity
-        };
-        try {
-            const response = await fetch('/api/medicines', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify(payload)
-            });
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.message || 'Erreur lors de l\'enregistrement.');
-            setStatus('Médicament enregistré avec succès.');
-            form.reset();
-            clearPreview();
-        } catch (error) {
-            setStatus(error.message || 'Une erreur inattendue est survenue.', true);
-        } finally {
-            saveBtn.disabled = false;
-        }
-    });
 </script>
 @endsection

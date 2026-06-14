@@ -126,11 +126,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/medicines', [MedicineController::class, 'index'])->name('medicines.index');
     Route::get('/medicines/create', [MedicineController::class, 'create'])
         ->name('medicines.create');
+    Route::post('/medicines', [MedicineController::class, 'store'])->name('medicines.store');
 
     Route::get(
         '/stock/',
         [StockMovementController::class, 'stockIn']
     )->name('admin.stock.index');
+    Route::get(
+        '/stock/create',
+        [StockMovementController::class, 'createStockIn']
+    )->name('admin.stock.create');
 
 
 });

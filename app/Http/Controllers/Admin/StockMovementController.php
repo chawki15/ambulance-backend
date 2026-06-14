@@ -17,6 +17,12 @@ class StockMovementController extends Controller
         return view('admin.stock.index');
     }
 
+    public function createStockIn()
+    {
+        return view('admin.stock.create');
+    }
+
+
     public function storeStockIn(Request $request)
     {
         $request->validate([

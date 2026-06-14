@@ -13,18 +13,26 @@ return new class extends Migration
     {
         Schema::create('stock_movements', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('medicine_id')
-                ->constrained()
-                ->onDelete('cascade');
-            $table->enum('type', [
-                'in',
-                'out'
-            ]);
+                ->constrained('medicines')
+                ->cascadeOnDelete();
+
+            $table->foreignId('stock_entry_id')
+                ->nullable()
+                ->constrained('stock_entries')
+                ->nullOnDelete();
+
+            $table->enum('type', ['in', 'out']);
+
             $table->integer('quantity');
+
             $table->string('reason')->nullable();
+
             $table->foreignId('created_by')
                 ->constrained('users')
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

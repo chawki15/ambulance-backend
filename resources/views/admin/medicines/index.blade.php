@@ -149,6 +149,22 @@
         transform: translateY(-1px);
     }
 
+    .alert-success {
+        margin-bottom: 14px;
+        padding: 14px 16px;
+        border: 1px solid #86efac;
+        border-radius: 10px;
+        background: #dcfce7;
+        color: #166534;
+        font-weight: 700;
+    }
+
+    .empty-state {
+        text-align: center;
+        color: var(--muted);
+        padding: 26px 12px;
+    }
+
     @media (max-width:1100px) {
         .stats {
             grid-template-columns: 1fr 1fr;
@@ -192,18 +208,21 @@
         Ajouter un médicament
     </a>
 </div>
+@if (session('success'))
+<div class="alert-success">{{ session('success') }}</div>
+@endif
 <section class="stats">
     <div class="card"><small>Total médicaments</small>
-        <h3>248</h3><small>Tous enregistrés</small>
+        <h3>{{ $stats['total'] }}</h3><small>Tous enregistrés</small>
     </div>
     <div class="card"><small>En stock</small>
-        <h3>186</h3><small>Disponibles</small>
+        <h3>{{ $stats['available'] }}</h3><small>Disponibles</small>
     </div>
     <div class="card"><small>Stock faible</small>
-        <h3>32</h3><small>À surveiller</small>
+        <h3>{{ $stats['low'] }}</h3><small>À surveiller</small>
     </div>
     <div class="card"><small>Rupture</small>
-        <h3>30</h3><small>Indisponibles</small>
+        <h3>{{ $stats['out'] }}</h3><small>Indisponibles</small>
     </div>
 </section>
 
@@ -230,31 +249,30 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Paracétamol 500mg</td>
-            <td>Paracétamol</td>
-            <td>Antalgique</td>
-            <td>120</td>
-            <td><span class="badge ok">En stock</span></td>
-            <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
-        </tr>
-        <tr>
-            <td>Ibuprofène 400mg</td>
-            <td>Ibuprofène</td>
-            <td>Anti-inflammatoire</td>
-            <td>8</td>
-            <td><span class="badge low">Stock faible</span></td>
-            <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
-        </tr>
-        <tr>
-            <td>Metformine 850mg</td>
-            <td>Metformine</td>
-            <td>Diabète</td>
-            <td>0</td>
-            <td><span class="badge out">Rupture</span></td>
-            <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
-        </tr>
+        @forelse ($medicines as $medicine)
+        @php
+        $statusClass = $medicine->quantity === 0 ? 'out' : ($medicine->quantity <= $medicine->minimum_quantity ? 'low' : 'ok');
+            $statusLabel = $medicine->quantity === 0 ? 'Rupture' : ($medicine->quantity <= $medicine->minimum_quantity ? 'Stock faible' : 'En stock');
+                @endphp
+                <tr>
+                    <td>{{ $medicine->name }}</td>
+                    <td>{{ $medicine->unit }}</td>
+                    <td>{{ $medicine->category?->name ?? '—' }}</td>
+                    <td>{{ $medicine->quantity }}</td>
+                    <td><span class="badge {{ $statusClass }}">{{ $statusLabel }}</span></td>
+                    <td class="actions"><button>👁</button><button>✏️</button><button>🗑</button></td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="empty-state">Aucun médicament enregistré.</td>
+                </tr>
+                @endforelse
     </tbody>
 </table>
-<div class="foot"><span>Affichage de 1 à 3 sur 248 résultats</span><span>Page 1</span></div>
+<div class="foot">
+    <span>Affichage de {{ $medicines->firstItem() ?? 0 }} à {{ $medicines->lastItem() ?? 0 }} sur {{ $medicines->total() }} résultats</span>
+    <span>Page {{ $medicines->currentPage() }}</span>
+</div>
+
+{{ $medicines->links() }}
 @endsection
