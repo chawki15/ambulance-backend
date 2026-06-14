@@ -128,14 +128,23 @@ Route::prefix('admin')->group(function () {
         ->name('medicines.create');
     Route::post('/medicines', [MedicineController::class, 'store'])->name('medicines.store');
 
-    Route::get(
-        '/stock/',
-        [StockMovementController::class, 'stockIn']
-    )->name('admin.stock.index');
-    Route::get(
-        '/stock/create',
-        [StockMovementController::class, 'createStockIn']
-    )->name('admin.stock.create');
-
+    Route::middleware('auth')->group(function () {
+        Route::get(
+            '/stock/',
+            [StockMovementController::class, 'stockIn']
+        )->name('admin.stock.index');
+        Route::get(
+            '/stock/create',
+            [StockMovementController::class, 'createStockIn']
+        )->name('admin.stock.create');
+        Route::post(
+            '/stock/in',
+            [StockMovementController::class, 'storeStockIn']
+        )->name('admin.stock.store');
+        Route::get(
+            '/stock/{stockEntry}/pdf',
+            [StockMovementController::class, 'pdf']
+        )->name('admin.stock.pdf');
+    });
 
 });

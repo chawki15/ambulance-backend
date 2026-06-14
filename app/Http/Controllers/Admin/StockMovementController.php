@@ -35,6 +35,7 @@ class StockMovementController extends Controller
             ->orderBy('name')
             ->get()
             ->map(fn(Medicine $medicine) => [
+                'id' => $medicine->id,
                 'name' => $medicine->name,
                 'generic' => $medicine->unit,
                 'package' => 'Stock actuel : ' . $medicine->quantity,
@@ -56,13 +57,21 @@ class StockMovementController extends Controller
             'reason' => 'nullable|string|max:255',
         ]);
 
+        $userId = $request->user()?->id;
+
+        if (!$userId) {
+            return response()->json([
+                'message' => 'Vous devez être connecté pour enregistrer une entrée de stock.',
+            ], 401);
+        }
+
         // هنا تقوم بحفظ البيانات في قاعدة البيانات
-        $entry = DB::transaction(function () use ($request) {
+        $entry = DB::transaction(function () use ($request, $userId) {
             $entry = StockEntry::create([
                 'entry_number' => $this->nextEntryNumber(),
                 'movement_date' => $request->date('movement_date')->toDateString(),
                 'reason' => $request->input('reason'),
-                'created_by' => $request->user()->id,
+                'created_by' => $userId,
             ]);
 
             foreach ($request->input('items') as $item) {
@@ -77,7 +86,7 @@ class StockMovementController extends Controller
                     'type' => 'in',
                     'quantity' => $item['quantity'],
                     'reason' => $request->input('reason'),
-                    'created_by' => $request->user()->id,
+                    'created_by' => $userId,
                 ]);
 
                 Medicine::whereKey($item['medicine_id'])->increment('quantity', $item['quantity']);
@@ -91,6 +100,13 @@ class StockMovementController extends Controller
             'entry_number' => $entry->entry_number,
             'message' => 'Entrée de stock enregistrée avec succès.'
         ]);
+    }
+
+    public function pdf(StockEntry $stockEntry)
+    {
+        $entry = $stockEntry->load(['creator', 'items.medicine']);
+
+        return view('admin.stock.pdf', compact('entry'));
     }
 
     private function nextEntryNumber(): string

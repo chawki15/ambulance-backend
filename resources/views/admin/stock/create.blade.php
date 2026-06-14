@@ -583,7 +583,7 @@
             items: collectItems(),
         };
         try {
-            const res = await fetch('/api/stock-movements/in', {
+            const res = await fetch(@json(route('admin.stock.store')), {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -596,6 +596,7 @@
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || 'Erreur lors de l\'enregistrement.');
             setStatus('Entrée de stock enregistrée avec succès.');
+            window.location.href = data.redirect_url || @json(route('admin.stock.index'));
         } catch (err) {
             setStatus(err.message || 'Une erreur inattendue est survenue.', true);
         } finally {

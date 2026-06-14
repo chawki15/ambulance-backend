@@ -11,24 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('driver_medicine_stocks', function (Blueprint $table) {
+        Schema::create('ambulance_medicine_stocks', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('driver_id')
-                ->constrained('driver')
+            $table->foreignId('ambulance_id')
+                ->constrained('ambulances')
                 ->cascadeOnDelete();
 
             $table->foreignId('medicine_id')
                 ->constrained('medicines')
                 ->cascadeOnDelete();
 
+            // الكمية الحالية داخل الإسعاف
             $table->integer('quantity')->default(0);
-            $table->integer('minimum_quantity')->default(0);
+
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();
 
-            $table->unique(['driver_id', 'medicine_id']);
+            $table->unique(['ambulance_id', 'medicine_id']);
         });
     }
 

@@ -249,70 +249,39 @@
                         <th>Date du mouvement</th>
                         <th>Créé par</th>
                         <th class="center">Nombre d’articles</th>
-                        <th class="center">Total quantité</th>
-                        <th>Raison</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse ($entries as $entry)
                     <tr>
-                        <td>EN-00025</td>
-                        <td>14/05/2025</td>
-                        <td><span class="creator"><i class="fa-regular fa-circle-user"></i> Admin</span></td>
-                        <td class="center">2</td>
-                        <td class="center">15</td>
-                        <td>Achat</td>
+                        <td>{{ $entry->entry_number }}</td>
+                        <td>{{ $entry->movement_date?->format('d/m/Y') }}</td>
+                        <td>
+                            <span class="creator"><i class="fa-regular fa-circle-user"></i> {{ $entry->creator?->name ?? 'Utilisateur supprimé' }}</span>
+                        </td>
+                        <td class="center">{{ $entry->items_count }}</td>
                         <td class="actions-cell">
-                            <button type="button" class="btn small view"><i class="fa-regular fa-eye"></i> Voir</button>
-                            <button type="button" class="btn small pdf"><i class="fa-regular fa-file-pdf"></i> PDF</button>
+                            <a class="btn small pdf" href="{{ route('admin.stock.pdf', $entry) }}" target="_blank" rel="noopener"><i class="fa-regular fa-file-pdf"></i> PDF</a>
                         </td>
                     </tr>
+                    @empty
                     <tr>
-                        <td>EN-00024</td>
-                        <td>13/05/2025</td>
-                        <td><span class="creator"><i class="fa-regular fa-circle-user"></i> Admin</span></td>
-                        <td class="center">3</td>
-                        <td class="center">30</td>
-                        <td>Retour fournisseur</td>
-                        <td class="actions-cell">
-                            <button type="button" class="btn small view"><i class="fa-regular fa-eye"></i> Voir</button>
-                            <button type="button" class="btn small pdf"><i class="fa-regular fa-file-pdf"></i> PDF</button>
-                        </td>
+                        <td colspan="7" class="center">Aucune entrée de stock enregistrée.</td>
                     </tr>
-                    <tr>
-                        <td>EN-00023</td>
-                        <td>12/05/2025</td>
-                        <td><span class="creator"><i class="fa-regular fa-circle-user"></i> Admin</span></td>
-                        <td class="center">1</td>
-                        <td class="center">8</td>
-                        <td>Ajustement</td>
-                        <td class="actions-cell">
-                            <button type="button" class="btn small view"><i class="fa-regular fa-eye"></i> Voir</button>
-                            <button type="button" class="btn small pdf"><i class="fa-regular fa-file-pdf"></i> PDF</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>EN-00022</td>
-                        <td>10/05/2025</td>
-                        <td><span class="creator"><i class="fa-regular fa-circle-user"></i> Admin</span></td>
-                        <td class="center">4</td>
-                        <td class="center">45</td>
-                        <td>Achat</td>
-                        <td class="actions-cell">
-                            <button type="button" class="btn small view"><i class="fa-regular fa-eye"></i> Voir</button>
-                            <button type="button" class="btn small pdf"><i class="fa-regular fa-file-pdf"></i> PDF</button>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
         <div class="table-footer">
-            <span>Affichage de 1 à 4 sur 4 entrées</span>
-            <div class="pagination" aria-label="Pagination des entrées de stock">
-                <a class="page-btn" href="#" aria-label="Page précédente"><i class="fa-solid fa-chevron-left"></i></a>
-                <a class="page-btn active" href="#" aria-current="page">1</a>
-                <a class="page-btn" href="#" aria-label="Page suivante"><i class="fa-solid fa-chevron-right"></i></a>
-            </div>
+            <span>
+                @if ($entries->total())
+                Affichage de {{ $entries->firstItem() }} à {{ $entries->lastItem() }} sur {{ $entries->total() }} entrées
+                @else
+                Affichage de 0 entrée
+                @endif
+            </span>
+            {{ $entries->links() }}
         </div>
     </section>
 </div>
