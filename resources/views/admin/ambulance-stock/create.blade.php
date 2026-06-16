@@ -255,6 +255,15 @@
         margin-bottom: 12px;
     }
 
+    .error {
+        padding: 13px 16px;
+        border-radius: 10px;
+        background: #fee2e2;
+        color: #991b1b;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
     .notice {
         margin-top: 16px;
         border: 1px solid #bbf7d0;
@@ -289,9 +298,7 @@
     }
 </style>
 
-<form action="{{ route('admin.ambulance-stock.standard') }}"
-    method="POST">
-    @csrf
+<div class="ambulance-stock-page">
     <div class="card">
         <nav class="breadcrumb" aria-label="Fil d'Ariane">
             <a href="{{ route('admin.dashboard') }}">Ambulances</a><span>›</span><span>Stocks</span><span>›</span><span>Remplissage initial</span>
@@ -302,6 +309,10 @@
 
     @if (session('success'))
     <div class="success">{{ session('success') }}</div>
+    @endif
+
+    @if ($errors->any())
+    <div class="error">{{ $errors->first() }}</div>
     @endif
 
     <div class="card top-grid">
@@ -320,75 +331,93 @@
         <div class="info">Le stock standard contient<strong>{{ $items->count() }} produits</strong></div>
     </div>
 
-    <div class="actions-grid">
-        <section class="choice primary">
-            <div class="choice-icon"><i class="fa-regular fa-file-lines"></i></div>
-            <div>
-                <h3>Charger le stock standard</h3>
-                <p>Charge automatiquement les produits actifs avec leurs quantités requises.</p>
-                <button type="button" class="btn primary" id="loadStandard">Charger le stock standard</button>
-            </div>
-        </section>
-        <section class="choice">
-            <div class="choice-icon"><i class="fa-solid fa-pen"></i></div>
-            <div>
-                <h3>Saisir manuellement</h3>
-                <p>Ajoutez ou ajustez manuellement les quantités à charger dans cette ambulance.</p>
-                <button type="button" class="btn" id="manualEntry">Saisir manuellement</button>
-            </div>
-        </section>
-    </div>
+    <form action="{{ route('admin.ambulance-stock.standard') }}" method="POST">
+        @csrf
+        <input type="hidden" name="ambulance_id" value="{{ $selectedAmbulance?->id }}">
+        <div class="actions-grid">
+            <section class="choice primary">
+                <div class="choice-icon"><i class="fa-regular fa-file-lines"></i></div>
+                <div>
+                    <h3>Charger le stock standard</h3>
+                    <p>Charge automatiquement les produits actifs avec leurs quantités requises.</p>
+                    <button type="submit" class="btn primary" @disabled(! $selectedAmbulance)>Charger le stock standard</button>
+                </div>
+            </section>
+            <section class="choice">
+                <div class="choice-icon"><i class="fa-solid fa-pen"></i></div>
+                <div>
+                    <h3>Saisir manuellement</h3>
+                    <p>Ajoutez ou ajustez manuellement les quantités à charger dans cette ambulance.</p>
+                    <button type="button" class="btn" id="manualEntry">Saisir manuellement</button>
+                </div>
+            </section>
+        </div>
+    </form>
 
-    <div class="content-grid">
-        <section class="card">
-            <div class="table-tools">
-                <h2>Produits du stock standard</h2>
-                <input class="search" id="searchProduct" type="search" placeholder="Rechercher un produit...">
-            </div>
-            @foreach ($items->groupBy('category') as $category => $categoryItems)
-            <div class="category">
-                <div class="category-title"><span>{{ $category }}</span><span>{{ $categoryItems->count() }} produit(s)</span></div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produit</th>
-                            <th>Unité</th>
-                            <th>Quantité standard</th>
-                            <th>Quantité à charger</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($categoryItems as $item)
-                        <tr class="product-row" data-name="{{ Str::lower($item['name']) }}">
-                            <td class="product"><img class="thumb" src="{{ $item['image'] }}" alt=""> {{ $item['name'] }}</td>
-                            <td>{{ $item['unit'] }}</td>
-                            <td>{{ $item['standard_quantity'] }}</td>
-                            <td>
-                                <input type="hidden" name="items[{{ $loop->parent->index }}{{ $loop->index }}][medicine_id]" value="{{ $item['id'] }}">
-                                <input type="hidden" name="items[{{ $loop->parent->index }}{{ $loop->index }}][standard_quantity]" value="{{ $item['standard_quantity'] }}">
-                                <input class="qty-input" name="items[{{ $loop->parent->index }}{{ $loop->index }}][quantity]" type="number" min="0" value="{{ $item['quantity'] }}" data-standard="{{ $item['standard_quantity'] }}" required>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            @endforeach
-        </section>
-        <aside class="card summary">
-            <h2>Récapitulatif</h2>
-            <div class="summary-row"><span>Total produits</span><strong>{{ $items->count() }}</strong></div>
-            <div class="summary-row"><span>Produits affichés</span><strong id="visibleCount">{{ $items->count() }}</strong></div>
-            <div class="summary-row"><span>Quantité totale</span><strong id="totalQuantity">0</strong></div>
-            <div class="notice"><i class="fa-solid fa-circle-check"></i> Le stock standard sera utilisé comme référence pour les réapprovisionnements futurs.</div>
-        </aside>
-    </div>
+    <form action="{{ route('admin.ambulance-stock.fill') }}" method="POST">
+        @csrf
+        <input type="hidden" name="ambulance_id" value="{{ $selectedAmbulance?->id }}">
+        <div class="content-grid">
+            <section class="card">
+                <div class="table-tools">
+                    <h2>Produits du stock standard</h2>
+                    <input class="search" id="searchProduct" type="search" placeholder="Rechercher un produit...">
+                </div>
+                @foreach ($items->groupBy('category') as $category => $categoryItems)
+                <div class="category">
+                    <div class="category-title"><span>{{ $category }}</span><span>{{ $categoryItems->count() }} produit(s)</span></div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Stock magasin</th>
+                                <th>Stock ambulance</th>
+                                <th>Quantité standard</th>
+                                <th>Quantité à charger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($categoryItems as $item)
+                            <tr class="product-row" data-name="{{ Str::lower($item['name']) }}">
+                                <td class="product"><img class="thumb" src="{{ $item['image'] }}" alt=""> {{ $item['name'] }}</td>
+                                <td>{{ $item['available_quantity'] }}</td>
+                                <td>{{ $item['current_quantity'] }}</td>
+                                <td>{{ $item['standard_quantity'] }}</td>
+                                <td>
+                                    <input type="hidden"
+                                        name="items[{{ $loop->parent->index }}{{ $loop->index }}][medicine_id]"
+                                        value="{{ $item['id'] }}">
+                                    <input
+                                        class="qty-input"
+                                        name="items[{{ $loop->parent->index }}{{ $loop->index }}][quantity_to_fill]"
+                                        type="number"
+                                        min="0"
+                                        max="{{ max(0, $item['standard_quantity'] - $item['current_quantity']) }}"
+                                        value="{{ $item['quantity_to_fill'] }}"
+                                        {{ $item['current_quantity'] >= $item['standard_quantity'] ? 'readonly' : '' }}>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @endforeach
+            </section>
+            <aside class="card summary">
+                <h2>Récapitulatif</h2>
+                <div class="summary-row"><span>Total produits</span><strong>{{ $items->count() }}</strong></div>
+                <div class="summary-row"><span>Produits affichés</span><strong id="visibleCount">{{ $items->count() }}</strong></div>
+                <div class="summary-row"><span>Quantité totale</span><strong id="totalQuantity">0</strong></div>
+                <div class="notice"><i class="fa-solid fa-circle-check"></i> Le stock standard sera utilisé comme référence pour les réapprovisionnements futurs.</div>
+            </aside>
+        </div>
 
-    <div class="bottom-actions">
-        <a class="btn" href="{{ route('admin.stock.index') }}">Annuler</a>
-        <button class="btn primary" type="submit" @disabled(! $selectedAmbulance)>Valider le remplissage initial</button>
-    </div>
-</form>
+        <div class="bottom-actions">
+            <a class="btn" href="{{ route('admin.stock.index') }}">Annuler</a>
+            <button class="btn primary" type="submit" @disabled(! $selectedAmbulance)>Valider le remplissage initial</button>
+        </div>
+    </form>
+</div>
 
 <script>
     const quantityInputs = [...document.querySelectorAll('.qty-input')];
@@ -401,10 +430,6 @@
         visibleCount.textContent = rows.filter((row) => !row.hidden).length;
     }
 
-    document.getElementById('loadStandard').addEventListener('click', () => {
-        quantityInputs.forEach((input) => input.value = input.dataset.standard || 0);
-        updateSummary();
-    });
 
     document.getElementById('manualEntry').addEventListener('click', () => quantityInputs[0]?.focus());
     quantityInputs.forEach((input) => input.addEventListener('input', updateSummary));

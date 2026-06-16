@@ -40,4 +40,9 @@ class Ambulance extends Model
     {
         return $this->hasMany(AmbulanceStockStandard::class);
     }
+
+    public function driverProfile()
+    {
+        return $this->hasOne(DriverProfile::class);
+    }
 }

@@ -9,6 +9,7 @@ class StockMovement extends Model
 {
     protected $fillable = [
         'medicine_id',
+        'ambulance_id',
         'stock_entry_id',
         'type',
         'quantity',

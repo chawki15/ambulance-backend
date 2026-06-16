@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Admin\Ambulance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -31,6 +32,7 @@ class AuthController extends Controller
             'specialty' => 'nullable|string|max:120',
             'is_available' => 'sometimes|boolean',
             'blocked_reason' => 'nullable|string|max:255',
+            'ambulance_id' => 'nullable|exists:ambulances,id',
         ], [
             'name.unique' => 'Nom déjà utilisé.',
             'email.unique' => 'Email déjà utilisé.',
@@ -68,11 +70,16 @@ class AuthController extends Controller
                 ];
 
                 if ($rawRole === 'driver') {
+                    $ambulance = isset($data['ambulance_id'])
+                        ? Ambulance::find($data['ambulance_id'])
+                        : null;
+
                     DB::table('driver_profiles')->insert(array_merge($profileBase, [
-                        'license_number' => $data['license_number'] ?? 'N/A',
-                        'license_expiry' => $data['license_expiry'] ?? null,
-                        'vehicle_type' => $data['vehicle_type'] ?? null,
-                        'vehicle_plate' => $data['vehicle_plate'] ?? null,
+                        'ambulance_id' => $data['ambulance_id'] ?? null,
+                        'license_number' => $ambulance?->license_number ?? $data['license_number'] ?? 'N/A',
+                        'license_expiry' => $ambulance?->license_expiry ?? $data['license_expiry'] ?? null,
+                        'vehicle_type' => $ambulance?->vehicle_type ?? $data['vehicle_type'] ?? null,
+                        'vehicle_plate' => $ambulance?->vehicle_plate ?? $data['vehicle_plate'] ?? null,
                     ]));
                 } elseif ($rawRole === 'nurse') {
                     DB::table('nurse_profiles')->insert(array_merge($profileBase, [

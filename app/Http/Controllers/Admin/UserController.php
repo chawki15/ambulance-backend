@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Admin\Ambulance;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,13 @@ class UserController extends Controller
     {
         $users = User::query()->latest()->get();
         return view('admin.users.index', compact('users'));
+    }
+
+    public function create(): View
+    {
+        return view('admin.users.create', [
+            'ambulances' => Ambulance::orderBy('vehicle_plate')->get(),
+        ]);
     }
 
     public function show(User $user): View
@@ -80,6 +88,7 @@ class UserController extends Controller
             'specialty' => ['nullable', 'string', 'max:120'],
             'is_available' => ['required', 'boolean'],
             'blocked_reason' => ['nullable', 'string', 'max:255'],
+            'ambulance_id' => ['nullable', 'exists:ambulances,id'],
         ]);
 
         $submittedRole = $data['role'];
@@ -183,6 +192,7 @@ class UserController extends Controller
             $profileData += [
                 'license_number' => $data['license_number'] ?: 'N/A',
                 'license_expiry' => $data['license_expiry'] ?? null,
+                'ambulance_id' => $data['ambulance_id'] ?? null,
                 'vehicle_type' => $data['vehicle_type'] ?? null,
                 'vehicle_plate' => $data['vehicle_plate'] ?? null,
             ];

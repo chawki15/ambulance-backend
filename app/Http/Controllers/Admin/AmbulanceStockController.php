@@ -117,51 +117,78 @@ class AmbulanceStockController extends Controller
 
         $userId = auth()->id();
 
-        DB::transaction(function () use ($validated, $userId) {
-            foreach ($validated['items'] as $item) {
-                $qtyToFill = (int) $item['quantity_to_fill'];
+        try {
+            DB::transaction(function () use ($validated, $userId) {
+                foreach ($validated['items'] as $item) {
+                    $requestedQty = (int) $item['quantity_to_fill'];
 
-                if ($qtyToFill <= 0) {
-                    continue;
-                }
+                    if ($requestedQty <= 0) {
+                        continue;
+                    }
 
-                $medicine = Medicine::whereKey($item['medicine_id'])
-                    ->lockForUpdate()
-                    ->firstOrFail();
+                    $standard = (int) AmbulanceStockStandard::where('ambulance_id', $validated['ambulance_id'])
+                        ->where('medicine_id', $item['medicine_id'])
+                        ->value('standard_quantity');
 
-                if ($medicine->quantity < $qtyToFill) {
-                    throw new \RuntimeException(
-                        "Stock insuffisant pour {$medicine->name}. Disponible: {$medicine->quantity}, demandé: {$qtyToFill}."
+                    $current = (int) AmbulanceMedicineStock::where('ambulance_id', $validated['ambulance_id'])
+                        ->where('medicine_id', $item['medicine_id'])
+                        ->lockForUpdate()
+                        ->value('quantity');
+
+                    $missing = max(0, $standard - $current);
+
+                    if ($missing <= 0) {
+                        continue;
+                    }
+
+                    $qtyToFill = min($requestedQty, $missing);
+
+                    $medicine = Medicine::whereKey($item['medicine_id'])
+                        ->lockForUpdate()
+                        ->firstOrFail();
+
+                    if ($medicine->quantity < $qtyToFill) {
+                        throw new \RuntimeException(
+                            "Stock insuffisant pour {$medicine->name}. Disponible: {$medicine->quantity}, demandé: {$qtyToFill}."
+                        );
+                    }
+
+                    $ambulanceStock = AmbulanceMedicineStock::firstOrCreate(
+                        [
+                            'ambulance_id' => $validated['ambulance_id'],
+                            'medicine_id' => $item['medicine_id'],
+                        ],
+                        [
+                            'quantity' => 0,
+                            'is_active' => true,
+                        ]
                     );
-                }
 
-                AmbulanceMedicineStock::updateOrCreate(
-                    [
-                        'ambulance_id' => $validated['ambulance_id'],
+                    $ambulanceStock->increment('quantity', $qtyToFill);
+                    $ambulanceStock->update(['is_active' => true]);
+
+                    $medicine->decrement('quantity', $qtyToFill);
+
+                    StockMovement::create([
                         'medicine_id' => $item['medicine_id'],
-                    ],
-                    [
-                        'quantity' => DB::raw("quantity + {$qtyToFill}"),
-                        'is_active' => true,
-                    ]
-                );
-
-                $medicine->decrement('quantity', $qtyToFill);
-
-                StockMovement::create([
-                    'medicine_id' => $item['medicine_id'],
-                    'type' => 'out',
-                    'quantity' => $qtyToFill,
-                    'reason' => 'Remplissage ambulance #' . $validated['ambulance_id'],
-                    'created_by' => $userId,
-                ]);
-            }
-        });
+                        'ambulance_id' => $validated['ambulance_id'],
+                        'type' => 'out',
+                        'quantity' => $qtyToFill,
+                        'reason' => 'Réapprovisionnement intelligent',
+                        'created_by' => $userId,
+                    ]);
+                }
+            });
+        } catch (\RuntimeException $exception) {
+            return back()->withErrors([
+                'items' => $exception->getMessage(),
+            ])->withInput();
+        }
 
         return redirect()
             ->route('admin.ambulance-stock.create', [
                 'ambulance_id' => $validated['ambulance_id']
             ])
-            ->with('success', 'Ambulance remplie avec succès. Le stock général a été diminué.');
+            ->with('success', 'Réapprovisionnement effectué avec succès.');
     }
 }
